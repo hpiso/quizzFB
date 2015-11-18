@@ -23,6 +23,8 @@ $app = require __DIR__.'/../bootstrap/app.php';
 | the client's browser allowing them to enjoy the creative
 | and wonderful application we have prepared for them.
 |
+| Essai de commit by Antoine
+| Essai de commit by Jolan
 */
 
 $app->run();
