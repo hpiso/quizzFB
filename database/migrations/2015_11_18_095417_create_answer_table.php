@@ -12,7 +12,7 @@ class CreateAnswerTable extends Migration
      */
     public function up()
     {
-        Schema::create('answer', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_question')->unsigned();
             $table->string('label',255);
@@ -20,8 +20,8 @@ class CreateAnswerTable extends Migration
             $table->timestamps();;
         });
 
-        Schema::table('answer', function (Blueprint $table) {
-            $table->foreign('id_question')->references('id')->on('question')->onDelete('cascade');
+        Schema::table('answers', function (Blueprint $table) {
+            $table->foreign('id_question')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateAnswerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('answer');
+        Schema::drop('answers');
     }
 }

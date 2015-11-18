@@ -12,15 +12,15 @@ class CreateQuestionTable extends Migration
      */
     public function up()
     {
-        Schema::create('question', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_theme')->unsigned();
             $table->string('label',400);
             $table->timestamps();
         });
 
-        Schema::table('question', function (Blueprint $table) {
-            $table->foreign('id_theme')->references('id')->on('theme');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign('id_theme')->references('id')->on('themes');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateQuestionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('question');
+        Schema::drop('questions');
     }
 }
