@@ -12,7 +12,7 @@ class CreateQuestionsQuizzTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions_quizz', function (Blueprint $table) {
+        Schema::create('questions_quizzs', function (Blueprint $table) {
             $table->integer('id_quizz')->unsigned();
             $table->integer('id_question')->unsigned();
             $table->integer('order')->nullable();
@@ -20,9 +20,9 @@ class CreateQuestionsQuizzTable extends Migration
             $table->primary(['id_quizz','id_question']);
         });
 
-        Schema::table('questions_quizz', function(Blueprint $table) {
-            $table->foreign('id_quizz')->references('id')->on('quizz');
-            $table->foreign('id_question')->references('id')->on('question');
+        Schema::table('questions_quizzs', function(Blueprint $table) {
+            $table->foreign('id_quizz')->references('id')->on('quizzs');
+            $table->foreign('id_question')->references('id')->on('questions');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateQuestionsQuizzTable extends Migration
      */
     public function down()
     {
-        Schema::drop('questions_quizz');
+        Schema::drop('questions_quizzs');
     }
 }

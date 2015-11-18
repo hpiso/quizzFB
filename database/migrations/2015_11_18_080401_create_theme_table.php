@@ -12,7 +12,7 @@ class CreateThemeTable extends Migration
      */
     public function up()
     {
-        Schema::create('theme', function (Blueprint $table) {
+        Schema::create('themes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label',50);
             $table->string('description',500);
@@ -27,6 +27,6 @@ class CreateThemeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('theme');
+        Schema::drop('themes');
     }
 }

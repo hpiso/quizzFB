@@ -12,7 +12,7 @@ class CreateQuizzTable extends Migration
      */
     public function up()
     {
-        Schema::create('quizz', function (Blueprint $table) {
+        Schema::create('quizzs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label',100);
             $table->string('description',500);
@@ -24,8 +24,8 @@ class CreateQuizzTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('quizz', function (Blueprint $table) {
-            $table->foreign('id_theme')->references('id')->on('theme');
+        Schema::table('quizzs', function (Blueprint $table) {
+            $table->foreign('id_theme')->references('id')->on('themes');
         });
     }
 
@@ -36,6 +36,6 @@ class CreateQuizzTable extends Migration
      */
     public function down()
     {
-        Schema::drop('quizz');
+        Schema::drop('quizzs');
     }
 }
