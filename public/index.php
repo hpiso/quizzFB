@@ -24,6 +24,7 @@ $app = require __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 | Essai de commit by Antoine
+| Essai de commit by Jolan
 */
 
 $app->run();
