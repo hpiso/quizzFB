@@ -11,10 +11,13 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->welcome();
-});
+/* ---------- FRONT ----------*/
+$app->get('/', [
+    'as' => 'front.index', 'uses' => 'FrontController@index'
+]);
 
+
+/* ---------- ADMIN ----------*/
 //admin
 $app->get('admin/dashboard', [
     'as' => 'admin.index', 'uses' => 'AdminController@index'
@@ -29,3 +32,4 @@ $app->get('admin/quizz', [
 $app->get('admin/question', [
     'as' => 'question.index', 'uses' => 'QuestionController@index'
 ]);
+
