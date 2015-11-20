@@ -1,4 +1,5 @@
 /vendor
+/storage/*
 .env
 /.idea
 .idea
