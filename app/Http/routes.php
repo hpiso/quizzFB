@@ -18,7 +18,7 @@ $app->get('/', [
 
 
 /* ---------- ADMIN ----------*/
-//admin
+//Dashboard
 $app->get('admin/dashboard', [
     'as' => 'admin.index', 'uses' => 'AdminController@index'
 ]);
@@ -33,3 +33,22 @@ $app->get('admin/question', [
     'as' => 'question.index', 'uses' => 'QuestionController@index'
 ]);
 
+//Theme
+$app->get('admin/theme', [
+    'as' => 'theme.index', 'uses' => 'ThemeController@index'
+]);
+$app->get('admin/theme/create', [
+    'as' => 'theme.create', 'uses' => 'ThemeController@create'
+]);
+$app->post('admin/theme/store', [
+    'as' => 'theme.store', 'uses' => 'ThemeController@store'
+]);
+$app->get('admin/theme/{id}/edit', [
+    'as' => 'theme.edit', 'uses' => 'ThemeController@edit'
+]);
+$app->get('admin/theme/{id}/update', [
+    'as' => 'theme.update', 'uses' => 'ThemeController@update'
+]);
+$app->get('admin/theme/{id}/delete', [
+    'as' => 'theme.destroy', 'uses' => 'ThemeController@destroy'
+]);
