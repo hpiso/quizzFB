@@ -13,6 +13,7 @@
     <div class="row">
         <div class="col-lg-12">
             <form method="update" action="{{ route('theme.update', ['id' => $theme->id]) }}">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="themeLabel">Nom du thème</label>
                     <input type="text" class="form-control" id="themeLabel" name="label" value="{{ $theme->label }}" placeholder="Nom du thème">

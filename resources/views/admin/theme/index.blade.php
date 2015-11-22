@@ -44,6 +44,7 @@
                                 <div class="modal-body">
                                     <p>Etes vous sur de vouloir supprimer le thème <strong>{{$entity->label}}</strong> ?</p>
                                     <form method="delete" action="{{ route('theme.destroy',['id' => $entity->id]) }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-sm btn-default" value="Oui">
                                     </form>
                                 </div>
