@@ -1,9 +1,16 @@
 @extends('layout.admin')
 
 @section('content')
+
+    @include('admin.common.breadcrumb', [
+        'mainTitle' => 'Quizz',
+        'links' => [
+            'Quizz' => 'quizz.index',
+        ]
+    ])
+
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Quizz</h1>
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
