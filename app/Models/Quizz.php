@@ -21,16 +21,14 @@ class Quizz extends Model {
         'ending_at',
         'actif',
         'max_question',
-        'theme_id',
+        'id_theme',
     ];
 
     /**
-     * Get the Theme associated with the quizz
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function theme() {
-        return $this->hasOne('App\Theme');
+        return $this->belongsTo('App\Models\Theme','id_theme');
     }
 
     /**
