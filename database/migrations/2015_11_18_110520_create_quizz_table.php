@@ -20,12 +20,12 @@ class CreateQuizzTable extends Migration
             $table->dateTime('ending_at');
             $table->boolean('actif')->default(false);
             $table->integer('max_question')->default(10);
-            $table->integer('id_theme')->unsigned();
+            $table->integer('theme_id')->unsigned();
             $table->timestamps();
         });
 
         Schema::table('quizzs', function (Blueprint $table) {
-            $table->foreign('id_theme')->references('id')->on('themes');
+            $table->foreign('theme_id')->references('id')->on('themes');
         });
     }
 
