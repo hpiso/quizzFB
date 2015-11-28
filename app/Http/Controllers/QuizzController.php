@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Repositories\QuizzRepository;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -21,9 +22,13 @@ class QuizzController extends BaseController
     public function index()
     {
         $entities = Quizz::all();
+        $entitiesQuestion = Question::all();
+        $entitiesTheme = Theme::all();
 
         return view('admin.quizz.index', [
-            'entities' => $entities
+            'entities' => $entities,
+            'entitiesQuestion' => $entitiesQuestion,
+            'entitiesTheme' => $entitiesTheme
         ]);
     }
 

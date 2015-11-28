@@ -43,6 +43,7 @@ class Question extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function quizzs() {
-        return $this->belongsToMany('App\Models\Quizz', 'questions_quizzs');
+        return $this->belongsToMany('App\Models\Quizz', 'questions_quizzs',
+            'question_id', 'quizz_id');
     }
 }

@@ -21,8 +21,8 @@ class CreateQuestionsQuizzTable extends Migration
         });
 
         Schema::table('questions_quizzs', function(Blueprint $table) {
-            $table->foreign('quizz_id')->references('id')->on('quizzs');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('quizz_id')->references('id')->on('quizzs')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

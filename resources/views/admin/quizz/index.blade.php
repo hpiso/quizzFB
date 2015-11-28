@@ -10,6 +10,40 @@
     ])
 
     <div class="row">
+        @include('admin.common.panelItem', [
+            'title' => 'Quizz',
+            'colorTheme' => 'primary',
+            'icon' => 'question-circle',
+            'route' => 'quizz.index',
+            'totalNumber' => count($entities)
+        ])
+
+        @include('admin.common.panelItem', [
+            'title' => 'Questions',
+            'colorTheme' => 'green',
+            'icon' => 'question',
+            'route' => 'question.index',
+            'totalNumber' => count($entitiesQuestion)
+        ])
+
+        @include('admin.common.panelItem', [
+           'title' => 'Themes',
+           'colorTheme' => 'yellow',
+           'icon' => 'beer',
+           'route' => 'theme.index',
+           'totalNumber' => count($entitiesTheme)
+       ])
+
+        @include('admin.common.panelItem', [
+           'title' => 'Statistiques',
+           'colorTheme' => 'red',
+           'icon' => 'tasks',
+           'route' => 'quizz.index',
+           'totalNumber' => '0'
+       ])
+    </div>
+
+    <div class="row">
         <div class="col-lg-12">
             @if (session('status'))
                 @include('admin.common.flash-message', ['type' => 'success', 'message' => session('status')])
@@ -51,7 +85,9 @@
                 @endforeach
                 </tbody>
             </table>
-            <a href="{{ route('quizz.create') }}" class="btn btn-primary btn-small">Ajouter un quizz</a>
+            <a href="{{ route('quizz.create') }}" class="btn btn-primary btn-small">Créer un quizz</a>
+            <span>Ou</span>
+            <a href="{{ route('question.index') }}" class="btn btn-primary btn-small">Ajouter des questions</a>
         </div>
         <!-- /.col-lg-12 -->
     </div>

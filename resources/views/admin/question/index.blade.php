@@ -16,18 +16,25 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <form method="post" action="{{route('question.filter')}}">
+                    <form method="post" action="{{route('question.filter')}}" class="form-horizontal">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
-                            <label for="quizz">Quizz</label>
-                            <select class="form-control" id="quizz" name="quizz">
-                                    <option value="{{null}}">--- Tous ---</option>
-                                @foreach($quizzs as $quizz)
-                                    <option value="{{$quizz->id}}">{{$quizz->label}}</option>
-                                @endforeach
-                            </select>
+                            <label for="quizz" class="col-sm-3 control-label">Quizz</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="quizz" name="quizz">
+                                        <option value="{{null}}">--- Tous ---</option>
+                                    @foreach($quizzs as $quizz)
+                                        <option value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
+                        <div class="form-group">
+                            <label for="quizz" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <!-- /.panel-body -->
@@ -37,7 +44,7 @@
         <div class="col-lg-8">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <i class="fa fa-search fa-fw"></i> Filter
+                    <i class="fa fa-search fa-fw"></i> Informations
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -58,7 +65,7 @@
                         <thead>
                         <tr>
                             <th>id</th>
-                            <th>Label</th>
+                            <th>Question</th>
                             <th>Quizzs associé(s)</th>
                             <th>Créé en</th>
                             <th>Actions</th>
@@ -70,9 +77,13 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$entity->label}}</td>
                                 <td>
-                                    @foreach($entity->quizzs as $quizz)
-                                        <span class="label label-success">{{$quizz->label}}</span>
-                                    @endforeach
+                                    @if(count($entity->quizzs) > 0)
+                                        @foreach($entity->quizzs as $quizz)
+                                            <span class="label label-success">{{$quizz->label}}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="label label-warning">Aucun quizz associé</span>
+                                    @endif
                                 </td>
                                 <td>{{$entity->created_at}}</td>
                                 <td>
@@ -84,7 +95,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ route('question.create') }}" class="btn btn-primary btn-small">Ajouter une question</a>
+                    <a href="{{ route('question.create') }}" class="btn btn-primary btn-small">Créer une question</a>
                 </div>
             </div>
         </div>

@@ -18,10 +18,6 @@ $app->get('/', [
 
 
 /* ---------- ADMIN ----------*/
-//Dashboard
-$app->get('admin/dashboard', [
-    'as' => 'admin.index', 'uses' => 'AdminController@index'
-]);
 
 //Quizz
 $app->get('admin/quizz', [

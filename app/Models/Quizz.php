@@ -28,7 +28,7 @@ class Quizz extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function theme() {
-        return $this->belongsTo('App\Models\Theme','theme_id');
+        return $this->belongsTo('App\Models\Theme');
     }
 
     /**
@@ -37,6 +37,7 @@ class Quizz extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function questions() {
-        return $this->belongsToMany('App\Models\Question', 'questions_quizzs');
+        return $this->belongsToMany('App\Models\Question', 'questions_quizzs',
+            'quizz_id', 'question_id');
     }
 }

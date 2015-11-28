@@ -37,6 +37,6 @@ class QuizzTableSeeder extends Seeder
             'created_at' => $date
         ]);
 
-        
+
     }
 }
