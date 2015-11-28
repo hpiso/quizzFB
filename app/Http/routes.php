@@ -33,10 +33,19 @@ $app->get('admin/quizz/create', [
 $app->post('admin/quizz/store', [
     'as' => 'quizz.store', 'uses' => 'QuizzController@store'
 ]);
+$app->get('admin/quizz/{id}/delete', [
+    'as' => 'quizz.destroy', 'uses' => 'QuizzController@destroy'
+]);
 
 //Question
 $app->get('admin/question', [
     'as' => 'question.index', 'uses' => 'QuestionController@index'
+]);
+$app->get('admin/question/create', [
+    'as' => 'question.create', 'uses' => 'QuestionController@create'
+]);
+$app->post('admin/question/filter', [
+    'as' => 'question.filter', 'uses' => 'QuestionController@filter'
 ]);
 
 //Theme
