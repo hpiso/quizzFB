@@ -11,6 +11,9 @@
 
     <div class="row">
         <div class="col-lg-12">
+            @if (session('status'))
+                @include('admin.common.flash-message', ['type' => 'success', 'message' => session('status')])
+            @endif
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -32,10 +35,19 @@
                         <td>{{$entity->ending_at}}</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Supprimer</a>
+                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
                             <a href="#" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Voir le quizz</a>
                         </td>
                     </tr>
+
+                    {{--Popup for suppression--}}
+                    @include('admin.common.modalSuppression', [
+                        $entity,
+                        'title' => 'quizz',
+                        'formAction' => 'quizz.destroy',
+
+                    ])
+
                 @endforeach
                 </tbody>
             </table>

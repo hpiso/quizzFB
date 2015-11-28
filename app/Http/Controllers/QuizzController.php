@@ -21,7 +21,7 @@ class QuizzController extends BaseController
     public function index()
     {
         $entities = Quizz::all();
-        
+
         return view('admin.quizz.index', [
             'entities' => $entities
         ]);
@@ -42,5 +42,13 @@ class QuizzController extends BaseController
         $this->quizzRepository->store($inputs);
 
         return redirect('admin/quizz');
+    }
+
+    public function destroy($id)
+    {
+        $quizz = Quizz::findOrFail($id);
+        $quizz->delete();
+
+        return redirect('admin/quizz')->with('status', 'Quizz supprimé');
     }
 }
