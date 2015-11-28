@@ -25,5 +25,18 @@ class QuizzTableSeeder extends Seeder
             'theme_id' => 1,
             'created_at' => $date
         ]);
+
+        DB::table('quizzs')->insert([
+            'label' => 'Mon quizz test',
+            'description' => 'Decription de mon quizz test',
+            'starting_at' => $startDate,
+            'ending_at' => $endDate,
+            'actif' => true,
+            'max_question' => 15,
+            'theme_id' => 1,
+            'created_at' => $date
+        ]);
+
+        
     }
 }

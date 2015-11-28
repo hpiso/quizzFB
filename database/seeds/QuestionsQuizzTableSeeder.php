@@ -24,5 +24,11 @@ class QuestionsQuizzTableSeeder extends Seeder
             'order' => 1,
             'created_at' => $date
         ]);
+        DB::table('questions_quizzs')->insert([
+            'quizz_id' => 2,
+            'question_id' => 1,
+            'order' => 1,
+            'created_at' => $date
+        ]);
     }
 }
