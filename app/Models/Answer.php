@@ -26,7 +26,7 @@ class Answer extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function question() {
-        return $this->belongsTo('App\Question');
+        return $this->belongsTo('App\Models\Question');
     }
 
 }

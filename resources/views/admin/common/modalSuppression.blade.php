@@ -7,7 +7,7 @@
 				<h4 class="modal-title" id="myModalLabel">Suppression {{$title}}</h4>
 			</div>
 			<div class="modal-body">
-				<p>Etes vous sur de vouloir supprimer le thème <strong>{{$entity->label}}</strong> ?</p>
+				<p>Etes vous sur de vouloir supprimer <strong>{{$entity->label}}</strong> ?</p>
 				<form method="delete" action="{{ route($formAction,['id' => $entity->id]) }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<input type="submit" class="btn btn-sm btn-default" value="Oui">

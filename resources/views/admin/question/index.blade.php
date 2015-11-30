@@ -61,6 +61,9 @@
                     <i class="fa fa-question fa-fw"></i> Liste des questions
                 </div>
                 <div class="panel-body">
+                    @if (session('status'))
+                        @include('admin.common.flash-message', ['type' => 'success', 'message' => session('status')])
+                    @endif
                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -88,10 +91,19 @@
                                 <td>{{$entity->created_at}}</td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
-                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Supprimer</a>
-                                    <a href="#" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Voir la question</a>
+                                    <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
+                                    <a href="{{ route('question.show',['id' => $entity->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Voir la question</a>
                                 </td>
                             </tr>
+
+                            {{--Popup for suppression--}}
+                            @include('admin.common.modalSuppression', [
+                                $entity,
+                                'title' => 'question',
+                                'formAction' => 'question.destroy',
+
+                            ])
+
                         @endforeach
                         </tbody>
                     </table>

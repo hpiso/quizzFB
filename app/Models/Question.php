@@ -34,7 +34,7 @@ class Question extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function answers() {
-        return $this->hasMany('App\Answer');
+        return $this->hasMany('App\Models\Answer');
     }
 
     /**
@@ -45,5 +45,9 @@ class Question extends Model {
     public function quizzs() {
         return $this->belongsToMany('App\Models\Quizz', 'questions_quizzs',
             'question_id', 'quizz_id');
+    }
+
+    public function set_label($label) {
+        $this->fillable['label'] = $label;
     }
 }

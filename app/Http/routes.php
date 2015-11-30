@@ -43,6 +43,15 @@ $app->get('admin/question/create', [
 $app->post('admin/question/filter', [
     'as' => 'question.filter', 'uses' => 'QuestionController@filter'
 ]);
+$app->get('admin/question/{id}/delete', [
+    'as' => 'question.destroy', 'uses' => 'QuestionController@destroy'
+]);
+$app->post('admin/question/store', [
+    'as' => 'question.store', 'uses' => 'QuestionController@store'
+]);
+$app->get('admin/question/{id}/show', [
+    'as' => 'question.show', 'uses' => 'QuestionController@show'
+]);
 
 //Theme
 $app->get('admin/theme', [
