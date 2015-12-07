@@ -23,7 +23,8 @@ class QuizzTableSeeder extends Seeder
             'actif' => true,
             'max_question' => 2,
             'theme_id' => 1,
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
 
         DB::table('quizzs')->insert([
@@ -34,7 +35,8 @@ class QuizzTableSeeder extends Seeder
             'actif' => true,
             'max_question' => 15,
             'theme_id' => 1,
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
 
 
