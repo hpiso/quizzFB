@@ -28,8 +28,8 @@
                         <td>{{$entity->label}}</td>
                         <td>{{$entity->description}}</td>
                         <td>
-                            <a href="{{ route('theme.edit', ['id' => $entity->id]) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Modifier</a>
-                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
+                            <a href="{{ route('theme.edit', ['id' => $entity->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
+                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
                         </td>
                     </tr>
 

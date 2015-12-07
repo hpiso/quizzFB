@@ -25,7 +25,7 @@ class Theme extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function quizzs() {
-        return $this->belongsToMany('App\Quizz');
+        return $this->belongsToMany('App\Models\Quizz');
     }
 
     /**

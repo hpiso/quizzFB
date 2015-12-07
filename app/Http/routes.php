@@ -27,6 +27,12 @@ $app->get('admin/dashboard', [
 $app->get('admin/quizz', [
     'as' => 'quizz.index', 'uses' => 'QuizzController@index'
 ]);
+$app->get('admin/quizz/create', [
+    'as' => 'quizz.create', 'uses' => 'QuizzController@create'
+]);
+$app->post('admin/quizz/store', [
+    'as' => 'quizz.store', 'uses' => 'QuizzController@store'
+]);
 
 //Question
 $app->get('admin/question', [
