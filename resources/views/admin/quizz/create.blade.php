@@ -39,7 +39,7 @@
                     <input type="text" class="form-control"  id="quizzEndDate" name="end_at">
                 </div>
                 <div class="form-group">
-                    <label for="quizzTheme">Date de fin</label>
+                    <label for="quizzTheme">Thème</label>
                     <select class="form-control" id="quizzTheme" name="id_theme">
                         @foreach($items as $item)
                             <option value="{{$item->id}}">{{$item->label}}</option>

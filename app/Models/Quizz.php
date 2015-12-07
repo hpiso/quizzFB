@@ -21,14 +21,14 @@ class Quizz extends Model {
         'ending_at',
         'actif',
         'max_question',
-        'id_theme',
+        'theme_id',
     ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function theme() {
-        return $this->belongsTo('App\Models\Theme','id_theme');
+        return $this->belongsTo('App\Models\Theme');
     }
 
     /**
@@ -37,6 +37,7 @@ class Quizz extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function questions() {
-        return $this->hasMany('App\Question');
+        return $this->belongsToMany('App\Models\Question', 'questions_quizzs',
+            'quizz_id', 'question_id');
     }
 }

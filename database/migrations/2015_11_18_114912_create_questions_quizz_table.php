@@ -13,16 +13,16 @@ class CreateQuestionsQuizzTable extends Migration
     public function up()
     {
         Schema::create('questions_quizzs', function (Blueprint $table) {
-            $table->integer('id_quizz')->unsigned();
-            $table->integer('id_question')->unsigned();
+            $table->integer('quizz_id')->unsigned();
+            $table->integer('question_id')->unsigned();
             $table->integer('order')->nullable();
             $table->timestamps();
-            $table->primary(['id_quizz','id_question']);
+            $table->primary(['quizz_id','question_id']);
         });
 
         Schema::table('questions_quizzs', function(Blueprint $table) {
-            $table->foreign('id_quizz')->references('id')->on('quizzs');
-            $table->foreign('id_question')->references('id')->on('questions');
+            $table->foreign('quizz_id')->references('id')->on('quizzs')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 
