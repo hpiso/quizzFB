@@ -19,7 +19,7 @@ $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
 $app->get('/result', [
-    'as' => 'result.index', 'uses' => 'ResultController@index'
+    'as' => 'front.result', 'uses' => 'FrontController@result'
 ]);
 //$app->get('result', 'ResultController@index');]);
 
