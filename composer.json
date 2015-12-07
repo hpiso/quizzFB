@@ -31,7 +31,6 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "chmod -R 774 storage",
             "php artisan migrate",
             "php artisan db:seed"
         ]
