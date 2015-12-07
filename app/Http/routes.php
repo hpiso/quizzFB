@@ -11,10 +11,17 @@
 |
 */
 
-/* ---------- FRONT ----------*/
+//$app->get('/', function () use ($app) {
+//    return $app->welcome();
+//});
+
 $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
+$app->get('/result', [
+    'as' => 'result.index', 'uses' => 'ResultController@index'
+]);
+//$app->get('result', 'ResultController@index');]);
 
 
 /* ---------- ADMIN ----------*/
