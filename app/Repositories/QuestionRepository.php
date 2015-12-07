@@ -31,6 +31,7 @@ class QuestionRepository {
 		$answers = [];
 		for($i=1; $i<=$answerNbr; $i++){
 
+			//Creating Answers object
 			$answer = new Answer();
 			$answer->setAttribute('label', $inputs['answerLabel'.$i.'']);
 			if (array_key_exists('answerChecked'.$i.'', $inputs)) {
