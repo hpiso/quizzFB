@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
                 </div>
                 <div class="form-group">
-                    <label for="answerNbr">Nombre de réponse possible</label>
+                    <label for="answerNbr">Nombre de réponse possible (cocher la bonne réponse)</label>
                     <select class="form-control answerNbr" id="answerNbr" name="answerNbr">
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -28,16 +28,20 @@
                 </div>
                 <div id="answers">
                     <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" class="checkboxAnswer" name="answerChecked1" checked id="checkboxAnswer1"> Activer comme réponse correcte
-                        </label>
-                        <input type="text" class="form-control" name="answerLabel1" placeholder="Réponse n°1">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" class="checkboxAnswer" name="answerChecked1" checked id="checkboxAnswer1">
+                            </span>
+                            <input type="text" class="form-control" name="answerLabel1" placeholder="Réponse n°1">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" class="checkboxAnswer" name="answerChecked2" id="checkboxAnswer1"> Activer comme réponse correcte
-                        </label>
-                        <input type="text" class="form-control" name="answerLabel2" placeholder="Réponse n°2">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" class="checkboxAnswer" name="answerChecked2" id="checkboxAnswer2">
+                            </span>
+                            <input type="text" class="form-control" name="answerLabel2" placeholder="Réponse n°2">
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -60,15 +64,17 @@
             var data = '';
             for(i=1;i<=questionNbr; i++){
                 data += '<div class="form-group">'
-                    + '<label class="checkbox-inline">';
+                     +  '<div class="input-group">'
+                     +  '<span class="input-group-addon">';
                 if(i<=1){
-                    data += '<input type="checkbox" class="checkboxAnswer" checked name="answerChecked'+i+'" id="checkboxAnswer'+i+'"> Activer comme réponse correcte';
+                    data += '<input type="checkbox" checked class="checkboxAnswer" name="answerChecked'+i+'" id="checkboxAnswer'+i+'">';
                 }else{
-                    data += '<input type="checkbox" class="checkboxAnswer" name="answerChecked'+i+'" id="checkboxAnswer'+i+'"> Activer comme réponse correcte';
+                    data += '<input type="checkbox" class="checkboxAnswer" name="answerChecked'+i+'" id="checkboxAnswer'+i+'">';
                 }
-                data += '</label>'
-                    + '<input type="text" class="form-control" required name="answerLabel'+i+'" placeholder="Réponse n°'+i+'">'
-                    + '</div>';
+                data += '</span>'
+                    +   '<input type="text" class="form-control" name="answerLabel'+i+'" placeholder="Réponse n°'+i+'">'
+                    +   '</div>'
+                    +   '</div>';
             }
 
             //Insert html data in #answers
