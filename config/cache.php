@@ -35,7 +35,7 @@ return [
         'database' => [
             'driver' => 'database',
             'table'  => env('CACHE_DATABASE_TABLE', 'cache'),
-            'connection' => null,
+            'connection' => 'pgsql',
         ],
 
         'file' => [
