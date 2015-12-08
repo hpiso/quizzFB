@@ -2,7 +2,8 @@
 
 return [
 
-    'debug' => env('APP_DEBUG',true),
+    'debug' => true,
+    'env' => 'local',
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -29,7 +30,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,6 +43,6 @@ return [
     |
     */
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'fr'),
 
 ];
