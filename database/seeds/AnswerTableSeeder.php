@@ -26,7 +26,7 @@ class AnswerTableSeeder extends Seeder
         ]);
         DB::table('answers')->insert([
             'question_id' => 1,
-            'label' => 'La Cambodge',
+            'label' => 'Le Cambodge',
             'correct' => false,
             'created_at' => $date,
             'updated_at' => $date
