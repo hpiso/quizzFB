@@ -61,10 +61,12 @@ class QuizzController extends BaseController
         ]);
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
+        $inputs = $request->all();
+        $this->quizzRepository->update($id, $inputs);
 
-        //
+        return redirect('admin/quizz')->with('status', 'Quizz modifié');
     }
 
     public function destroy($id)

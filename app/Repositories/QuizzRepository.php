@@ -20,4 +20,21 @@ class QuizzRepository {
 		$quizz->save();
 	}
 
+	/**
+	 * @param $id
+	 * @param $inputs
+	 */
+	public function update($id, $inputs)
+	{
+		$theme = Theme::findOrFail($inputs['id_theme']);
+
+		$quizz = Quizz::find($id);
+		$quizz->fill($inputs);
+		$actif = isset($inputs['actif']) ? true : false;
+		$quizz->setAttribute('actif', $actif);
+		$quizz->theme()->associate($theme);
+		$quizz->save();
+
+	}
+
 }
