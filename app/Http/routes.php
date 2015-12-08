@@ -39,6 +39,12 @@ $app->post('admin/quizz/store', [
 $app->get('admin/quizz/{id}/delete', [
     'as' => 'quizz.destroy', 'uses' => 'QuizzController@destroy'
 ]);
+$app->get('admin/quizz/{id}/edit', [
+    'as' => 'quizz.edit', 'uses' => 'QuizzController@edit'
+]);
+$app->get('admin/quizz/{id}/update', [
+    'as' => 'quizz.update', 'uses' => 'QuizzController@update'
+]);
 
 //Question
 $app->get('admin/question', [

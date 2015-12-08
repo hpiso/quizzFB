@@ -49,6 +49,24 @@ class QuizzController extends BaseController
         return redirect('admin/quizz');
     }
 
+    public function edit($id)
+    {
+
+        $quizz = Quizz::findOrFail($id);
+        $items = Theme::all(['id', 'label']);
+
+        return view('admin.quizz.edit', [
+            'quizz' => $quizz,
+            'items' => $items
+        ]);
+    }
+
+    public function update($id)
+    {
+
+        //
+    }
+
     public function destroy($id)
     {
         $quizz = Quizz::findOrFail($id);
