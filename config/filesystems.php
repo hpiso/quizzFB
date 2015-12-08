@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'heroku'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,12 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('/tmp'),
+            'root'   => storage_path('app'),
+        ],
+
+        'heroku' => [
+            'driver' => 'heroku',
+            'root' => '/tmp'
         ],
 
         's3' => [
