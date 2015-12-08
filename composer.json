@@ -32,8 +32,7 @@
     "scripts": {
         "post-install-cmd": [
             "mkdir storage",
-            "chmod -R 777 storage",
-            "php artisan migrate --seed --force"
+            "chmod -R 777 storage"
         ]
     }
 }
