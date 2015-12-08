@@ -1,8 +1,6 @@
 <?php
 
 return [
-    'debug' => env('APP_DEBUG',true),
-    'env' => env('APP_ENV','local'),
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -13,6 +11,8 @@ return [
     | will not be safe. Please do this before deploying an application!
     |
     */
+
+    'debug' => true,
 
     'key' => env('APP_KEY', 'xlhF31NeOlibJcoOW9tvZg7TkHcAZI3a'),
 

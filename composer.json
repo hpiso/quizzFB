@@ -28,11 +28,5 @@
     },
     "config": {
         "preferred-install": "dist"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "mkdir storage",
-            "chmod -R 777 storage"
-        ]
     }
 }
