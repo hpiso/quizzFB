@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'debug' => true,
+    'debug' => env('APP_DEBUG',true),
+    'env' => env('APP_ENV','local'),
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
