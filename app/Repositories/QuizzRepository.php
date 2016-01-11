@@ -17,4 +17,10 @@ class QuizzRepository {
 		$quizz->save();
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getActif() {
+		return Quizz::where('actif', 1)->first();
+	}
 }

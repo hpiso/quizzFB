@@ -21,6 +21,8 @@ $app->get('/', [
 $app->get('/result', [
     'as' => 'front.result', 'uses' => 'FrontController@result'
 ]);
+
+$app->get('/quizz', 'FrontController@quizz');
 //$app->get('result', 'ResultController@index');]);
 
 

@@ -18,6 +18,15 @@ body {
     display: inline-block;
 }
 
+.content p {
+    text-align: left;
+}
+
+#subForm {
+    display:none;
+    margin: 80px;
+}
+
 h1.title {
     font-size: 80px;
     margin-bottom: 40px;
@@ -38,4 +47,19 @@ p.collection-item {
 .collection {
     margin-top: 80px;
     width: 550px;
+}
+
+.liste_questions {
+    width: 60em;
+}
+
+.questions {
+    margin-bottom:70px;
+}
+
+.questions>h5 {
+    text-align: left;
+}
+.questions>div>p {
+    /*text-align: center;*/
 }

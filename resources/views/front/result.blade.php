@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Quizz ESGI</title>
-
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
@@ -16,7 +16,7 @@
         <div class="row">
 
         </div>
-        <a class="waves-effect waves-light btn-large">Commencer le Quizz</a>
+        <p> Paramètre "p" de l'url : {{ app('request')->input('p') }}</p>
     </div>
 </div>
 </body>
