@@ -32,11 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label for="quizzStartDate">Date de début</label>
-                    <input type="text" class="form-control"  id="quizzStartDate" name="starting_at">
+                    <input type="text" class="form-control date-picker"  id="quizzStartDate" name="starting_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzEndDate">Date de fin</label>
-                    <input type="text" class="form-control"  id="quizzEndDate" name="end_at">
+                    <input type="text" class="form-control date-picker"  id="quizzEndDate" name="end_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzTheme">Thème</label>
@@ -53,3 +53,9 @@
 
 @endsection
 
+@section('javascript')
+    <script>
+        $('.date-picker').datepicker({
+        });
+    </script>
+@endsection
