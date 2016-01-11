@@ -26,6 +26,11 @@ $app->get('/result', [
 
 /* ---------- ADMIN ----------*/
 
+//Dashboard
+$app->get('admin/dashboard', [
+    'as' => 'dashboard.index', 'uses' => 'DashboardController@index'
+]);
+
 //Quizz
 $app->get('admin/quizz', [
     'as' => 'quizz.index', 'uses' => 'QuizzController@index'
