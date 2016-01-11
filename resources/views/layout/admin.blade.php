@@ -59,6 +59,7 @@
 
     <div id="page-wrapper">
         @yield('content')
+        <hr>
     </div>
 
 </div>

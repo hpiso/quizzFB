@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-lg-4">
-            <form method="post" action="{{ route('quizz.store') }}">
+            <form method="update" action="{{ route('quizz.update', ['id' => $quizz->id]) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="quizzLabel">Nom</label>

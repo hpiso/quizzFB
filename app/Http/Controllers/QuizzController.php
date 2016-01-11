@@ -51,7 +51,6 @@ class QuizzController extends BaseController
 
     public function edit($id)
     {
-
         $quizz = Quizz::findOrFail($id);
         $items = Theme::all(['id', 'label']);
 
