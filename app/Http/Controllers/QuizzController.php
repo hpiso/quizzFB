@@ -75,4 +75,9 @@ class QuizzController extends BaseController
 
         return redirect('admin/quizz')->with('status', 'Quizz supprimé');
     }
+
+    public function show()
+    {
+
+    }
 }
