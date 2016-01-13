@@ -78,6 +78,6 @@ class QuizzController extends BaseController
 
     public function show()
     {
-
+        dd('youpiii');
     }
 }
