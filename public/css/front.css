@@ -22,11 +22,6 @@ body {
     text-align: left;
 }
 
-#subForm {
-    display:none;
-    margin: 80px;
-}
-
 h1.title {
     font-size: 80px;
     margin-bottom: 40px;

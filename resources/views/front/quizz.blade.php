@@ -17,31 +17,10 @@
     <div class="content">
         <h1 class="title">Quizz {{ $quizz->theme->label }}</h1><div id="compteRebour"></div>
         <div class="row liste_questions">
-            <?php $i=0;
-                $j=1;
-            ?>
-            <form action="#">
-                <div id="content_pager">
-                    @foreach($quizz->questions as $question)
-                        <div class="page">
-                            <div class="questions col s12 ">
-                                <h5><small>{{ $j }}/{{count($quizz->questions )}}</small>....{{ $question->label }}</h5><br>
-                                @foreach($question->answers as $rep )
-                                    <div class="col s6">
-                                        <p>
-                                            <input name="group{!! $j !!}" type="radio" id={!! $i !!} />
-                                            <label for={!! $i !!}>{{ $rep->label }}</label>
-                                        </p>
-                                    </div>
-                                    <?php $i++; ?>
-                                @endforeach
-                            </div>
-                        </div>
-                        <?php $j++; ?>
-                    @endforeach
+            <form method="GET" action={{url('result')}}>
+                <div class="questions col s12 " id="question">
+                    {{--Generate Questions--}}
                 </div>
-                <button id="subForm" class="btn waves-effect waves-light blue" type="submit" name="action">Valider
-                </button>
             </form>
                 <div id="pagingControls"></div>
         </div>
@@ -50,11 +29,5 @@
 </body>
 </html>
 <script type="text/javascript">
-    var pager = new Imtech.Pager();
-    $(document).ready(function() {
-        pager.paragraphsPerPage = 1;
-        pager.pagingContainer = $('#content_pager');
-        pager.paragraphs = $('div.page', pager.pagingContainer);
-        pager.showPage(1);
-    });
+    nextPage(0);
 </script>

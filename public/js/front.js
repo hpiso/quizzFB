@@ -3,50 +3,30 @@
  */
 
 var timeout;
-var Imtech = {};
-Imtech.Pager = function() {
-    this.paragraphsPerPage = 3;
-    this.currentPage = 1;
-    this.pagingControlsContainer = '#pagingControls';
-    this.pagingContainerPath = '#content_pager';
 
-    this.numPages = function() {
-        var numPages = 0;
-        if (this.paragraphs != null && this.paragraphsPerPage != null) {
-            numPages = Math.ceil(this.paragraphs.length / this.paragraphsPerPage);
+function nextPage($numPage) {
+    $.ajax({
+        type: "GET",
+        url : "/questionquizz",
+        data : 'numQuest='+$numPage ,
+        success : function(data){
+            $('#question').html(data);
         }
+    },"json");
 
-        return numPages;
-    };
+}
 
-    this.showPage = function(page, numPages) {
-        clearTimeout(timeout);
-        this.currentPage = page;
-        var html = '';
+function result($question) {
+    $res=$('input:checked').attr('id');
 
-        this.paragraphs.slice((page-1) * this.paragraphsPerPage,
-            ((page-1)*this.paragraphsPerPage) + this.paragraphsPerPage).each(function() {
-            html += '<div>' + $(this).html() + '</div>';
-        });
+    $.ajax({
+        type: "GET",
+        url : "/result",
+        data : 'question='+$question+'&res='+$res ,
+        success : function(data){
 
-        $(this.pagingContainerPath).html(html);
-
-        renderControls(this.pagingControlsContainer, this.currentPage, this.numPages());
-
-        rebour(7, page, this.numPages());
-    }
-
-    var renderControls = function(container, currentPage, numPages) {
-        var pagingControls = null;
-        var nextPage = currentPage+1;
-        if (numPages != currentPage) {
-            pagingControls = '<a href="#" id="butNext" class="btn-floating btn-large waves-effect waves-light blue" onclick="pager.showPage(' + nextPage + ',' + numPages + '); return false;"> >> </a>';
-        } else {
-            $('#subForm').css("display", "inline-block");
         }
-
-        $(container).html(pagingControls);
-    }
+    },"json");
 }
 
 function rebour(tps,currentPage, numPages)
@@ -72,6 +52,7 @@ function rebour(tps,currentPage, numPages)
         document.getElementById("compteRebour").innerHTML = secondes;
         if(secondes=="00") {
             if(currentPage==numPages){
+                console.log(numPages);
                 $('#subForm').click();
             } else {
                 $("#butNext").click();
