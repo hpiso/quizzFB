@@ -56,6 +56,9 @@ $app->get('admin/quizz/{id}/edit', [
 $app->get('admin/quizz/{id}/update', [
     'as' => 'quizz.update', 'uses' => 'QuizzController@update'
 ]);
+$app->get('admin/quizz/{id}/show', [
+    'as' => 'quizz.show', 'uses' => 'QuizzController@show'
+]);
 
 //Question
 $app->get('admin/question', [

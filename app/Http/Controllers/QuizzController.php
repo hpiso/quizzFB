@@ -76,8 +76,12 @@ class QuizzController extends BaseController
         return redirect('admin/quizz')->with('status', 'Quizz supprimé');
     }
 
-    public function show()
+    public function show($id)
     {
-        dd('youpiii');
+        $quizz = Quizz::findOrFail($id);
+
+        return view('admin.quizz.show',[
+            'quizz' => $quizz
+        ]);
     }
 }
