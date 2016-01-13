@@ -74,4 +74,12 @@ class QuestionRepository {
 		$question->save();
 	}
 
+
+	/**
+	 * @return mixed
+	 */
+	public function getQuestion($id) {
+		return Question::where('id',$id)->first();
+	}
+
 }
