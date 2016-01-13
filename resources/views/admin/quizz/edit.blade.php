@@ -6,43 +6,52 @@
         'mainTitle' => 'Quizz',
         'links' => [
             'Quizz' => 'quizz.index',
-            'Ajouter un quizz' => 'quizz.create'
+            'Modifier un quizz' => 'quizz.edit'
         ]
     ])
 
     <div class="row">
         <div class="col-lg-4">
-            <form method="post" action="{{ route('quizz.store') }}">
+            <form method="update" action="{{ route('quizz.update', ['id' => $quizz->id]) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="quizzLabel">Nom</label>
-                    <input type="text" class="form-control" id="quizzLabel" name="label" placeholder="Nom du thème">
+                    <input type="text" class="form-control" id="quizzLabel" name="label" value="{{$quizz->label}}" placeholder="Nom du thème">
                 </div>
                 <div class="form-group">
                     <label for="quizzDescription">Description</label>
-                    <textarea class="form-control" id="quizzDescription" name="description" placeholder="Description"></textarea>
+                    <textarea class="form-control" id="quizzDescription" name="description" placeholder="Description">{{$quizz->description}}
+                    </textarea>
                 </div>
                 <div class="form-group">
                     <label for="quizzActif">Actif</label>
-                    <input type="checkbox" id="quizzActif" name="actif">
+                    @if($quizz->actif == true)
+                        <input type="checkbox" value="true" checked id="quizzActif" name="actif">
+                    @else
+                        <input type="checkbox" value="false" id="quizzActif" name="actif">
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="quizzMaxNumber">Nombre de question</label>
-                    <input type="number" class="form-control" id="quizzMaxNumber" name="max_question">
+                    <input type="number" class="form-control" value="{{$quizz->max_question}}" id="quizzMaxNumber" name="max_question">
                 </div>
                 <div class="form-group">
                     <label for="quizzStartDate">Date de début</label>
-                    <input type="text" class="form-control date-picker"  id="quizzStartDate" name="starting_at">
+                    <input type="text" class="form-control date-picker" value="{{$quizz->starting_at}}" id="quizzStartDate" name="starting_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzEndDate">Date de fin</label>
-                    <input type="text" class="form-control date-picker"  id="quizzEndDate" name="end_at">
+                    <input type="text" class="form-control date-picker" value="{{$quizz->ending_at}}" id="quizzEndDate" name="end_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzTheme">Thème</label>
                     <select class="form-control" id="quizzTheme" name="id_theme">
                         @foreach($items as $item)
-                            <option value="{{$item->id}}">{{$item->label}}</option>
+                            @if($quizz->theme->id == $item->id)
+                                <option selected value="{{$item->id}}">{{$item->label}}</option>
+                            @else
+                                <option value="{{$item->id}}">{{$item->label}}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

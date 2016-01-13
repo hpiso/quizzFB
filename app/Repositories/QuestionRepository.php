@@ -26,20 +26,21 @@ class QuestionRepository {
      */
 	public function store($inputs)
 	{
-		$answerNbr = $inputs['answerNbr'];
+		$answersLabels = $inputs['answerLabel'];
 
 		$answers = [];
-		for($i=1; $i<=$answerNbr; $i++){
+		foreach ($answersLabels as $key => $answersLabel){
+			//Creating Answer object
+			$answerEntity = new Answer();
+			$answerEntity->setAttribute('label', $answersLabel);
 
-			//Creating Answers object
-			$answer = new Answer();
-			$answer->setAttribute('label', $inputs['answerLabel'.$i.'']);
-			if (array_key_exists('answerChecked'.$i.'', $inputs)) {
-				$answer->setAttribute('correct', true);
-			}else{
-				$answer->setAttribute('correct', false);
+			if ($key == key($inputs['answerChecked'])) {
+				$answerEntity->setAttribute('correct', true);
+			} else {
+				$answerEntity->setAttribute('correct', false);
 			}
-			$answers[] = $answer;
+
+			$answers[] = $answerEntity;
 		}
 
 		//Insert the question
@@ -50,6 +51,27 @@ class QuestionRepository {
 		//Insert all the answers
 		$question->answers()->saveMany($answers);
 
+	}
+
+	public function update($id, $inputs)
+	{
+		$question = Question::find($id);
+		$answersLabels = $inputs['answerLabel'];
+
+		foreach ($question->answers as $key => $answer){
+			$answer->setAttribute('label', $answersLabels[$key]);
+
+			if ($key == key($inputs['answerChecked'])) {
+				$answer->setAttribute('correct', true);
+			} else {
+				$answer->setAttribute('correct', false);
+			}
+
+			$answer->save();
+		}
+
+		$question->fill($inputs);
+		$question->save();
 	}
 
 }

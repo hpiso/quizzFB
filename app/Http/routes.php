@@ -26,6 +26,11 @@ $app->get('/result', [
 
 /* ---------- ADMIN ----------*/
 
+//Dashboard
+$app->get('admin/dashboard', [
+    'as' => 'dashboard.index', 'uses' => 'DashboardController@index'
+]);
+
 //Quizz
 $app->get('admin/quizz', [
     'as' => 'quizz.index', 'uses' => 'QuizzController@index'
@@ -38,6 +43,12 @@ $app->post('admin/quizz/store', [
 ]);
 $app->get('admin/quizz/{id}/delete', [
     'as' => 'quizz.destroy', 'uses' => 'QuizzController@destroy'
+]);
+$app->get('admin/quizz/{id}/edit', [
+    'as' => 'quizz.edit', 'uses' => 'QuizzController@edit'
+]);
+$app->get('admin/quizz/{id}/update', [
+    'as' => 'quizz.update', 'uses' => 'QuizzController@update'
 ]);
 
 //Question
@@ -58,6 +69,12 @@ $app->post('admin/question/store', [
 ]);
 $app->get('admin/question/{id}/show', [
     'as' => 'question.show', 'uses' => 'QuestionController@show'
+]);
+$app->get('admin/question/{id}/edit', [
+    'as' => 'question.edit', 'uses' => 'QuestionController@edit'
+]);
+$app->get('admin/question/{id}/update', [
+    'as' => 'question.update', 'uses' => 'QuestionController@update'
 ]);
 
 //Theme

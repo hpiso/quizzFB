@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Quizz Application</a>
+            <a class="navbar-brand" href="{{ route('dashboard.index') }}">Quizz Application</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -59,6 +59,7 @@
 
     <div id="page-wrapper">
         @yield('content')
+        <hr>
     </div>
 
 </div>
