@@ -24,6 +24,10 @@ $app->get('/callback', [
     'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback'
 ]);
 
+$app->get('/logout', [
+    'as' => 'logout', 'uses' => 'AuthController@logout'
+]);
+
 /* ---------- ADMIN ----------*/
 
 //Quizz
