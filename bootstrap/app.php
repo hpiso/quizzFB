@@ -19,8 +19,7 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__ . '/../')
 );
 
-// $app->withFacades();
-
+$app->withFacades();
 $app->withEloquent();
 
 /*
@@ -80,6 +79,7 @@ $app->middleware([
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(\Laravel\Socialite\SocialiteServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -92,8 +92,20 @@ $app->middleware([
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+$app->group(['namespace' => 'App\Http\Controllers'], function ($app)
+{
     require __DIR__ . '/../app/Http/routes.php';
 });
+
+config([
+        'services' => [
+            'facebook' => [
+                'client_id' => env('FACEBOOK_APP_ID','1685507368351576'),
+                'client_secret' => env('FACEBOOK_APP_SECRET','76494686368fe261129849f7b70e526f'),
+                'redirect' => route('callback')
+            ]
+        ]
+    ]
+);
 
 return $app;

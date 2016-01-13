@@ -16,6 +16,13 @@ $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
 
+/* ---------- LOGIN ----------*/
+$app->get('/login', [
+    'as' => 'login', 'uses' => 'AuthController@redirectToProvider'
+]);
+$app->get('/callback', [
+    'as' => 'callback', 'uses' => 'AuthController@handleProviderCallback'
+]);
 
 /* ---------- ADMIN ----------*/
 
