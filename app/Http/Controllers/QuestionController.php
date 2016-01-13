@@ -77,4 +77,21 @@ class QuestionController extends BaseController
 
         return redirect('admin/question')->with('status', 'Question supprimée');
     }
+
+    public function edit($id)
+    {
+        $question = Question::findOrFail($id);
+
+        return view('admin.question.edit', [
+            'question' => $question,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $inputs = $request->all();
+        $this->questionRepository->update($id, $inputs);
+
+        return redirect('admin/question')->with('status', 'Question modifiée');
+    }
 }

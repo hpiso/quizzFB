@@ -65,6 +65,7 @@
 @section('javascript')
     <script>
         $('.date-picker').datepicker({
+            language: "fr"
         });
     </script>
 @endsection

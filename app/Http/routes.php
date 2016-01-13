@@ -70,6 +70,12 @@ $app->post('admin/question/store', [
 $app->get('admin/question/{id}/show', [
     'as' => 'question.show', 'uses' => 'QuestionController@show'
 ]);
+$app->get('admin/question/{id}/edit', [
+    'as' => 'question.edit', 'uses' => 'QuestionController@edit'
+]);
+$app->get('admin/question/{id}/update', [
+    'as' => 'question.update', 'uses' => 'QuestionController@update'
+]);
 
 //Theme
 $app->get('admin/theme', [

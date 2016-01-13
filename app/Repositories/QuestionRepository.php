@@ -53,4 +53,25 @@ class QuestionRepository {
 
 	}
 
+	public function update($id, $inputs)
+	{
+		$question = Question::find($id);
+		$answersLabels = $inputs['answerLabel'];
+
+		foreach ($question->answers as $key => $answer){
+			$answer->setAttribute('label', $answersLabels[$key]);
+
+			if ($key == key($inputs['answerChecked'])) {
+				$answer->setAttribute('correct', true);
+			} else {
+				$answer->setAttribute('correct', false);
+			}
+
+			$answer->save();
+		}
+
+		$question->fill($inputs);
+		$question->save();
+	}
+
 }

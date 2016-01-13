@@ -90,7 +90,7 @@
                                 </td>
                                 <td>{{$entity->created_at}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
+                                    <a href="{{ route('question.edit',['id' => $entity->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
                                     <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
                                     <a href="{{ route('question.show',['id' => $entity->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Voir la question</a>
                                 </td>
