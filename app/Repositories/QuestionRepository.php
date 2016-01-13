@@ -29,7 +29,7 @@ class QuestionRepository {
 		$answersLabels = $inputs['answerLabel'];
 
 		$answers = [];
-		foreach ($answersLabels as $key => $answersLabel){
+		foreach ($answersLabels as $key => $answersLabel) {
 			//Creating Answer object
 			$answerEntity = new Answer();
 			$answerEntity->setAttribute('label', $answersLabel);
@@ -48,9 +48,19 @@ class QuestionRepository {
 		$question->fill($inputs);
 		$question->save();
 
-		//Insert all the answers
-		$question->answers()->saveMany($answers);
+		//Attach this question to one or several quizzs
+		if (isset($inputs['quizz'])) {
 
+			$quizzs = $inputs['quizz'];
+
+			foreach ($quizzs as $quizz) {
+				$quizzAttached = Quizz::findOrFail($quizz);
+				$question->quizzs()->attach($quizzAttached);
+			}
+		}
+
+		//Insert all the answers to this question
+		$question->answers()->saveMany($answers);
 	}
 
 	public function update($id, $inputs)

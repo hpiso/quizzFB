@@ -11,11 +11,19 @@
     ])
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <form method="post" action="{{ route('question.store') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label for="questionLabel">Posez votre question</label>
+                    <label for="quizz">Associer à un quizz</label>
+                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
+                        @foreach($items as $item)
+                            <option value="{{$item->id}}">{{$item->label}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionLabel">Posez votre question (cocher la bonne réponse)</label>
                     <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
                 </div>
                 <div id="answers">
@@ -41,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Créer</button>
             </form>
         </div>
     </div>
@@ -80,5 +88,8 @@
         $(element).on('change', '.checkboxAnswer', function() {
             $('.checkboxAnswer').not(this).prop('checked', false);
         });
+    </script>
+    <script>
+        $('.selectpicker').selectpicker();
     </script>
 @endsection

@@ -15,6 +15,19 @@
             <form method="update" action="{{ route('question.update', ['id' => $question->id]) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
+                    <label for="quizz">Associer à un quizz</label>
+                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
+                        @foreach($items as $item)
+                            @foreach($question->quizzs as $quizz)
+                                @if($quizz->id == $item->id)
+                                    <option selected value="{{$item->id}}">{{$item->label}}</option>
+                                @endif
+                            @endforeach
+                                <option value="{{$item->id}}">{{$item->label}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="questionLabel">Posez votre question</label>
                     <input type="text" class="form-control" required id="questionLabel" value="{{$question->label}}" name="label" placeholder="Votre question ?">
                 </div>
@@ -49,5 +62,8 @@
         $(element).on('change', '.checkboxAnswer', function() {
             $('.checkboxAnswer').not(this).prop('checked', false);
         });
+    </script>
+    <script>
+        $('.selectpicker').selectpicker();
     </script>
 @endsection
