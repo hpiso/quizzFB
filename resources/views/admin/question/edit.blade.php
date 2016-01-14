@@ -16,14 +16,9 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="quizz">Associer à un quizz</label>
-                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
+                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[2]">
                         @foreach($items as $item)
-                            @foreach($question->quizzs as $quizz)
-                                @if($quizz->id == $item->id)
-                                    <option selected value="{{$item->id}}">{{$item->label}}</option>
-                                @endif
-                            @endforeach
-                                <option value="{{$item->id}}">{{$item->label}}</option>
+                            <option value="{{$item->id}}">{{$item->label}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -62,8 +57,5 @@
         $(element).on('change', '.checkboxAnswer', function() {
             $('.checkboxAnswer').not(this).prop('checked', false);
         });
-    </script>
-    <script>
-        $('.selectpicker').selectpicker();
     </script>
 @endsection

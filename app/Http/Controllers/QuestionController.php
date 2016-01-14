@@ -83,9 +83,21 @@ class QuestionController extends BaseController
         $question = Question::findOrFail($id);
         $items = Quizz::all();
 
+        $quizzSelected = [];
+        foreach ($question->quizzs as $quizz){
+            $quizzSelected[] = $quizz->id;
+        }
+        
+        $quizzs = [];
+        foreach ($items as $item){
+            $quizzs[] = $item->id;
+        }
+
+
         return view('admin.question.edit', [
             'question' => $question,
-            'items'    => $items
+            'items'    => $items,
+            'quizzSelected'    => $quizzSelected
         ]);
     }
 
