@@ -39,7 +39,6 @@ class QuestionRepository {
 			} else {
 				$answerEntity->setAttribute('correct', false);
 			}
-
 			$answers[] = $answerEntity;
 		}
 
@@ -50,13 +49,7 @@ class QuestionRepository {
 
 		//Attach this question to one or several quizzs
 		if (isset($inputs['quizz'])) {
-
-			$quizzs = $inputs['quizz'];
-
-			foreach ($quizzs as $quizz) {
-				$quizzAttached = Quizz::findOrFail($quizz);
-				$question->quizzs()->attach($quizzAttached);
-			}
+			$question->quizzs()->attach($inputs['quizz']);
 		}
 
 		//Insert all the answers to this question
@@ -76,12 +69,16 @@ class QuestionRepository {
 			} else {
 				$answer->setAttribute('correct', false);
 			}
-
 			$answer->save();
 		}
 
 		$question->fill($inputs);
 		$question->save();
+
+		//Update pivots relations
+		if (isset($inputs['quizz'])) {
+			$question->quizzs()->sync($inputs['quizz']);
+		}
 	}
 
 

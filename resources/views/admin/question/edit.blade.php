@@ -16,7 +16,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="quizz">Associer à un quizz</label>
-                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[2]">
+                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
                         @foreach($items as $item)
                             <option value="{{$item->id}}">{{$item->label}}</option>
                         @endforeach
@@ -57,5 +57,8 @@
         $(element).on('change', '.checkboxAnswer', function() {
             $('.checkboxAnswer').not(this).prop('checked', false);
         });
+
+        //Set selected value in the select multiple
+        $('#quizz').val({{$quizzSelected}});
     </script>
 @endsection
