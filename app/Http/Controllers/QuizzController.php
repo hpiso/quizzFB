@@ -78,7 +78,7 @@ class QuizzController extends BaseController
 
     public function show($id)
     {
-        $quizz = Quizz::findOrFail($id);
+        $quizz = Quizz::findOrFail($id); 
 
         return view('admin.quizz.show',[
             'quizz' => $quizz
