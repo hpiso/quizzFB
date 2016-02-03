@@ -58,5 +58,20 @@
         $('.date-picker').datepicker({
             language: "fr"
         });
+
+        $('#quizzDescription').wysihtml5(
+                {
+                    toolbar: {
+                        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+                        "emphasis": true, //Italics, bold, etc. Default true
+                        "lists": false,
+                        "html": false,
+                        "link": false,
+                        "image": true,
+                        "color": false,
+                        "blockquote": false
+                }
+                }
+        );
     </script>
 @endsection

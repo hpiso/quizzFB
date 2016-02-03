@@ -5,6 +5,8 @@
 <script type="text/javascript" src="{{ url('/js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/metisMenu.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/bootstrap3-wysihtml5.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/sb-admin-2.js') }}"></script>
 
 <script>

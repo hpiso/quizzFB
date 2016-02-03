@@ -80,7 +80,7 @@ class QuizzController extends BaseController
     {
         $quizz = Quizz::findOrFail($id); 
 
-        $questions = $quizz->questions()->paginate(10);
+        $questions = $quizz->questions()->paginate(2);
 
         return view('admin.quizz.show',[
             'questions' => $questions
