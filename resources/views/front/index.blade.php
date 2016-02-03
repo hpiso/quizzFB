@@ -16,7 +16,7 @@
         <div class="row">
             <div class="collection">
                 <h5 class="title">Quizz : {{ $quizz->theme->label }}</h5>
-                <p class="collection-item">Créé par : <a href="/" class="chip">Jolan Levy</a><span class="badge">Le :   20/12/15</span></p>
+                <p class="collection-item">{{$quizz->description}}</p>
                 <div class="collection-item">
                     <div class="col s6">
                         <p>Date de début : {{$startingDate}}</p>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col s6">
                         <p>Nombre de questions : {{$quizz->max_question}}</p>
-                        <p>Nombre de participants : 150</p>
+                        <p>Temps par question : 150s</p>
                     </div>
                 </div>
             </div>

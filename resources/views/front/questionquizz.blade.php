@@ -1,12 +1,17 @@
 <script>
     clearTimeout(timeout);
-    rebour(15, {{$numQuest+1}}, {{count($quizz->questions )}});
+    rebour(15, {{$numQuest+1}}, {{$nbQuest}});
 </script>
 <h5>
-    <small>{{ $numQuest+1 }}/{{count($quizz->questions )}}</small>
+    <small>{{ $numQuest+1 }}/{{$nbQuest}}</small>
     ....{{ $question->label }}</h5>
 <br>
-@foreach($question->answers as $rep )
+<?php $random=array(); ?>
+@foreach($question->answers as $rep)
+    <?php array_push($random,$rep) ?>
+@endforeach
+<?php shuffle($random); ?>
+@foreach($random as $rep )
     <div class="col s6">
         <p>
             <input name="group[{!! $numQuest !!}]" type="radio" id={!! $rep->id !!} />
@@ -14,8 +19,8 @@
         </p>
     </div>
 @endforeach
-@if($numQuest+1==count($quizz->questions ))
-    <a href="#" id="subForm" class="btn btn-large waves-effect waves-light blue" onclick="result({{$question->id}})"> Valider </a>
+@if($numQuest+1==$nbQuest)
+    <a href="#" id="subForm" class="btn btn-large waves-effect waves-light blue" onclick="process({{$question->id}}, {{$numQuest}}, restant);result();"> Valider </a>
 @else
-    <a href="#" id="butNext" class="btn-floating btn-large waves-effect waves-light blue" onclick="nextPage({{$numQuest+1}});result({{$question->id}});"> >> </a>
+    <a href="#" id="butNext" class="btn-floating btn-large waves-effect waves-light blue" onclick="nextPage({{$numQuest+1}});process({{$question->id}}, {{$numQuest}}, restant);"> >> </a>
 @endif
