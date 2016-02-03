@@ -13,7 +13,7 @@
         @include('admin.common.panelItem', [
             'title' => 'Quizz',
             'colorTheme' => 'primary',
-            'icon' => 'question-circle',
+            'icon' => 'gamepad',
             'route' => 'quizz.index',
             'totalNumber' => count($quizzs)
         ])
@@ -29,7 +29,7 @@
         @include('admin.common.panelItem', [
            'title' => 'Themes',
            'colorTheme' => 'yellow',
-           'icon' => 'beer',
+           'icon' => 'picture-o',
            'route' => 'theme.index',
            'totalNumber' => count($themes)
        ])
@@ -37,7 +37,7 @@
         @include('admin.common.panelItem', [
            'title' => 'Statistiques',
            'colorTheme' => 'red',
-           'icon' => 'tasks',
+           'icon' => 'bar-chart',
            'route' => 'quizz.index',
            'totalNumber' => '0'
        ])

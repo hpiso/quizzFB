@@ -27,7 +27,7 @@ class QuestionController extends BaseController
 
         return view('admin.question.index', [
             'entities' => $entities,
-            'quizzs' => $quizzs
+            'quizzs'   => $quizzs
         ]);
     }
 
@@ -42,7 +42,7 @@ class QuestionController extends BaseController
 
     public function create()
     {
-        $items = Theme::all(['id', 'label']);
+        $items = Quizz::all();
 
         return view('admin.question.create',[
             'items' => $items
@@ -66,7 +66,7 @@ class QuestionController extends BaseController
 
         return view('admin.question.index', [
             'entities' => $entities,
-            'quizzs' => $quizzs
+            'quizzs'   => $quizzs
         ]);
     }
 
@@ -81,9 +81,19 @@ class QuestionController extends BaseController
     public function edit($id)
     {
         $question = Question::findOrFail($id);
+        $items = Quizz::all();
+
+        $quizzSelectedArray = [];
+        foreach ($question->quizzs as $quizz){
+            $quizzSelectedArray[] = $quizz->id;
+        }
+
+        $quizzSelected = json_encode($quizzSelectedArray);
 
         return view('admin.question.edit', [
             'question' => $question,
+            'items'    => $items,
+            'quizzSelected'    => $quizzSelected
         ]);
     }
 

@@ -4,4 +4,5 @@
 <link href="{{ url('/css/font-awesome-4.4.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/sb-admin-2.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ url('/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/style.css') }}" rel="stylesheet" type="text/css" >

@@ -29,7 +29,7 @@ class QuestionRepository {
 		$answersLabels = $inputs['answerLabel'];
 
 		$answers = [];
-		foreach ($answersLabels as $key => $answersLabel){
+		foreach ($answersLabels as $key => $answersLabel) {
 			//Creating Answer object
 			$answerEntity = new Answer();
 			$answerEntity->setAttribute('label', $answersLabel);
@@ -39,7 +39,6 @@ class QuestionRepository {
 			} else {
 				$answerEntity->setAttribute('correct', false);
 			}
-
 			$answers[] = $answerEntity;
 		}
 
@@ -48,9 +47,13 @@ class QuestionRepository {
 		$question->fill($inputs);
 		$question->save();
 
-		//Insert all the answers
-		$question->answers()->saveMany($answers);
+		//Attach this question to one or several quizzs
+		if (isset($inputs['quizz'])) {
+			$question->quizzs()->attach($inputs['quizz']);
+		}
 
+		//Insert all the answers to this question
+		$question->answers()->saveMany($answers);
 	}
 
 	public function update($id, $inputs)
@@ -66,12 +69,16 @@ class QuestionRepository {
 			} else {
 				$answer->setAttribute('correct', false);
 			}
-
 			$answer->save();
 		}
 
 		$question->fill($inputs);
 		$question->save();
+
+		//Update pivots relations
+		if (isset($inputs['quizz'])) {
+			$question->quizzs()->sync($inputs['quizz']);
+		}
 	}
 
 
