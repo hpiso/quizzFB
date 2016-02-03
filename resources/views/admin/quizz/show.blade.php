@@ -12,7 +12,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @foreach($quizz->questions as $question)
+            @foreach($questions as $question)
                 <h4>{{$question->label}}</h4>
                 <ul class="list-group">
                     @foreach($question->answers as $key => $answer)
@@ -25,6 +25,7 @@
                 </ul>
                 <hr>
             @endforeach
+                {!! $questions->render() !!}
         </div>
     </div>
 @endsection
