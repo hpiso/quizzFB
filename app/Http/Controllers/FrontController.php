@@ -25,9 +25,9 @@ class FrontController extends Controller {
         $quizz = $this->quizzRepository->getActif();
 
         $startingDate = new DateTime($quizz->starting_at);
-        $startingDate = $startingDate->format('d-m-Y') ;
+        $startingDate = $startingDate->format('d/m/Y') ;
         $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d-m-Y') ;
+        $endingDate = $endingDate->format('d/m/Y') ;
         return view('front.index', [
             'quizz'         => $quizz,
             'startingDate' => $startingDate,
@@ -35,34 +35,68 @@ class FrontController extends Controller {
         ]);
     }
 
-    public function result(Request $request) {
+    public function process(Request $request) {
         $quizz = $this->quizzRepository->getActif();
 
+//        if(Request::ajax()) {
+//            $data = Input::all();
+//            dd($data);
+//        }
 
-        if (null !== $request->input('question') && null !== $request->input('res')) {
+        if (null !== $request->input('question') && null !== $request->input('res') && null !== $request->input('temps')) {
             $res = $request->input('res');
             $question = $this->questionRepository->getQuestion($request->input('question'));
             $answer = $this->answerRepository->getTrue($question->id);
-
             if($res==$answer->id){
-                //USER +1rep
+                dd('true');
+                //USER +1rep +temps
+            } else{
+                dd('false');
+                //USER +temps
             }
         } else {
 
         }
 
-        return view('front.result', [
+        return view('front.process', [
             'quizz' => $quizz,
             'question' => $question,
             'res'   =>  $res
         ]);
     }
 
-    public function quizz() {
+    public function result() {
+
         $quizz = $this->quizzRepository->getActif();
 
+        $endingDate = new DateTime($quizz->ending_at);
+        $endingDate = $endingDate->format('d/m/Y') ;
+        $startClassement = false;
+        if(new DateTime() > new DateTime($quizz->ending_at)) {
+            $startClassement = true;
+        }
+
+        return view('front.result', [
+            'endingDate' => $endingDate,
+            'startClassement' => $startClassement
+        ]);
+    }
+
+    public function quizz() {
+        $tabQuest = array();
+        $quizz = $this->quizzRepository->getActif();
+
+        foreach($quizz->questions as $quest) {
+            array_push($tabQuest,$quest);
+        }
+        shuffle($tabQuest);
+        while(count($tabQuest)>$quizz->max_question){
+            array_pop($tabQuest);
+        }
+
         return view('front.quizz', [
-            'quizz' => $quizz
+            'quizz' => $quizz,
+            'tabQuest'=> $tabQuest
         ]);
     }
 
@@ -70,18 +104,34 @@ class FrontController extends Controller {
 
         $quizz = $this->quizzRepository->getActif();
 
-        if (null !== $request->input('numQuest')) {
+        if(null !== $request->input('questionId')){
+            $question = $this->questionRepository->getQuestion($request->input('questionId'));
+        }
+        if(null !== $request->input('numQuest')) {
             $numQuest = $request->input('numQuest');
-            $question = $quizz->questions[$numQuest];
         } else {
             $numQuest = 0;
-            $question = $quizz->questions->first();
         }
 
         return view('front.questionquizz', [
-            'quizz' => $quizz,
             'question' => $question,
-            'numQuest' => $numQuest
+            'numQuest' => $numQuest,
+            'nbQuest' => $quizz->max_question
+        ]);
+    }
+    public function classement() {
+
+        $quizz = $this->quizzRepository->getActif();
+        //IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
+        $endingDate = new DateTime($quizz->ending_at);
+        $endingDate = $endingDate->format('d/m/Y') ;
+        $startClassement = false;
+        if(new DateTime() > new DateTime($quizz->ending_at)) {
+            $startClassement = true;
+        }
+
+        return view('front.classement', [
+            'startClassement' => $startClassement
         ]);
     }
 }

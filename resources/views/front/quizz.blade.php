@@ -18,9 +18,11 @@
         <h1 class="title">Quizz {{ $quizz->theme->label }}</h1><div id="compteRebour"></div>
         <div class="row liste_questions">
             <form method="GET" action={{url('result')}}>
-                <div class="questions col s12 " id="question">
-                    {{--Generate Questions--}}
-                </div>
+                @foreach($tabQuest as $quest)
+                    <div class="questions col s12 " id="{{$quest->id}}">
+                        {{--Generate Questions--}}
+                    </div>
+                @endforeach
             </form>
                 <div id="pagingControls"></div>
         </div>

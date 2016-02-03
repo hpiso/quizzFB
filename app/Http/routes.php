@@ -22,12 +22,28 @@ $app->get('/result', [
     'as' => 'front.result', 'uses' => 'FrontController@result'
 ]);
 
+$app->get('/process', [
+    'as' => 'front.process', 'uses' => 'FrontController@process'
+]);
+
 $app->get('/questionquizz', [
-    'as' => 'front.result', 'uses' => 'FrontController@questionQuizz'
+    'as' => 'front.questionquizz', 'uses' => 'FrontController@questionQuizz'
+]);
+
+$app->get('/classement', [
+    'as' => 'front.classement', 'uses' => 'FrontController@classement'
 ]);
 
 $app->get('/quizz', 'FrontController@quizz');
-//$app->get('result', 'ResultController@index');]);
+
+//$app->filter('old', function()
+//{
+//    if (Input::get('age') < 200)
+//    {
+//        return Redirect::to('home');
+//    }
+//});
+
 
 
 /* ---------- ADMIN ----------*/

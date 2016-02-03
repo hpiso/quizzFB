@@ -36,7 +36,8 @@ h1.title {
 }
 
 p.collection-item {
-    text-align: left;
+    text-align: center;
+    color:gray;
 }
 
 .collection {
@@ -57,4 +58,38 @@ p.collection-item {
 }
 .questions>div>p {
     /*text-align: center;*/
+}
+
+blockquote {
+    text-align: left;
+    font-size: 12px;
+}
+
+.partage{
+    color:white;
+    font-weight: bold;
+    background-color: #354c8c;
+}
+
+.partage:hover{
+    background-color: #354c8c ;
+}
+
+.partage > .facebook {
+
+}
+
+.s6 > button {
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+ul.pager li.active {
+    color: white;
+    background-color: #2bbbad;
+}
+
+#tab_classement{
+    margin-bottom: 50px;
 }

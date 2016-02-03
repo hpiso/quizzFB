@@ -3,30 +3,38 @@
  */
 
 var timeout;
+var restant;
 
-function nextPage($numPage) {
+function nextPage(numPage) {
+    var questionId=$('.questions:eq('+numPage+')').attr('id');
     $.ajax({
         type: "GET",
         url : "/questionquizz",
-        data : 'numQuest='+$numPage ,
+        data : 'numQuest='+numPage+'&questionId='+questionId ,
         success : function(data){
-            $('#question').html(data);
+            $('.questions').hide();
+            $('.questions:eq('+numPage+')').html(data);
+            $('.questions:eq('+numPage+')').show();
         }
     },"json");
 
 }
 
-function result($question) {
-    $res=$('input:checked').attr('id');
+function process(question, numPage, temps) {
+    var res=$('.questions:eq('+numPage+') input:checked').attr('id');
 
     $.ajax({
         type: "GET",
-        url : "/result",
-        data : 'question='+$question+'&res='+$res ,
+        url : "/process",
+        data : 'question='+question+'&res='+res+'&temps='+temps ,
         success : function(data){
 
         }
     },"json");
+}
+
+function result() {
+    window.location.replace("/result");
 }
 
 function rebour(tps,currentPage, numPages)
@@ -52,13 +60,12 @@ function rebour(tps,currentPage, numPages)
         document.getElementById("compteRebour").innerHTML = secondes;
         if(secondes=="00") {
             if(currentPage==numPages){
-                console.log(numPages);
                 $('#subForm').click();
             } else {
                 $("#butNext").click();
             }
             return;
         }
-        var restant = tps-1;
+        restant = tps-1;
         timeout = setTimeout("rebour("+restant+","+currentPage+","+numPages+")", 1000);
 }
