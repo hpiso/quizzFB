@@ -72,7 +72,7 @@ class AuthController extends Controller
         $user = Socialite::driver('facebook')->user();
         $user = $this->findOrStore($user);
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
-        if ($this->login($user))// && Auth::User()->isAdmin())
+        if ($this->login($user) && $user->isAdmin())
         {
             return redirect($this->redirectTo);
         }

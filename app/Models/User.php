@@ -18,14 +18,10 @@ class User extends Model implements Authenticatable
     protected
         $fillable = ['id', 'token', 'email', 'admin', 'first_name', 'last_name', 'avatar', 'avatar_original', 'gender'];
 
-    public function scopeAdmin($query)
-    {
-        return $query->where('admin', true);
-    }
 
     public function isAdmin()
     {
-        return $this->admin == true;
+        return ($this->admin === 1 || $this->admin === true);
     }
 
     public function getAuthIdentifier()
