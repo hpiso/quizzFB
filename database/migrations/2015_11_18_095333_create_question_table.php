@@ -14,14 +14,14 @@ class CreateQuestionTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_theme')->unsigned();
+            //$table->integer('theme_id')->unsigned();
             $table->string('label',400);
             $table->timestamps();
         });
 
-        Schema::table('questions', function (Blueprint $table) {
-            $table->foreign('id_theme')->references('id')->on('themes');
-        });
+//        Schema::table('questions', function (Blueprint $table) {
+//            $table->foreign('theme_id')->references('id')->on('themes');
+//        });
     }
 
     /**

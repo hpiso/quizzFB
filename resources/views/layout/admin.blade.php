@@ -64,6 +64,6 @@
 </div>
 
 @include('admin.common.global-js')
-
+@yield('javascript')
 </body>
 </html>
