@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label for="quizzEndDate">Date de fin</label>
-                    <input type="text" class="form-control date-picker"  id="quizzEndDate" name="end_at">
+                    <input type="text" class="form-control date-picker"  id="quizzEndDate" name="ending_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzTheme">Thème</label>
