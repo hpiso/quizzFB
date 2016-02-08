@@ -16,6 +16,8 @@ class CreateThemeTable extends Migration
             $table->increments('id');
             $table->string('label',50);
             $table->string('description',500);
+            $table->string('color_nav',20);
+            $table->string('color_elements',20);
             $table->timestamps();
         });
     }

@@ -16,7 +16,9 @@ class Theme extends Model
      */
     protected $fillable = [
         'label',
-        'description'
+        'description',
+        'color_nav',
+        'color_elements',
     ];
 
     /**
