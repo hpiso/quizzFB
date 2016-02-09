@@ -26,7 +26,15 @@ $app->get('/questionquizz', [
     'as' => 'front.result', 'uses' => 'FrontController@questionQuizz'
 ]);
 
+$app->get('quizz-first', [
+    'as' => 'quizz.first', 'uses' => 'FrontController@quizzFirst'
+]);
+
 $app->get('/quizz', 'FrontController@quizz');
+
+$app->post('quizz/action', [
+    'as' => 'quizz.action', 'uses' => 'FrontController@action'
+]);
 //$app->get('result', 'ResultController@index');]);
 
 

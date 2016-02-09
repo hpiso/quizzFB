@@ -13,19 +13,20 @@ class CreateScoreTable extends Migration
     public function up()
     {
         Schema::create('scores', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('fb_id');
             $table->integer('quizz_id')->unsigned();
             $table->integer('question_id')->unsigned();
             $table->integer('answer_id')->unsigned();
             $table->integer('time');
             $table->boolean('correct');
-            $table->primary('fb_id');
+            $table->timestamps();
         });
 
         Schema::table('scores', function(Blueprint $table) {
-            $table->foreign('quizz_id')->references('id')->on('quizzs')->onDelete('cascade');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
+            $table->foreign('quizz_id')->references('id')->on('quizzs');
+            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('answer_id')->references('id')->on('answers');
         });
     }
 

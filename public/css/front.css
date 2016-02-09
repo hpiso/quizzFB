@@ -1,60 +1,14 @@
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: table;
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
 
+.icon-block {
+    padding: 0 15px;
 }
-
-.container {
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.content {
-    text-align: center;
-    display: inline-block;
-}
-
-.content p {
-    text-align: left;
-}
-
-h1.title {
-    font-size: 80px;
-    margin-bottom: 40px;
-    text-align: center;
-    font-weight: 100;
-    font-family: 'Lato';
-    color: #B0BEC5;
-}
-
-.btn-large {
-    margin : 80px;
-}
-
-p.collection-item {
-    text-align: left;
-}
-
-.collection {
-    margin-top: 80px;
-    width: 550px;
-}
-
-.liste_questions {
-    width: 60em;
-}
-
-.questions {
-    margin-bottom:70px;
-}
-
-.questions>h5 {
-    text-align: left;
-}
-.questions>div>p {
-    /*text-align: center;*/
+.icon-block .material-icons {
+    font-size: inherit;
 }

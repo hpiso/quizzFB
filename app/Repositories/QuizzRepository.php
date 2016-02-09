@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Models\Quizz;
+use App\Models\Score;
 use App\Models\Theme;
 
 class QuizzRepository {
@@ -40,7 +41,32 @@ class QuizzRepository {
 	/**
 	 * @return mixed
 	 */
-	public function getActif() {
+	public function getActif()
+	{
 		return Quizz::where('actif', 1)->first();
+	}
+
+	public function checkAndStore($quizz, $answer, $question)
+	{
+
+		//Todo changer par le vrai id facebook
+		$idFb = 999;
+
+		$score = new Score();
+		$score->setAttribute('fb_id', $idFb);
+		$score->quizz()->associate($quizz);
+		$score->question()->associate($question);
+		$score->answer()->associate($answer);
+
+		if ($answer->correct) {
+			$correct = true;
+		} else {
+			$correct = false;
+		}
+
+		$score->setAttribute('correct', $correct);
+
+		$score->save();
+
 	}
 }
