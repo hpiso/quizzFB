@@ -9,7 +9,7 @@ use App\Models\Score;
 use App\Repositories\QuizzRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\AnswerRepository;
-use DateTime;
+use App\Repositories\ScoreRepository;
 
 class FrontController extends Controller {
 
@@ -18,22 +18,24 @@ class FrontController extends Controller {
     protected $quizzRepository;
     protected $questionRepository;
     protected $answerRepository;
+    protected $scoreRepository;
 
-    public function __construct(QuizzRepository $quizzRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function __construct(
+        QuizzRepository $quizzRepository,
+        QuestionRepository $questionRepository,
+        AnswerRepository $answerRepository,
+        ScoreRepository $scoreRepository
+    )
     {
         $this->quizzRepository = $quizzRepository;
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
+        $this->scoreRepository = $scoreRepository;
     }
 
     public function index()
     {
         $quizz = $this->quizzRepository->getActif();
-
-        $startingDate = new DateTime($quizz->starting_at);
-        $startingDate = $startingDate->format('d-m-Y');
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d-m-Y');
 
         return view('front.index', [
             'quizz' => $quizz,
@@ -45,20 +47,24 @@ class FrontController extends Controller {
         $quizz = $this->quizzRepository->getActif();
 
         //Calcule combien de question répondu par user et par quizz
-        $scoreNumber = Score::where('fb_id', $this::FB_ID)
+        $answerExist = Score::where('fb_id', $this::FB_ID)
             ->where('quizz_id', $quizz->id)
-            ->count();
+            ->exists();
 
-        //Si le nombre de question répondu est inférieur au nombre max de question par quizz
-        if ($scoreNumber < $quizz->max_question) {
-            $question = $quizz->questions->first();
-
-            return view('front.quizz', [
-                'question' => $question,
-            ]);
+        if ($answerExist) {
+            $score = Score::where('fb_id', $this::FB_ID)
+                ->where('already_answer', false)
+                ->first();
+            $question = $score->question;
         } else {
-            return redirect('/result');
+            $question = $quizz->questions->random(1);
+
+            $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
         }
+
+        return view('front.quizz', [
+            'question' => $question,
+        ]);
     }
 
     public function quizz()
@@ -100,6 +106,7 @@ class FrontController extends Controller {
 
     public function action(Request $request)
     {
+
         $quizz = $this->quizzRepository->getActif();
 
         $answer = Answer::findOrFail($request->get('answer'));

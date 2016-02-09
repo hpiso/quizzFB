@@ -17,9 +17,9 @@ class CreateScoreTable extends Migration
             $table->integer('fb_id');
             $table->integer('quizz_id')->unsigned();
             $table->integer('question_id')->unsigned();
-            $table->integer('answer_id')->unsigned();
-            $table->integer('time');
-            $table->boolean('correct');
+            $table->integer('answer_id')->unsigned()->nullable();
+            $table->boolean('already_answer');
+            $table->boolean('correct')->nullable();
             $table->timestamps();
         });
 

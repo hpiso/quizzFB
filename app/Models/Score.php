@@ -19,7 +19,7 @@ class Score extends Model
         'quizz_id',
         'question_id',
         'answer_id',
-        'time',
+        'already_answer',
         'correct'
     ];
 
