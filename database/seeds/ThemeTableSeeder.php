@@ -18,17 +18,20 @@ class ThemeTableSeeder extends Seeder
         DB::table('themes')->insert([
             'label' => 'Général',
             'description' => 'Des questions de tout ordre',
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
         DB::table('themes')->insert([
             'label' => 'Voiture',
             'description' => 'Des questions orientées belles mécaniques',
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
         DB::table('themes')->insert([
             'label' => 'Nature',
             'description' => 'Des questions sur les plantes, les animaux et la planète',
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
     }
 }

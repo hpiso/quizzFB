@@ -21,6 +21,7 @@ class CreateQuizzTable extends Migration
             $table->boolean('actif')->default(false);
             $table->integer('max_question')->default(10);
             $table->integer('theme_id')->unsigned();
+            $table->integer('temps',false,true)->default(10); // Temps en seconde pour les questions
             $table->timestamps();
         });
 

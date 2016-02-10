@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Models\Quizz;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Auth;
 
 class QuizzController extends BaseController
 {
@@ -21,6 +22,7 @@ class QuizzController extends BaseController
 
     public function index()
     {
+//        dump(Auth::user());
         $entities = Quizz::all();
         $entitiesQuestion = Question::all();
         $entitiesTheme = Theme::all();
