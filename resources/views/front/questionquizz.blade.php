@@ -1,10 +1,10 @@
 <script>
     clearTimeout(timeout);
     rebour(15, {{$numQuest+1}}, {{$nbQuest}});
+    var text = '<?php echo 'Question '.($numQuest+1).' sur '.$nbQuest; ?>';
+    $('.nav-wrapper .nav-link').html(text);
 </script>
-<h5>
-    <small>{{ $numQuest+1 }}/{{$nbQuest}}</small>
-    ....{{ $question->label }}</h5>
+<h5>{{ $question->label }}</h5>,
 <br>
 <?php $random=array(); ?>
 @foreach($question->answers as $rep)
