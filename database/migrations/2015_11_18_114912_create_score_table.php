@@ -14,11 +14,11 @@ class CreateScoreTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('fb_id');
+            $table->integer('user_id');
             $table->integer('quizz_id')->unsigned();
             $table->integer('question_id')->unsigned();
             $table->integer('answer_id')->unsigned()->nullable();
-            $table->boolean('already_answer');
+            $table->boolean('already_answered');
             $table->boolean('correct')->nullable();
             $table->timestamps();
         });

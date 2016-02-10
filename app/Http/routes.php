@@ -1,42 +1,22 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
-//$app->get('/', function () use ($app) {
-//    return $app->welcome();
-//});
+/* ---------- FRONT ----------*/
 
 $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
-$app->get('/result', [
-    'as' => 'front.result', 'uses' => 'FrontController@result'
-]);
 
-$app->get('/questionquizz', [
-    'as' => 'front.result', 'uses' => 'FrontController@questionQuizz'
+$app->get('/question', [
+    'as' => 'front.question', 'uses' => 'FrontController@question'
 ]);
-
-$app->get('quizz-first', [
-    'as' => 'quizz.first', 'uses' => 'FrontController@quizzFirst'
-]);
-
-$app->get('/quizz', 'FrontController@quizz');
 
 $app->post('quizz/action', [
     'as' => 'quizz.action', 'uses' => 'FrontController@action'
 ]);
-//$app->get('result', 'ResultController@index');]);
 
+$app->get('/result', [
+    'as' => 'front.result', 'uses' => 'FrontController@result'
+]);
 
 /* ---------- ADMIN ----------*/
 

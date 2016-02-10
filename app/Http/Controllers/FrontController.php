@@ -42,92 +42,69 @@ class FrontController extends Controller {
         ]);
     }
 
-    public function quizzFirst()
+    public function question()
     {
         $quizz = $this->quizzRepository->getActif();
 
-        //Calcule combien de question répondu par user et par quizz
-        $answerExist = Score::where('fb_id', $this::FB_ID)
+        $answerExist = Score::where('user_id', $this::FB_ID)
             ->where('quizz_id', $quizz->id)
             ->exists();
 
-        if ($answerExist) {
-            $score = Score::where('fb_id', $this::FB_ID)
-                ->where('already_answer', false)
-                ->first();
-            $question = $score->question;
-        } else {
+        if (!$answerExist) {
             $question = $quizz->questions->random(1);
-
             $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
+        } else {
+            $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
+            $question = $unansweredQuestion->question;
         }
 
-        return view('front.quizz', [
-            'question' => $question,
-        ]);
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+
+        if ($answeredQuestionNbr < $quizz->max_question) {
+            return view('front.quizz', [
+                'question' => $question,
+            ]);
+        }
+
+        return redirect('/result');
     }
 
-    public function quizz()
+    public function action(Request $request)
     {
         $quizz = $this->quizzRepository->getActif();
+        $answer = Answer::findOrFail($request->get('answer'));
 
-        //Calcule combien de question répondu par user et par quizz
-        $scoreNumber = Score::where('fb_id', $this::FB_ID)
-            ->where('quizz_id', $quizz->id)
-            ->count();
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
 
-        //Si le nombre de question répondu est inférieur au nombre max de question par quizz
-        if ($scoreNumber < $quizz->max_question) {
+        if ($answeredQuestionNbr < $quizz->max_question) {
 
-            $questionAlreadyAnswers = Score::where('fb_id', $this::FB_ID)
-                ->where('quizz_id', $quizz->id)
-                ->get();
+            $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
+            $this->scoreRepository->checkAndStore($answer, $unansweredQuestion);
 
-            //Ne pas prendre en compte les questions déja effectuées
+            $answeredQuestions = $this->scoreRepository->getAnsweredQuestions($quizz);
             foreach ($quizz->questions as $key => $question) {
-                foreach ($questionAlreadyAnswers as $questionAlreadyAnswer) {
-                    if ($question->id == $questionAlreadyAnswer->question->id) {
+                foreach ($answeredQuestions as $answeredQuestion) {
+                    if ($question->id == $answeredQuestion->question->id) {
                         $quizz->questions->forget($key);
                     }
                 }
             }
 
-            //Selectionner une question aléatoire parmis les questions restantes
-            $question = $quizz->questions->random(1);
+            if ($quizz->questions->isEmpty()) {
+                return redirect('/result');
+            } else {
+                $question = $quizz->questions->random(1);
+                $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
+            }
 
-            return view('front.quizz', [
-                'question' => $question,
-            ]);
-
-        } else {
-            return redirect('/result');
+            return redirect('/question');
         }
+        return redirect('/result');
     }
 
-    public function action(Request $request)
+    public function result()
     {
-
-        $quizz = $this->quizzRepository->getActif();
-
-        $answer = Answer::findOrFail($request->get('answer'));
-        $question = $answer->question;
-
-        //Calcule combien de question répondu par user et par quizz
-        $scoreNumber = Score::where('fb_id', $this::FB_ID)
-            ->where('quizz_id', $quizz->id)
-            ->count();
-
-        //Si le nombre de question répondu est inférieur au nombre max de question par quizz
-        if ($scoreNumber < $quizz->max_question) {
-
-            //On insert les données dans score
-            $this->quizzRepository->checkAndStore($quizz, $answer, $question);
-
-            return redirect('/quizz');
-
-        } else {
-            return redirect('/result');
-        }
+        return view('front.result');
     }
 }
 

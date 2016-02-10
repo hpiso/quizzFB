@@ -35,7 +35,6 @@ class QuizzRepository {
 		$quizz->setAttribute('actif', $actif);
 		$quizz->theme()->associate($theme);
 		$quizz->save();
-
 	}
 
 	/**
@@ -44,29 +43,5 @@ class QuizzRepository {
 	public function getActif()
 	{
 		return Quizz::where('actif', 1)->first();
-	}
-
-	public function checkAndStore($quizz, $answer, $question)
-	{
-
-		//Todo changer par le vrai id facebook
-		$idFb = 999;
-
-		$score = new Score();
-		$score->setAttribute('fb_id', $idFb);
-		$score->quizz()->associate($quizz);
-		$score->question()->associate($question);
-		$score->answer()->associate($answer);
-
-		if ($answer->correct) {
-			$correct = true;
-		} else {
-			$correct = false;
-		}
-
-		$score->setAttribute('correct', $correct);
-
-		$score->save();
-
 	}
 }

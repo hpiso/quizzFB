@@ -15,7 +15,7 @@ class Score extends Model
      * @var array Fillable fields
      */
     protected $fillable = [
-        'fb_id',
+        'user_id',
         'quizz_id',
         'question_id',
         'answer_id',
