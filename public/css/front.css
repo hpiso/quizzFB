@@ -7,9 +7,23 @@ body {
 
 }
 
+.nav-wrapper {
+    background-color: #7f76cc;
+}
+
+.brand-logo {
+    font-family: 'Lato';
+    font-size: 80px;
+}
+.brand-logo:hover{
+    text-decoration:none ;
+}
+
+#btn-menu {
+    text-decoration: none;
+}
 .container {
     text-align: center;
-    display: table-cell;
     vertical-align: middle;
 }
 
@@ -33,6 +47,10 @@ h1.title {
 
 .btn-large {
     margin : 80px;
+}
+
+.btn-large > a {
+    text-decoration: none;
 }
 
 p.collection-item {

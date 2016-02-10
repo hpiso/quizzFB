@@ -1,14 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Quizz ESGI</title>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <link href='css/front.css' rel='stylesheet' type='text/css'>
+@extends('layout.front')
+
+@section('content')
+
+        <h1 class="title">Classement</h1>
+        @if($startClassement)
+            <table id="tab_classement" class="bordered highlight paginated">
+                <thead>
+                <tr>
+                    <th scope="col">Position</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Profil</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Temps</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @for($i=0;$i<50;$i++)
+                        <tr>
+                            <td>#1</td>
+                            <td>Alvin</td>
+                            <td><a href="">Alvin Gégé</a></td>
+                            <td>35/35</td>
+                            <td>60s</td>
+                        </tr>
+                    @endfor
+                </tbody>
+            </table>
+        @else
+            <blockquote>
+                Les résultats finaux seront disponible <br>
+                lorsque le quizz arrivera à sa date échéante.
+            </blockquote>
+        @endif
+@endsection
+
+@section('javascript')
     <script type="text/javascript">
         $(window).load(function() {
 
@@ -44,42 +70,4 @@
 
         });
     </script>
-</head>
-<body>
-<div class="container">
-    <div class="content">
-        <h1 class="title">Classement</h1>
-        @if($startClassement)
-            <table id="tab_classement" class="bordered highlight paginated">
-                <thead>
-                <tr>
-                    <th scope="col">Position</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Profil</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Temps</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @for($i=0;$i<50;$i++)
-                        <tr>
-                            <td>#1</td>
-                            <td>Alvin</td>
-                            <td><a href="">Alvin Gégé</a></td>
-                            <td>35/35</td>
-                            <td>60s</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-        @else
-            <blockquote>
-                Les résultats finaux seront disponible <br>
-                lorsque le quizz arrivera à sa date échéante.
-            </blockquote>
-        @endif
-    </div>
-</div>
-</div>
-</body>
-</html>
+@endsection
