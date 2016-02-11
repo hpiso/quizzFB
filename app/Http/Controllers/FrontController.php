@@ -5,8 +5,6 @@ use App\Models\Answer;
 use Illuminate\Http\Request;
 use App\Models\Score;
 use App\Repositories\QuizzRepository;
-use App\Repositories\QuestionRepository;
-use App\Repositories\AnswerRepository;
 use App\Repositories\ScoreRepository;
 
 class FrontController extends Controller {
@@ -14,20 +12,14 @@ class FrontController extends Controller {
     const FB_ID = 999;
 
     protected $quizzRepository;
-    protected $questionRepository;
-    protected $answerRepository;
     protected $scoreRepository;
 
     public function __construct(
         QuizzRepository $quizzRepository,
-        QuestionRepository $questionRepository,
-        AnswerRepository $answerRepository,
         ScoreRepository $scoreRepository
     )
     {
         $this->quizzRepository = $quizzRepository;
-        $this->questionRepository = $questionRepository;
-        $this->answerRepository = $answerRepository;
         $this->scoreRepository = $scoreRepository;
     }
 
