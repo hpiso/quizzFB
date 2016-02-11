@@ -2,9 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
-use App\Models\Question;
 use Illuminate\Http\Request;
-use App\Models\Quizz;
 use App\Models\Score;
 use App\Repositories\QuizzRepository;
 use App\Repositories\QuestionRepository;
