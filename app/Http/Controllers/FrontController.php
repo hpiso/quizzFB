@@ -59,7 +59,7 @@ class FrontController extends Controller {
         $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
 
         if ($answeredQuestionNbr < $quizz->max_question) {
-            return view('front.quizz', [
+            return view('front.question', [
                 'question' => $question,
             ]);
         }
