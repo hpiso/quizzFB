@@ -1,48 +1,26 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
-//$app->get('/', function () use ($app) {
-//    return $app->welcome();
-//});
+/* ---------- FRONT ----------*/
 
 $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
+
+$app->get('/question', [
+    'as' => 'front.question', 'uses' => 'FrontController@question'
+]);
+
+$app->post('/quizz/action', [
+    'as' => 'quizz.action', 'uses' => 'FrontController@action'
+]);
+
 $app->get('/result', [
     'as' => 'front.result', 'uses' => 'FrontController@result'
-]);
-
-$app->get('/process', [
-    'as' => 'front.process', 'uses' => 'FrontController@process'
-]);
-
-$app->get('/questionquizz', [
-    'as' => 'front.questionquizz', 'uses' => 'FrontController@questionQuizz'
 ]);
 
 $app->get('/classement', [
     'as' => 'front.classement', 'uses' => 'FrontController@classement'
 ]);
-
-$app->get('/quizz', 'FrontController@quizz');
-
-//$app->filter('old', function()
-//{
-//    if (Input::get('age') < 200)
-//    {
-//        return Redirect::to('home');
-//    }
-//});
 
 
 /* ---------- LOGIN ----------*/

@@ -37,6 +37,10 @@ class Question extends Model {
         return $this->hasMany('App\Models\Answer');
     }
 
+    public function alreadyAnswers() {
+        return $this->hasMany('App\Models\Score');
+    }
+
     /**
      * Return the quizz that use this question
      *

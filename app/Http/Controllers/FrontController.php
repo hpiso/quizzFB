@@ -1,138 +1,107 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Quizz;
+use App\Models\Score;
 use App\Repositories\QuizzRepository;
-use App\Repositories\QuestionRepository;
-use App\Repositories\AnswerRepository;
-use DateTime;
+use App\Repositories\ScoreRepository;
 
 class FrontController extends Controller {
 
     protected $quizzRepository;
-    protected $questionRepository;
-    protected $answerRepository;
+    protected $scoreRepository;
 
-    public function __construct(QuizzRepository $quizzRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function __construct(
+        QuizzRepository $quizzRepository,
+        ScoreRepository $scoreRepository
+    )
     {
         $this->quizzRepository = $quizzRepository;
-        $this->questionRepository = $questionRepository;
-        $this->answerRepository = $answerRepository;
+        $this->scoreRepository = $scoreRepository;
     }
 
-    public function index() {
+    //TODO FONCTION TEMPORAIRE
+    public function getUser(){
+        return User::findOrFail(10207739955836859);
+    }
+
+    public function index()
+    {
         $quizz = $this->quizzRepository->getActif();
 
-        $startingDate = new DateTime($quizz->starting_at);
-        $startingDate = $startingDate->format('d/m/Y') ;
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
         return view('front.index', [
-            'quizz'         => $quizz,
-            'startingDate' => $startingDate,
-            'endingDate' => $endingDate
+            'quizz' => $quizz,
         ]);
     }
 
-    public function process(Request $request) {
+    public function question()
+    {
         $quizz = $this->quizzRepository->getActif();
 
-//        if(Request::ajax()) {
-//            $data = Input::all();
-//            dd($data);
-//        }
+        $answerExist = Score::where('user_id', $this->getUser()->id)
+            ->where('quizz_id', $quizz->id)
+            ->exists();
 
-        if (null !== $request->input('question') && null !== $request->input('res') && null !== $request->input('temps')) {
-            $res = $request->input('res');
-            $question = $this->questionRepository->getQuestion($request->input('question'));
-            $answer = $this->answerRepository->getTrue($question->id);
-            if($res==$answer->id){
-                dd('true');
-                //USER +1rep +temps
-            } else{
-                dd('false');
-                //USER +temps
+        if (!$answerExist) {
+            $question = $quizz->questions->random(1);
+            $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
+        } else {
+            $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
+            if(!$unansweredQuestion) {
+                return redirect('/result');
             }
-        } else {
-
+            $question = $unansweredQuestion->question;
         }
 
-        return view('front.process', [
-            'quizz' => $quizz,
-            'question' => $question,
-            'res'   =>  $res
-        ]);
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+
+        if ($answeredQuestionNbr < $quizz->max_question) {
+            return view('front.question', [
+                'question' => $question,
+            ]);
+        }
+
+        return redirect('/result');
     }
 
-    public function result() {
-
+    public function action(Request $request)
+    {
         $quizz = $this->quizzRepository->getActif();
+        $answer = Answer::findOrFail($request->get('answer'));
 
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
-        $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
-            $startClassement = true;
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+
+        if ($answeredQuestionNbr < $quizz->max_question) {
+
+            $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
+            $this->scoreRepository->checkAndStore($answer, $unansweredQuestion);
+
+            $answeredQuestions = $this->scoreRepository->getAnsweredQuestions($quizz);
+            foreach ($quizz->questions as $key => $question) {
+                foreach ($answeredQuestions as $answeredQuestion) {
+                    if ($question->id == $answeredQuestion->question->id) {
+                        $quizz->questions->forget($key);
+                    }
+                }
+            }
+
+            if ($quizz->questions->isEmpty()) {
+                return redirect('/result');
+            } else {
+                $question = $quizz->questions->random(1);
+                $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
+            }
+
+            return redirect('/question');
         }
-
-        return view('front.result', [
-            'endingDate' => $endingDate,
-            'startClassement' => $startClassement
-        ]);
+        return redirect('/result');
     }
 
-    public function quizz() {
-        $tabQuest = array();
-        $quizz = $this->quizzRepository->getActif();
-
-        foreach($quizz->questions as $quest) {
-            array_push($tabQuest,$quest);
-        }
-        shuffle($tabQuest);
-        while(count($tabQuest)>$quizz->max_question){
-            array_pop($tabQuest);
-        }
-
-        return view('front.quizz', [
-            'quizz' => $quizz,
-            'tabQuest'=> $tabQuest
-        ]);
-    }
-
-    public function questionQuizz(Request $request) {
-
-        $quizz = $this->quizzRepository->getActif();
-
-        if(null !== $request->input('questionId')){
-            $question = $this->questionRepository->getQuestion($request->input('questionId'));
-        }
-        if(null !== $request->input('numQuest')) {
-            $numQuest = $request->input('numQuest');
-        } else {
-            $numQuest = 0;
-        }
-
-        return view('front.questionquizz', [
-            'question' => $question,
-            'numQuest' => $numQuest,
-            'nbQuest' => $quizz->max_question
-        ]);
-    }
-    public function classement() {
-
-        $quizz = $this->quizzRepository->getActif();
-        //IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
-        $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
-            $startClassement = true;
-        }
-
-        return view('front.classement', [
-            'startClassement' => $startClassement
-        ]);
+    public function result()
+    {
+        return view('front.result');
     }
 }
 

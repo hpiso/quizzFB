@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Models\Quizz;
+use App\Models\Score;
 use App\Models\Theme;
 
 class QuizzRepository {
@@ -34,13 +35,13 @@ class QuizzRepository {
 		$quizz->setAttribute('actif', $actif);
 		$quizz->theme()->associate($theme);
 		$quizz->save();
-
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function getActif() {
+	public function getActif()
+	{
 		return Quizz::where('actif', 1)->first();
 	}
 }
