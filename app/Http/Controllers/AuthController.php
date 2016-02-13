@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -61,7 +60,7 @@ class AuthController extends Controller
 
     public function redirectToProvider()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->scopes(['user_location'])->redirect();
     }
 
     public function handleProviderCallback()
@@ -69,7 +68,7 @@ class AuthController extends Controller
         // Je cherche l'utilisateur renvoyé par Facebook dans ma propre base de donées
         // S'il existe -> je le renvois
         // S'il n'existe pas -> on l'ajoute
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->fields(['first_name', 'last_name', 'email', 'gender', 'verified', 'id', 'age_range', 'location'])->user();
         $user = $this->findOrStore($user);
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
         if ($this->login($user) && $user->isAdmin())
@@ -79,7 +78,7 @@ class AuthController extends Controller
         return redirect($this->redirectAfterLogout);
     }
 
-    protected function login($user)
+    protected function login(User $user)
     {
         Session::put(Auth::getName(), $user->id);
         Auth::setUser($user);
@@ -101,6 +100,10 @@ class AuthController extends Controller
     function findOrStore(\Laravel\Socialite\Two\User $user)
     {
         $userBase = User::where('id', $user->getId())->first();
+
+        $city = isset($user['location']) ? explode(',', $user['location']['name'])[0] : null;
+        $country = isset($user['location']) ? explode(',', $user['location']['name'])[1] : null;
+
         if ($userBase == null)
         {
             // L'utilisateur n'existe pas en base, on l'ajoute
@@ -113,12 +116,26 @@ class AuthController extends Controller
                 'avatar' => $user->getAvatar(),
                 'avatar_original' => $user->avatar_original,
                 'gender' => $user['gender'],
-                'admin' => false
+                'admin' => false,
+                'age' => $user['age_range']['min'],
+                'city' => $city,
+                'country' => $country
             ]);
         } else
         {
-            // Utilisateur trouvé en base, on met à jour son token
-            $userBase->update(['token' => $user->token]);
+            // Utilisateur trouvé en base, on met à jour ses informations
+            $userBase->update([
+                'token' => $user->token,
+                'email' => $user->getEmail(),
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'avatar' => $user->getAvatar(),
+                'avatar_original' => $user->avatar_original,
+                'gender' => $user['gender'],
+                'age' => $user['age_range']['min'],
+                'city' => $city,
+                'country' => $country
+            ]);
         }
         $userBase->save();
         return $userBase;

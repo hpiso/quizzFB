@@ -16,7 +16,7 @@ class User extends Model implements Authenticatable
      * @var array Fillable fields
      */
     protected
-        $fillable = ['id', 'token', 'email', 'admin', 'first_name', 'last_name', 'avatar', 'avatar_original', 'gender'];
+        $fillable = ['id', 'token', 'email', 'admin', 'first_name', 'last_name', 'avatar', 'avatar_original', 'gender', 'age', 'city', 'country'];
 
 
     public function isAdmin()
