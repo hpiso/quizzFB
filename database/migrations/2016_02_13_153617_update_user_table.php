@@ -13,7 +13,7 @@ class UpdateUserTable extends Migration
     public function up()
     {
         Schema::table('users', function(Blueprint $table){
-            $table->integer('age',false,true);
+            $table->integer('age',false,true)->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
         });
