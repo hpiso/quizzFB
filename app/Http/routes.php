@@ -2,6 +2,10 @@
 
 /* ---------- FRONT ----------*/
 
+//$app->get('/', function () use ($app) {
+//    return $app->welcome();
+//});
+
 $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
@@ -21,6 +25,16 @@ $app->get('/result', [
 $app->get('/classement', [
     'as' => 'front.classement', 'uses' => 'FrontController@classement'
 ]);
+
+$app->get('/quizz', 'FrontController@quizz');
+
+//$app->filter('old', function()
+//{
+//    if (Input::get('age') < 200)
+//    {
+//        return Redirect::to('home');
+//    }
+//});
 
 
 /* ---------- LOGIN ----------*/
@@ -109,4 +123,13 @@ $app->get('admin/theme/{id}/update', [
 ]);
 $app->get('admin/theme/{id}/delete', [
     'as' => 'theme.destroy', 'uses' => 'ThemeController@destroy'
+]);
+
+//Users
+$app->get('admin/users', [
+    'as' => 'users.index', 'uses' => 'UserController@index'
+]);
+
+$app->get('admin/users/export.csv', [
+    'as' => 'users.export', 'uses' => 'UserController@export'
 ]);
