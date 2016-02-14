@@ -58,16 +58,28 @@ class AuthController extends Controller
         $this->socialite = $socialite;
     }
 
+    /**
+     * Redirige vers la page de connexion de Facebook
+     * TODO Ajouter des scopes pour récupérer d'autres données utilisateur
+     *
+     * @return mixed
+     */
     public function redirectToProvider()
     {
-        return Socialite::driver('facebook')->scopes(['user_location'])->redirect();
+        return Socialite::driver('facebook')->scopes(['user_location','email'])->redirect();
     }
 
+    /**
+     * Gère la requête qui revient de Facebook après l'authentification de l'utilisateur
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function handleProviderCallback()
     {
-        // Je cherche l'utilisateur renvoyé par Facebook dans ma propre base de donées
-        // S'il existe -> je le renvois
-        // S'il n'existe pas -> on l'ajoute
+        /** Je cherche l'utilisateur renvoyé par Facebook dans ma propre base de donées
+         * S'il existe -> je le renvois
+         * S'il n'existe pas -> on l'ajoute
+         */
         $user = Socialite::driver('facebook')->fields(['first_name', 'last_name', 'email', 'gender', 'verified', 'id', 'age_range', 'location'])->user();
         $user = $this->findOrStore($user);
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
@@ -78,14 +90,32 @@ class AuthController extends Controller
         return redirect($this->redirectAfterLogout);
     }
 
+    /**
+     * Fausse fonction de connexion de l'utilisateur
+     * Il n'es pas possible d'utiliser les fonctions par défaut de Lumen car l'utilisateur n'a pas de mot de passe
+     * On considère que si Facebook renvoit des informations, alors il est correctement identifié .
+     * On fait confiance à Facebook qui s'est occupé de cette partie et on connectre notre utilisateur
+     *
+     * @param $user
+     * @return mixed
+     */
     protected function login(User $user)
     {
+        // L'utilisateur est ajouté à la session courante
         Session::put(Auth::getName(), $user->id);
+        // On set l'utilisateur courant dans l'application
         Auth::setUser($user);
 
+        // Renvoie true si l'utilisateur est bien connecté
         return (Auth::check());
     }
 
+    /**
+     * Méthode de déconnection à la main de l'utilisateur
+     * Il est retiré de la session et redirigé vers l'accueil
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Laravel\Lumen\Http\Redirector
+     */
     public function logout()
     {
         Session::forget(Auth::getName());
@@ -119,7 +149,7 @@ class AuthController extends Controller
                 'admin' => false,
                 'age' => $user['age_range']['min'],
                 'city' => $city,
-                'country' => $country
+                'country' => trim($country)
             ]);
         } else
         {
@@ -134,7 +164,7 @@ class AuthController extends Controller
                 'gender' => $user['gender'],
                 'age' => $user['age_range']['min'],
                 'city' => $city,
-                'country' => $country
+                'country' => trim($country)
             ]);
         }
         $userBase->save();
