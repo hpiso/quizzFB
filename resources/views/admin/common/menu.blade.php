@@ -10,3 +10,6 @@
 <li>
     <a href="{{ route('theme.index') }}"><i class="fa fa-picture-o fa-fw"></i> Theme</a>
 </li>
+<li>
+    <a href="{{ route('users.index') }}"><i class="fa fa-users"></i> Utilisateurs</a>
+</li>

@@ -25,7 +25,7 @@ class Question extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function theme() {
-        return $this->hasOne('App\Theme');
+        return $this->hasOne('App\Models\Theme');
     }
 
     /**

@@ -110,3 +110,12 @@ $app->get('admin/theme/{id}/update', [
 $app->get('admin/theme/{id}/delete', [
     'as' => 'theme.destroy', 'uses' => 'ThemeController@destroy'
 ]);
+
+//Users
+$app->get('admin/users', [
+    'as' => 'users.index', 'uses' => 'UserController@index'
+]);
+
+$app->get('admin/users/export.csv', [
+    'as' => 'users.export', 'uses' => 'UserController@export'
+]);

@@ -25,7 +25,25 @@ class UserTableSeeder extends Seeder
             'gender' => 'male',
             'created_at' => $date,
             'updated_at' => $date,
-            'admin' => true
+            'admin' => true,
+            'age' => 21,
+            'city' => 'Paris',
+            'country' => 'France'
+        ], [
+            'id' => 1679138425675836,
+            'token' => 'CAAX89cP091gBAIn8D2iyqXaio31j0ti1lPyDwNKAfmn9MQ15WBVvXhQcvYOMt8Go5SGeXasoKydaZAE3jZCpgrVZA9RSw0HMOrRsjWJlqjt28CuZBnp2Lrv7K4NuvXUzJn6lI0YuZAmdyCS0NydIMgFdFRLkjJaddZBCsLRESiFD6VMh7Mp1dn44EV4sZCL0dUZD',
+            'email' => 'hugopiso@yahoo.com',
+            'first_name' => 'Hugo',
+            'last_name' => 'Piso',
+            'avatar' => 'https://graph.facebook.com/v2.5/1679138425675836/picture?type=normal',
+            'avatar_original' => 'https://graph.facebook.com/v2.5/1679138425675836/picture?width=1920',
+            'gender' => 'male',
+            'created_at' => $date,
+            'updated_at' => $date,
+            'admin' => true,
+            'age' => 21,
+            'city' => 'Paris',
+            'country' => 'France'
         ]);
     }
 }
