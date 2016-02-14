@@ -63,22 +63,27 @@
                         <td><a href="https://facebook.com/{{ $user->id }}" target="_blank">{{ $user->id }}</a></td>
                         <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
                         <td>{{ $user->gender }}</td>
-                        <td>{{ $user->age }}</td>
-                        <td>{{ $user->city . ', ' . $user->country }}</td>
+                        <td>{{ isset($user->age) ? $user->age : 'Inconnu'  }}</td>
+                        <td>{{ isset($user->city) && isset($user->country) ? $user->city . ', ' . $user->country : 'Inconnu'  }}</td>
                         <td>
-                            @if( Request::get('quizz') == 'all')
-                                @foreach($user->scores as $score)
-                                    <span class="label label-success">{{ $score->quizz->label . ' (' . $score->score . ')' }}</span>
-                                @endforeach
+                            @if(count($user->scores) != 0)
+                                @if( Request::get('quizz') == 'all')
+                                    @foreach($user->scores as $score)
+                                        <span class="label label-success">{{ $score->quizz->label . ' (' . $score->score . ')' }}</span>
+                                    @endforeach
+                                @else
+                                    {{ $user->scores[0]->score }}
+                                @endif
                             @else
-                                {{ $user->scores[0]->score }}
+                                Aucune information
                             @endif
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-                <a href="{{ route('users.export') }}" class="btn btn-primary btn-small">Exporter la liste de tous les utilisateurs</a>
+            <a href="{{ route('users.export') }}" class="btn btn-primary btn-small">Exporter la liste de tous les
+                utilisateurs</a>
         </div>
         <!-- /.col-lg-12 -->
     </div>
