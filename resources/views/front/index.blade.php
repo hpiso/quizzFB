@@ -9,8 +9,12 @@
                 <p class="collection-item">{{$quizz->description}}</p>
                 <div class="collection-item">
                     <div class="col s6">
+                        <p>Date de début : {{ date('d/m/Y', strtotime($quizz->starting_at)) }}</p>
+                        <p>Date de fin : {{ date('d/m/Y', strtotime($quizz->ending_at)) }}</p>
                     </div>
                     <div class="col s6">
+                        <p>Nombre de questions : {{$quizz->max_question}}</p>
+                        <p>Temps par question : 150s</p>
                     </div>
                 </div>
             </div>
