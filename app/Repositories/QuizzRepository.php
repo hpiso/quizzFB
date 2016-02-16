@@ -17,6 +17,8 @@ class QuizzRepository {
 		$quizz->fill($inputs);
 		$actif = isset($inputs['actif']) ? true : false;
 		$quizz->setAttribute('actif', $actif);
+		$quizz->setAttribute('starting_at', new \DateTime($inputs['starting_at']));
+		$quizz->setAttribute('ending_at', new \DateTime($inputs['ending_at']));
 		$quizz->theme()->associate($theme);
 		$quizz->save();
 	}

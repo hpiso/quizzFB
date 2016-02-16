@@ -46,6 +46,16 @@ class QuizzController extends BaseController
     public function store(Request $request)
     {
         $inputs = $request->all();
+
+        $messages = [
+            'max' => 'Il ne peut y avoir qu\'un quizz actif',
+        ];
+
+        //Si il exsite au moins un autre quizz actif on retourne une erreur
+        if ($this->quizzRepository->getActif()) {
+            $this->validate($request, ['actif' => 'max:0'], $messages);
+        }
+
         $this->quizzRepository->store($inputs);
 
         return redirect('admin/quizz');

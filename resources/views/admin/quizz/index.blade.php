@@ -15,12 +15,6 @@
                 @include('admin.common.flash-message', ['type' => 'success', 'message' => session('status')])
             @endif
 
-            <a href="{{ route('quizz.create') }}" class="btn btn-primary btn-small">Créer un quizz</a>
-                <span>Ou</span>
-            <a href="{{ route('question.index') }}" class="btn btn-primary btn-small">Ajouter des questions</a>
-
-            <hr>
-
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -58,8 +52,6 @@
                 </tbody>
             </table>
             <a href="{{ route('quizz.create') }}" class="btn btn-primary btn-small">Créer un quizz</a>
-            <span>Ou</span>
-            <a href="{{ route('question.index') }}" class="btn btn-primary btn-small">Ajouter des questions</a>
         </div>
         <!-- /.col-lg-12 -->
     </div>
