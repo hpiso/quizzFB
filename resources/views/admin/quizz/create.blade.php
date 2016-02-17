@@ -21,7 +21,6 @@
                     </ul>
                 </div>
             @endif
-
             <form method="post" action="{{ route('quizz.store') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">

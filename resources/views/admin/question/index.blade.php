@@ -41,13 +41,13 @@
             @if (session('status'))
                 @include('admin.common.flash-message', ['type' => 'success', 'message' => session('status')])
             @endif
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <table id="example" class="table table-striped table-bordered table-responsive" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>id</th>
                     <th>Question</th>
                     <th>Quizzs associé(s)</th>
-                    <th>Créé en</th>
+                    <th>Réponses</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -55,7 +55,7 @@
                 @foreach($entities as $key => $entity)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{$entity->label}}</td>
+                        <td>{{ str_limit($entity->label, $limit = 40, $end = '...') }}</td>
                         <td>
                             @if(count($entity->quizzs) > 0)
                                 @foreach($entity->quizzs as $quizz)
@@ -65,11 +65,11 @@
                                 <span class="label label-warning">Aucun quizz associé</span>
                             @endif
                         </td>
-                        <td>{{$entity->created_at}}</td>
+                        <td><span class="badge">{{count($entity->answers)}}</span></td>
                         <td>
-                            <a href="{{ route('question.edit',['id' => $entity->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
-                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
-                            <a href="{{ route('question.show',['id' => $entity->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-eye"></i> Voir la question</a>
+                            <a href="{{ route('question.show',['id' => $entity->id]) }}" class="btn btn-default btn-circle"><i class="fa fa-eye"></i></a>
+                            <a href="{{ route('question.edit',['id' => $entity->id]) }}" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
 
