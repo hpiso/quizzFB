@@ -2,13 +2,9 @@
 
 use App\Models\Score;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreRepository {
-
-	//TODO REMPLACER PAR LE USER CONNECTE
-	public function getUser(){
-		return User::findOrFail(10207739955836859);
-	}
 
 	/**
 	 * @param $answer
@@ -35,7 +31,7 @@ class ScoreRepository {
 	public function storeUnansweredQuestion($quizz, $question)
 	{
 		$score = new Score();
-		$score->user()->associate($this->getUser());
+		$score->user()->associate(Auth::user());
 		$score->quizz()->associate($quizz);
 		$score->question()->associate($question);
 		$score->setAttribute('answer_id', null);
@@ -51,7 +47,7 @@ class ScoreRepository {
      */
 	public function getUnansweredQuestion($quizz)
 	{
-		$unansweredQuestion = Score::where('user_id', $this->getUser()->id)
+		$unansweredQuestion = Score::where('user_id', Auth::user()->id)
 			->where('quizz_id', $quizz->id)
 			->where('already_answered', false)
 			->first();
@@ -65,7 +61,7 @@ class ScoreRepository {
      */
 	public function getAnsweredQuestionNbr($quizz)
 	{
-		$nbrAnsweredQuestion = Score::where('user_id', $this->getUser()->id)
+		$nbrAnsweredQuestion = Score::where('user_id', Auth::user()->id)
 			->where('quizz_id', $quizz->id)
 			->where('already_answered', true)
 			->count();
@@ -79,7 +75,7 @@ class ScoreRepository {
      */
 	public function getAnsweredQuestions($quizz)
 	{
-		$answeredQuestions = Score::where('user_id', $this->getUser()->id)
+		$answeredQuestions = Score::where('user_id', Auth::user()->id)
 			->where('quizz_id', $quizz->id)
 			->where('already_answered', true)
 			->get();

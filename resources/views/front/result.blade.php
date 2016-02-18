@@ -4,7 +4,7 @@
         <h1 class="title">Résultat</h1>
         <div class="row">
             <div class="collection">
-                <h5 class="title">Félicitations Jolan</h5>
+                <h5 class="title">Félicitations {{ ucfirst(Auth::user()->first_name) }}</h5>
                 <p class="collection-item">Votre score :</p>
                 <div class="collection-item">
                     <div class="col s6">

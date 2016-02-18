@@ -17,7 +17,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <form method="get" action="{{ route('users.index')     }}" class="form-inline">
+                    <form method="get" action="{{ route('users.index') }}" class="form-inline">
                         <div class="form-group">
                             <label for="quizz">Quizz</label>
                             <select class="form-control" id="quizz" name="quizz">
@@ -47,9 +47,9 @@
                 <tr>
                     <th>Facebook ID</th>
                     <th>Nom</th>
-                    <th>Type</th>
+                    <th>Sexe</th>
                     <th>Age</th>
-                    <th>Location</th>
+                    <th>Emplacement</th>
                     @if(Request::get('quizz') == 'all')
                         <th>Participation(s) et score(s)</th>
                     @else
@@ -62,20 +62,20 @@
                     <tr>
                         <td><a href="https://facebook.com/{{ $user->id }}" target="_blank">{{ $user->id }}</a></td>
                         <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
-                        <td>{{ $user->gender }}</td>
+                        <td>{{ $user->gender == "male" ? 'Masculin' : 'Feminin' }}</td>
                         <td>{{ isset($user->age) ? $user->age : 'Inconnu'  }}</td>
                         <td>{{ isset($user->city) && isset($user->country) ? $user->city . ', ' . $user->country : 'Inconnu'  }}</td>
                         <td>
-                            @if(count($user->scores) != 0)
-                                @if( Request::get('quizz') == 'all')
-                                    @foreach($user->scores as $score)
+                            @if(count($user->scores) > 0)
+                                @foreach($user->scores as $score)
+                                    @if( Request::get('quizz') == 'all')
                                         <span class="label label-success">{{ $score->quizz->label . ' (' . $score->score . ')' }}</span>
-                                    @endforeach
-                                @else
-                                    {{ $user->scores[0]->score }}
-                                @endif
+                                    @else
+                                        <span class="label label-success">{{ $user->scores[0]->score }}</span>
+                                    @endif
+                                @endforeach
                             @else
-                                Aucune information
+                                N/A
                             @endif
                         </td>
                     </tr>

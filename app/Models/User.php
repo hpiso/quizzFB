@@ -49,6 +49,16 @@ class User extends Model implements Authenticatable
         return ($this->admin === 1 || $this->admin === true);
     }
 
+    public function hasAnsweredQuizz($quizzId)
+    {
+        if ($quizzId === 'all') return true;
+        foreach($this->quizzs() as $quizz)
+        {
+            if($quizz->id == $quizzId) return true;
+        }
+        return false;
+    }
+
     public function getAuthIdentifier()
     {
         return $this->id;

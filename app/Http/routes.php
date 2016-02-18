@@ -1,32 +1,29 @@
 <?php
 
+$app->get('/tests', ['uses' => 'FrontController@tests']);
+
 /* ---------- FRONT ----------*/
+//$app->group(['middleware' => 'secure', 'namespace' => 'App\Http\Controllers'], function($app) {
+    $app->get('/', [
+        'as' => 'front.index', 'uses' => 'FrontController@index'
+    ]);
 
-$app->get('/', [
-//    'middleware' => 'secure',
-    'as' => 'front.index', 'uses' => 'FrontController@index'
-]);
+    $app->get('/question', [
+        'as' => 'front.question', 'uses' => 'FrontController@question'
+    ]);
 
-$app->get('/question', [
-//    'middleware' => 'secure',
-    'as' => 'front.question', 'uses' => 'FrontController@question'
-]);
+    $app->post('/quizz/action', [
+        'as' => 'quizz.action', 'uses' => 'FrontController@action'
+    ]);
 
-$app->post('/quizz/action', [
-//    'middleware' => 'secure',
-    'as' => 'quizz.action', 'uses' => 'FrontController@action'
-]);
+    $app->get('/result', [
+        'as' => 'front.result', 'uses' => 'FrontController@result'
+    ]);
 
-$app->get('/result', [
-//    'middleware' => 'secure',
-    'as' => 'front.result', 'uses' => 'FrontController@result'
-]);
-
-$app->get('/classement', [
-//    'middleware' => 'secure',
-    'as' => 'front.classement', 'uses' => 'FrontController@classement'
-]);
-
+    $app->get('/classement', [
+        'as' => 'front.classement', 'uses' => 'FrontController@classement'
+    ]);
+//});
 
 /* ---------- LOGIN ----------*/
 $app->get('/login', [

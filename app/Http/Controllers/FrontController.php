@@ -2,19 +2,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\Score;
+use App\Repositories\AnswerRepository;
+use App\Repositories\QuestionRepository;
 use App\Repositories\QuizzRepository;
 use App\Repositories\ScoreRepository;
-use App\Repositories\QuestionRepository;
-use App\Repositories\AnswerRepository;
 use DateTime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class FrontController extends Controller {
+class FrontController extends Controller
+{
 
     protected $quizzRepository;
     protected $scoreRepository;
+    protected $answerRepository;
+    protected $questionRepository;
 
     public function __construct(
         QuizzRepository $quizzRepository,
@@ -29,34 +32,39 @@ class FrontController extends Controller {
         $this->answerRepository = $answerRepository;
     }
 
-    //TODO FONCTION TEMPORAIRE
-    public function getUser(){
-        return User::findOrFail(10207739955836859);
-    }
-
     public function index()
     {
         $quizz = $this->quizzRepository->getActif();
 
         return view('front.index', [
-            'quizz'         => $quizz
+            'quizz' => $quizz
         ]);
     }
+
+//    public function tests() {
+//        $quizz = 2;
+//        dd(Auth::user()->scores->contains(function($key,$item){
+//            return $item->quizz_id == $quizz ? $item : false;
+//        }));
+//    }
 
     public function question()
     {
         $quizz = $this->quizzRepository->getActif();
 
-        $answerExist = Score::where('user_id', $this->getUser()->id)
+        $answerExist = Score::where('user_id', Auth::user()->id)
             ->where('quizz_id', $quizz->id)
             ->exists();
 
-        if (!$answerExist) {
+        if (!$answerExist)
+        {
             $question = $quizz->questions->random(1);
             $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
-        } else {
+        } else
+        {
             $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
-            if(!$unansweredQuestion) {
+            if (!$unansweredQuestion)
+            {
                 return redirect('/result');
             }
             $question = $unansweredQuestion->question;
@@ -64,11 +72,12 @@ class FrontController extends Controller {
 
         $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
 
-        if ($answeredQuestionNbr < $quizz->max_question) {
+        if ($answeredQuestionNbr < $quizz->max_question)
+        {
             return view('front.question', [
                 'question' => $question,
                 'numQuest' => $answeredQuestionNbr,
-                'nbQuest'  => $quizz->max_question
+                'nbQuest' => $quizz->max_question
             ]);
         }
 
@@ -80,29 +89,36 @@ class FrontController extends Controller {
         $quizz = $this->quizzRepository->getActif();
         $answer = Answer::find($request->get('answer'));
 
-        if (!$answer) {
+        if (!$answer)
+        {
             return redirect('/question')->with('status', 'Vous devez cochez au moins une réponse');
         }
 
         $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
 
-        if ($answeredQuestionNbr < $quizz->max_question) {
+        if ($answeredQuestionNbr < $quizz->max_question)
+        {
 
             $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
             $this->scoreRepository->checkAndStore($answer, $unansweredQuestion);
 
             $answeredQuestions = $this->scoreRepository->getAnsweredQuestions($quizz);
-            foreach ($quizz->questions as $key => $question) {
-                foreach ($answeredQuestions as $answeredQuestion) {
-                    if ($question->id == $answeredQuestion->question->id) {
+            foreach ($quizz->questions as $key => $question)
+            {
+                foreach ($answeredQuestions as $answeredQuestion)
+                {
+                    if ($question->id == $answeredQuestion->question->id)
+                    {
                         $quizz->questions->forget($key);
                     }
                 }
             }
 
-            if ($quizz->questions->isEmpty()) {
+            if ($quizz->questions->isEmpty())
+            {
                 return redirect('/result');
-            } else {
+            } else
+            {
                 $question = $quizz->questions->random(1);
                 $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
             }
@@ -117,9 +133,10 @@ class FrontController extends Controller {
         $quizz = $this->quizzRepository->getActif();
 
         $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
+        $endingDate = $endingDate->format('d/m/Y');
         $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
+        if (new DateTime() > new DateTime($quizz->ending_at))
+        {
             $startClassement = true;
         }
 
@@ -129,14 +146,16 @@ class FrontController extends Controller {
         ]);
     }
 
-    public function classement() {
+    public function classement()
+    {
 
         $quizz = $this->quizzRepository->getActif();
-        //IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
+        // TODO : IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
         $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
+        $endingDate = $endingDate->format('d/m/Y');
         $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
+        if (new DateTime() > new DateTime($quizz->ending_at))
+        {
             $startClassement = true;
         }
 

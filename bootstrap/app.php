@@ -60,11 +60,12 @@ $app->middleware([
     Illuminate\Session\Middleware\StartSession::class,
     Illuminate\View\Middleware\ShareErrorsFromSession::class,
     Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
+//    App\Http\Middleware\HttpsProtocol::class,
 ]);
 
-// $app->routeMiddleware([
-
-// ]);
+ $app->routeMiddleware([
+    'secure' => 'App\Http\Middleware\HttpsProtocol',
+ ]);
 
 /*
 |--------------------------------------------------------------------------
