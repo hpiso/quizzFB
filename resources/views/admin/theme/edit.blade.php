@@ -22,6 +22,20 @@
                     <label for="themeDescription">Description</label>
                     <textarea class="form-control" id="themeDescription" name="description" placeholder="Description">{{ $theme->description }}</textarea>
                 </div>
+                <div class="form-group">
+                    <label for="themeColorNav">Couleur du header</label>
+                    <div class="input-group color-picker">
+                        <input type="text" id="themeColorNav" name="color_nav" value="{{ $theme->color_nav }}" class="form-control" />
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="themeColorElements">Couleur des éléments</label>
+                    <div class="input-group color-picker">
+                        <input type="text" id="themeColorElements" name="color_elements" value="{{ $theme->color_elements }}" class="form-control" />
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
@@ -29,3 +43,10 @@
 
 @endsection
 
+@section('javascript')
+    <script>
+        $(function(){
+            $('.color-picker').colorpicker();
+        });
+    </script>
+@endsection

@@ -12,6 +12,15 @@
 
     <div class="row">
         <div class="col-lg-4">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="update" action="{{ route('quizz.update', ['id' => $quizz->id]) }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">

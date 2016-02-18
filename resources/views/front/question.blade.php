@@ -1,7 +1,7 @@
 @extends('layout.front')
 
 @section('content')
-    <div class="row">
+    <div class="row question">
         <div class="col s12">
             <br><br><br>
             <div id="compteRebour"></div>

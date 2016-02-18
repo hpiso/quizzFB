@@ -35,11 +35,11 @@
        ])
 
         @include('admin.common.panelItem', [
-           'title' => 'Statistiques',
+           'title' => 'Users',
            'colorTheme' => 'red',
-           'icon' => 'bar-chart',
-           'route' => 'quizz.index',
-           'totalNumber' => '0'
+           'icon' => 'users',
+           'route' => 'users.index',
+           'totalNumber' => count($users)
        ])
     </div>
 

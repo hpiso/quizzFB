@@ -78,7 +78,11 @@ class FrontController extends Controller {
     public function action(Request $request)
     {
         $quizz = $this->quizzRepository->getActif();
-        $answer = Answer::findOrFail($request->get('answer'));
+        $answer = Answer::find($request->get('answer'));
+
+        if (!$answer) {
+            return redirect('/question')->with('status', 'Vous devez cochez au moins une réponse');
+        }
 
         $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
 

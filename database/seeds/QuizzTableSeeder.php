@@ -20,7 +20,7 @@ class QuizzTableSeeder extends Seeder
             'description' => 'Le premier quizz de l\'application qui va servir de test',
             'starting_at' => $startDate,
             'ending_at' => $endDate,
-            'actif' => true,
+            'actif' => false,
             'max_question' => 2,
             'theme_id' => 1,
             'created_at' => $date,
