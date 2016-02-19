@@ -43,5 +43,69 @@
        ])
     </div>
 
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Taux de bonnes / mauvaises réponses du quizz actuel
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-pie-chart"></div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
 @endsection
 
+@section('javascript')
+
+<script type="text/javascript" src="{{ url('/js/flot/excanvas.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.pie.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.resize.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.time.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.tooltip.min.js') }}"></script>
+
+<script>
+    //Flot Pie Chart
+    $(function() {
+
+        var data = [{
+            label: "Bonnes réponses",
+            color: "#5CB85C",
+            data: "{{ $goodAnswerNbr }}"
+        }, {
+            label: "Mauvaises réponses",
+            color: "#D9534F",
+            data: "{{ $badAnswerNbr }}"
+        }];
+
+        var plotObj = $.plot($("#flot-pie-chart"), data, {
+            series: {
+                pie: {
+                    innerRadius: 0.4,
+                    show: true
+                }
+            },
+            grid: {
+                hoverable: true
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                shifts: {
+                    x: 20,
+                    y: 0
+                },
+                defaultTheme: false
+            }
+        });
+
+    });
+</script>
+@endsection

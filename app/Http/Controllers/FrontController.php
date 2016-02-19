@@ -35,18 +35,23 @@ class FrontController extends Controller
     public function index()
     {
         $quizz = $this->quizzRepository->getActif();
+        $answeredQuestionNbr = 0;
+
+        if(Auth::check())
+        {
+            $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+        }
+
+        $already = true;
+        if ($answeredQuestionNbr < $quizz->max_question) {
+            $already = false;
+        }
 
         return view('front.index', [
-            'quizz' => $quizz
+            'quizz'         => $quizz,
+            'already'       => $already
         ]);
     }
-
-//    public function tests() {
-//        $quizz = 2;
-//        dd(Auth::user()->scores->contains(function($key,$item){
-//            return $item->quizz_id == $quizz ? $item : false;
-//        }));
-//    }
 
     public function question()
     {
