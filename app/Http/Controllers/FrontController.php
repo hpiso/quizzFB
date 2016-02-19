@@ -10,6 +10,7 @@ use App\Repositories\ScoreRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\AnswerRepository;
 use DateTime;
+use Carbon\Carbon;
 
 class FrontController extends Controller {
 
@@ -123,17 +124,26 @@ class FrontController extends Controller {
     public function result()
     {
         $quizz = $this->quizzRepository->getActif();
+        $score = $this->scoreRepository->scoreResult($quizz);
+
+        $timeFirstQuestion = $this->scoreRepository->getAnsweredQuestions($quizz)->first()->created_at;
+        $timeLastQuestion  = $this->scoreRepository->getAnsweredQuestions($quizz)->first()->updated_at;
+
+        $time = $timeLastQuestion->diffInSeconds($timeFirstQuestion);
 
         $endingDate = new DateTime($quizz->ending_at);
         $endingDate = $endingDate->format('d/m/Y') ;
         $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
+        if (new DateTime() > new DateTime($quizz->ending_at)) {
             $startClassement = true;
         }
 
         return view('front.result', [
-            'endingDate' => $endingDate,
-            'startClassement' => $startClassement
+            'endingDate'      => $endingDate,
+            'startClassement' => $startClassement,
+            'score'           => $score,
+            'time'            => $time,
+            'quizz'           => $quizz
         ]);
     }
 

@@ -87,4 +87,15 @@ class ScoreRepository {
 		return $answeredQuestions;
 	}
 
+	public function scoreResult($quizz)
+	{
+		$scoreResult = Score::where('user_id', $this->getUser()->id)
+			->where('quizz_id', $quizz->id)
+			->where('already_answered', true)
+			->where('correct', true)
+			->count();
+
+		return $scoreResult;
+	}
+
 }
