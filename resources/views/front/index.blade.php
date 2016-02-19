@@ -23,7 +23,8 @@
                         @if($already)
                             <a id="nav_btn" href="{{ route('front.result') }}" class="hvr-shutter-out-vertical">Ton résultat</a>
                         @else
-                            <a id="nav_btn" href="{{ route('front.question') }}" class="hvr-shutter-out-vertical">Commencer le Quizz</a>
+{{--                            <a id="nav_btn" href="{{ route('front.question') }}" class="hvr-shutter-out-vertical">Commencer le Quizz</a>--}}
+                            <a id="nav_btn" href="{{ route('login') }}" class="hvr-shutter-out-vertical">Commencer le Quizz</a>
                         @endif
                     </li>
                 </ul>
@@ -53,5 +54,10 @@
                 </div>
             </div>
         </div>
+        @if(Auth::check() && Auth::user()->isAdmin())
+            <div class="row">
+                <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+            </div>
+        @endif
     </div>
 @endsection

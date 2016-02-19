@@ -51,6 +51,11 @@
             </div>
         </div>
     </div>
+    @if(Auth::check() && Auth::user()->isAdmin())
+        <div class="row">
+            <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+        </div>
+    @endif
     <script type="text/javascript">
         clearTimeout(timeout);
         {{--rebour(15, {{$numQuest+1}}, {{$nbQuest}});--}}

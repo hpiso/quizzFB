@@ -62,6 +62,11 @@
                     </div>
                 </div>
             </div>
+            @if(Auth::check() && Auth::user()->isAdmin())
+                <div class="row">
+                    <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+                </div>
+        @endif
         </div>
     </div>
 @endsection

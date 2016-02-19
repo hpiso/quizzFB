@@ -23,7 +23,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/quizz';
+    protected $redirectTo = '/admin/dashboard';
 
     /**
      * Chemin pour se connecter
@@ -47,7 +47,7 @@ class AuthController extends Controller
     /**
      * @var string
      */
-    protected $redirectPath = '/admin';
+    protected $redirectPath = '/question';
 
     /**
      * AuthController constructor.
@@ -66,7 +66,12 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('facebook')->scopes(['user_location','email'])->redirect();
+        if(Auth::check())
+        {
+            return redirect($this->redirectPath);
+        } else{
+            return Socialite::driver('facebook')->scopes(['user_location', 'email'])->redirect();
+        }
     }
 
     /**
@@ -83,11 +88,9 @@ class AuthController extends Controller
         $user = Socialite::driver('facebook')->fields(['first_name', 'last_name', 'email', 'gender', 'verified', 'id', 'age_range', 'location'])->user();
         $user = $this->findOrStore($user);
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
-        if ($this->login($user) && $user->isAdmin())
-        {
-            return redirect($this->redirectTo);
-        }
-        return redirect($this->redirectAfterLogout);
+
+        $this->login($user);
+        return redirect($this->redirectPath);
     }
 
     /**
