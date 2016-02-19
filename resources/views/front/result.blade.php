@@ -1,9 +1,7 @@
 @extends('layout.front')
 
 @section('title')
-    <div class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="{{ url('/css/images/logo.png') }}" alt="">
-    </div>
+
 @endsection
 
 @section('content')
@@ -29,7 +27,7 @@
                     <h2 class="intro-text text-center">
                         <p><strong>Félicitations</strong></p>
                         <p>Score : {{$score}} / {{$quizz->max_question}}</p>
-                        <p>Temps effectué : {{$time}} secondes</p>
+                        <p>Temps effectué : {{$time}}</p>
                     </h2>
                     <hr>
                     <div class="collection col-md-6 col-md-offset-3">

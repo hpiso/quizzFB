@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        @if($numQuest+1==$nbQuest )
+                        @if($numQuest+1 == $nbQuest )
                             <a id="nav_btn"  class="hvr-shutter-out-vertical">VALIDER</a>
                         @else
                             <a id="nav_btn" class="hvr-shutter-out-vertical">SUIVANT</a>
@@ -31,19 +31,17 @@
                     <div id="compteRebour"></div>
                     <div class="modal-body">
                         <div class="quiz col-lg-8 col-lg-offset-2" id="quiz" data-toggle="buttons">
-                            <?php $random=array(); ?>
-                            @foreach($question->answers as $rep)
-                                <?php array_push($random,$rep) ?>
-                            @endforeach
-                            <?php shuffle($random); ?>
-                            @foreach($random as $rep )
-                                    <label class="element-animation1 btn btn-lg btn-primary btn-block">
-                                        <span class="btn-label">
-                                            <i class="glyphicon glyphicon-chevron-right"></i>
-                                        </span>
-                                        <input type="radio" name="answer" value="{{$rep->id}}">
-                                        {{$rep->label}}
-                                    </label>
+                            @if (session('status'))
+                                @include('admin.common.flash-message', ['type' => 'danger', 'message' => session('status')])
+                            @endif
+                            @foreach($question->answers->shuffle() as $rep )
+                                <label class="element-animation1 btn btn-lg btn-primary btn-block">
+                                    <span class="btn-label">
+                                        <i class="glyphicon glyphicon-chevron-right"></i>
+                                    </span>
+                                    <input type="radio" name="answer" value="{{$rep->id}}">
+                                    {{$rep->label}}
+                                </label>
                             @endforeach
                          </div>
                     </div>
@@ -53,9 +51,11 @@
     </div>
     <script type="text/javascript">
         clearTimeout(timeout);
-        {{--rebour(15, {{$numQuest+1}}, {{$nbQuest}});--}}
-        document.getElementById("nav_btn").onclick = function() {
-            document.getElementById("quest-form").submit();
-        };
+        (function(){
+            $('#nav_btn').on('click', function(ev) {
+                ev.preventDefault();
+                $("#quest-form").submit();
+            });
+        })();
     </script>
 @endsection

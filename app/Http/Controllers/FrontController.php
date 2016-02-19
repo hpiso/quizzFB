@@ -127,9 +127,10 @@ class FrontController extends Controller {
         $score = $this->scoreRepository->scoreResult($quizz);
 
         $timeFirstQuestion = $this->scoreRepository->getAnsweredQuestions($quizz)->first()->created_at;
-        $timeLastQuestion  = $this->scoreRepository->getAnsweredQuestions($quizz)->first()->updated_at;
+        $timeLastQuestion  = $this->scoreRepository->getAnsweredQuestions($quizz)->last()->updated_at;
 
-        $time = $timeLastQuestion->diffInSeconds($timeFirstQuestion);
+        Carbon::setLocale('fr');
+        $time = $timeLastQuestion->diffForHumans($timeFirstQuestion, true);
 
         $endingDate = new DateTime($quizz->ending_at);
         $endingDate = $endingDate->format('d/m/Y') ;
