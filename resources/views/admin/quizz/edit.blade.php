@@ -33,14 +33,6 @@
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label for="quizzActif">Actif</label>
-                    @if($quizz->actif == true)
-                        <input type="checkbox" value="true" checked id="quizzActif" name="actif">
-                    @else
-                        <input type="checkbox" value="false" id="quizzActif" name="actif">
-                    @endif
-                </div>
-                <div class="form-group">
                     <label for="quizzMaxNumber">Nombre de question</label>
                     <input type="number" class="form-control" value="{{$quizz->max_question}}" id="quizzMaxNumber" name="max_question">
                 </div>

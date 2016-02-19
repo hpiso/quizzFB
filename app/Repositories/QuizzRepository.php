@@ -15,8 +15,6 @@ class QuizzRepository {
 
 		$quizz = new Quizz();
 		$quizz->fill($inputs);
-		$actif = isset($inputs['actif']) ? true : false;
-		$quizz->setAttribute('actif', $actif);
 		$quizz->setAttribute('starting_at', new \DateTime($inputs['starting_at']));
 		$quizz->setAttribute('ending_at', new \DateTime($inputs['ending_at']));
 		$quizz->theme()->associate($theme);
@@ -33,8 +31,6 @@ class QuizzRepository {
 
 		$quizz = Quizz::find($id);
 		$quizz->fill($inputs);
-		$actif = isset($inputs['actif']) ? true : false;
-		$quizz->setAttribute('actif', $actif);
 		$quizz->theme()->associate($theme);
 		$quizz->save();
 	}
@@ -45,5 +41,11 @@ class QuizzRepository {
 	public function getActif()
 	{
 		return Quizz::where('actif', 1)->first();
+	}
+
+	public function updateState($inputs, $quizz)
+	{
+		$quizz->setAttribute('actif', $inputs['actif']);
+		$quizz->save();
 	}
 }

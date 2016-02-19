@@ -108,4 +108,34 @@ class QuizzController extends BaseController
             'questions' => $questions
         ]);
     }
+
+    public function updateState(Request $request)
+    {
+        $inputs = $request->all();
+
+        $quizz = Quizz::findOrFail($inputs['quizzId']);
+
+
+
+        if ($quizz->questions->count() < $quizz->max_question) {
+            return redirect('admin/quizz')->with(
+                'error-status',
+                'Il doit y avoir au moins '.$quizz->max_question.' questions appartenant
+                à ce quizz pour l\'activer ('.$quizz->questions->count().' actuellement).
+                Vous pouver ajouter des questions dans la rubrique "Question"');
+        } elseif ($inputs['actif'] && $this->quizzRepository->getActif()) {
+            return redirect('admin/quizz')->with(
+                'error-status',
+                'Un seul quizz peut être actif');
+        } else {
+            $this->quizzRepository->updateState($inputs, $quizz);
+        }
+
+        if ($inputs['actif']) {
+            return redirect('admin/quizz')->with('status', 'Le quizz a été activé');
+        } else {
+            return redirect('admin/quizz')->with('status', 'Le quizz a été désactivé');
+        }
+
+    }
 }

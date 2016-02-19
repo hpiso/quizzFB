@@ -32,10 +32,6 @@
                     <textarea class="form-control" id="quizzDescription" name="description" placeholder="Description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="quizzActif">Actif</label>
-                    <input type="checkbox" id="quizzActif" name="actif">
-                </div>
-                <div class="form-group">
                     <label for="quizzMaxNumber">Nombre de question</label>
                     <input type="number" class="form-control" id="quizzMaxNumber" name="max_question">
                 </div>
