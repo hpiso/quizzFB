@@ -38,8 +38,16 @@ class FrontController extends Controller {
     {
         $quizz = $this->quizzRepository->getActif();
 
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+
+        $already = true;
+        if ($answeredQuestionNbr < $quizz->max_question) {
+            $already = false;
+        }
+
         return view('front.index', [
-            'quizz'         => $quizz
+            'quizz'         => $quizz,
+            "already"       => $already
         ]);
     }
 

@@ -11,22 +11,11 @@
 
 </head>
 <body>
-
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Quizz ESGI</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a id="btn-menu" class="nav-link">Je sais pas quoi mettre</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="content">
-            @yield('content')
-        </div>
-    </div>
-
-
 @yield('javascript')
+
+@yield('title')
+@yield('content')
+
+
 </body>
 </html>
