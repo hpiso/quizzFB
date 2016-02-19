@@ -51,7 +51,11 @@
 
 @section('javascript')
     <script>
+        var element = $('#quizz');
         //Set selected value in the select multiple
-        $('#quizz').val({{$quizzSelected}});
+        element.val({{$quizzSelected}});
+        element.selectpicker({
+            "noneSelectedText": 'Aucun quizz sélectionné'
+        });
     </script>
 @endsection

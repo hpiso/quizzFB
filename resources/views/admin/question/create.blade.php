@@ -85,6 +85,8 @@
         });
     </script>
     <script>
-        $('.selectpicker').selectpicker();
+        $('.selectpicker').selectpicker({
+            "noneSelectedText": 'Aucun quizz sélectionné'
+        });
     </script>
 @endsection
