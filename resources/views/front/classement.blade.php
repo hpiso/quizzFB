@@ -1,37 +1,9 @@
 @extends('layout.front')
 
-@section('content')
-
-        <h1 class="title">Classement</h1>
-        @if($startClassement)
-            <table id="tab_classement" class="bordered highlight paginated">
-                <thead>
-                <tr>
-                    <th scope="col">Position</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Profil</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Temps</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @for($i=0;$i<50;$i++)
-                        <tr>
-                            <td>#1</td>
-                            <td>Alvin</td>
-                            <td><a href="">Alvin Gégé</a></td>
-                            <td>35/35</td>
-                            <td>60s</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-        @else
-            <blockquote>
-                Les résultats finaux seront disponible <br>
-                lorsque le quizz arrivera à sa date échéante.
-            </blockquote>
-        @endif
+@section('title')
+    <div class="image-bg-fluid-height">
+        <img class="img-responsive img-center" src="{{ url('/css/images/logo.png') }}" alt="">
+    </div>
 @endsection
 
 @section('javascript')
@@ -48,26 +20,85 @@
                 $table.trigger('repaginate');
                 var numRows = $table.find('tbody tr').length;
                 var numPages = Math.ceil(numRows / numPerPage);
-                var $pager = $('<ul class="pagination pager"></ul>');
-                var $pager2 = $('<ul class="pagination pager"></ul>');
-                for (var page = 0; page < numPages; page++) {
+                var $pager = $('<ul class="pagination"></ul>');
 
-                    $('<li class="waves-effect page-number"></li>').text(page + 1).bind('click', {
+                for (var page = 0; page < numPages; page++) {
+                    var li = $('<li class="page-number"><a href="#"></a></li>');
+
+                    li.find('a').text(page + 1).bind('click', {
                         newPage: page
                     }, function(event) {
                         currentPage = event.data['newPage'];
                         $table.trigger('repaginate');
-                        console.log(currentPage);
-                        $(this).addClass('active').siblings().removeClass('active');
-                    }).appendTo($pager);
+                    });
+
+                    li.appendTo($pager);
 
                 }
-                var copie = $($pager).clone();
-                copie.appendTo($pager2);
-                $pager.insertBefore($table).find('li.page-number:first').addClass('active');
-                $pager2.insertAfter($table).find('li.page-number:first').addClass('active');
+                $pager.insertAfter($table);
             });
 
         });
     </script>
 @endsection
+
+@section('content')
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a id="nav_btn" href="{{ route('front.index') }}" class="hvr-shutter-out-vertical">Accueil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Classement</strong>
+                        </h2>
+                        <hr>
+                        <div class="col-md-6 col-md-offset-3 page_classement">
+                            @if($startClassement)
+                                <table id="tab_classement" class="table table-striped paginated">
+                                    <thead>
+                                        <tr>
+                                            <th>Position</th>
+                                            <th>Nom</th>
+                                            <th>Profil</th>
+                                            <th>Score</th>
+                                            <th>Temps</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for($i=1;$i<50;$i++)
+                                            <tr>
+                                                <td>#{{$i}}</td>
+                                                <td>Alvin</td>
+                                                <td><a href="">Alvin Gégé</a></td>
+                                                <td>35/35</td>
+                                                <td>60s</td>
+                                            </tr>
+                                        @endfor
+                                    </tbody>
+                                </table>
+                            @else
+                                <blockquote>
+                                    Les résultats finaux seront disponible <br>
+                                    lorsque le quizz arrivera à sa date échéante.
+                                </blockquote>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endsection
+

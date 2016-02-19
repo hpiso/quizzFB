@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Score;
 use App\Repositories\QuizzRepository;
 use App\Repositories\ScoreRepository;
+use App\Repositories\QuestionRepository;
+use App\Repositories\AnswerRepository;
+use DateTime;
 
 class FrontController extends Controller {
 
@@ -15,11 +18,15 @@ class FrontController extends Controller {
 
     public function __construct(
         QuizzRepository $quizzRepository,
-        ScoreRepository $scoreRepository
+        ScoreRepository $scoreRepository,
+        QuestionRepository $questionRepository,
+        AnswerRepository $answerRepository
     )
     {
         $this->quizzRepository = $quizzRepository;
         $this->scoreRepository = $scoreRepository;
+        $this->questionRepository = $questionRepository;
+        $this->answerRepository = $answerRepository;
     }
 
     //TODO FONCTION TEMPORAIRE
@@ -31,8 +38,16 @@ class FrontController extends Controller {
     {
         $quizz = $this->quizzRepository->getActif();
 
+        $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
+
+        $already = true;
+        if ($answeredQuestionNbr < $quizz->max_question) {
+            $already = false;
+        }
+
         return view('front.index', [
-            'quizz' => $quizz,
+            'quizz'         => $quizz,
+            "already"       => $already
         ]);
     }
 
@@ -60,10 +75,12 @@ class FrontController extends Controller {
         if ($answeredQuestionNbr < $quizz->max_question) {
             return view('front.question', [
                 'question' => $question,
+                'numQuest' => $answeredQuestionNbr,
+                'nbQuest'  => $quizz->max_question
             ]);
         }
 
-        return redirect('/result');
+        return redirect()->secure('/result');
     }
 
     public function action(Request $request)
@@ -105,7 +122,35 @@ class FrontController extends Controller {
 
     public function result()
     {
-        return view('front.result');
+        $quizz = $this->quizzRepository->getActif();
+
+        $endingDate = new DateTime($quizz->ending_at);
+        $endingDate = $endingDate->format('d/m/Y') ;
+        $startClassement = false;
+        if(new DateTime() > new DateTime($quizz->ending_at)) {
+            $startClassement = true;
+        }
+
+        return view('front.result', [
+            'endingDate' => $endingDate,
+            'startClassement' => $startClassement
+        ]);
+    }
+
+    public function classement() {
+
+        $quizz = $this->quizzRepository->getActif();
+        //IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
+        $endingDate = new DateTime($quizz->ending_at);
+        $endingDate = $endingDate->format('d/m/Y') ;
+        $startClassement = false;
+        if(new DateTime() > new DateTime($quizz->ending_at)) {
+            $startClassement = true;
+        }
+
+        return view('front.classement', [
+            'startClassement' => $startClassement
+        ]);
     }
 }
 

@@ -3,22 +3,27 @@
 /* ---------- FRONT ----------*/
 
 $app->get('/', [
+//    'middleware' => 'secure',
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
 
 $app->get('/question', [
+//    'middleware' => 'secure',
     'as' => 'front.question', 'uses' => 'FrontController@question'
 ]);
 
 $app->post('/quizz/action', [
+//    'middleware' => 'secure',
     'as' => 'quizz.action', 'uses' => 'FrontController@action'
 ]);
 
 $app->get('/result', [
+//    'middleware' => 'secure',
     'as' => 'front.result', 'uses' => 'FrontController@result'
 ]);
 
 $app->get('/classement', [
+//    'middleware' => 'secure',
     'as' => 'front.classement', 'uses' => 'FrontController@classement'
 ]);
 
