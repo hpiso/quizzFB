@@ -24,15 +24,15 @@ class DashboardController extends BaseController
         if (!$actifQuizz) {
             $goodAnswerNbr = 0;
             $badAnswerNbr = 0;
+        } else {
+            $goodAnswerNbr = Score::where('quizz_id', $actifQuizz->id)
+                ->where('correct', true)
+                ->count();
+
+            $badAnswerNbr = Score::where('quizz_id', $actifQuizz->id)
+                ->where('correct', false)
+                ->count();
         }
-
-        $goodAnswerNbr = Score::where('quizz_id', $actifQuizz->id)
-            ->where('correct', true)
-            ->count();
-
-        $badAnswerNbr = Score::where('quizz_id', $actifQuizz->id)
-            ->where('correct', false)
-            ->count();
 
         return view('admin.dashboard.index', [
             'quizzs' => $quizzs,

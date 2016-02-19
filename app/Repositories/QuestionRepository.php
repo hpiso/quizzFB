@@ -34,7 +34,7 @@ class QuestionRepository {
 			$answerEntity = new Answer();
 			$answerEntity->setAttribute('label', $answersLabel);
 
-			if ($key == key($inputs['answerChecked'])) {
+			if ($key == $inputs['answerChecked']) {
 				$answerEntity->setAttribute('correct', true);
 			} else {
 				$answerEntity->setAttribute('correct', false);
@@ -64,7 +64,7 @@ class QuestionRepository {
 		foreach ($question->answers as $key => $answer){
 			$answer->setAttribute('label', $answersLabels[$key]);
 
-			if ($key == key($inputs['answerChecked'])) {
+			if ($key == $inputs['answerChecked']) {
 				$answer->setAttribute('correct', true);
 			} else {
 				$answer->setAttribute('correct', false);

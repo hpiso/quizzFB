@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" class="checkboxAnswer" name="answerChecked[1]" checked id="checkboxAnswer1">
+                                <input type="radio" class="checkboxAnswer" value="1" name="answerChecked" checked id="checkboxAnswer1">
                             </span>
                             <input type="text" class="form-control" required name="answerLabel[1]" placeholder="Réponse n°1">
                         </div>
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" class="checkboxAnswer" name="answerChecked[2]" id="checkboxAnswer2">
+                                <input type="radio" class="checkboxAnswer" value="2" name="answerChecked" id="checkboxAnswer2">
                             </span>
                             <input type="text" class="form-control" required name="answerLabel[2]" placeholder="Réponse n°2">
                         </div>
@@ -69,7 +69,7 @@
             data += '<div class="form-group">'
                  +  '<div class="input-group">'
                  +  '<span class="input-group-addon">'
-                 +  '<input type="checkbox" class="checkboxAnswer" name="answerChecked['+ answerNbr +']" id="checkboxAnswer'+ answerNbr +'">'
+                 +  '<input type="radio" class="checkboxAnswer" value="'+ answerNbr +'" name="answerChecked" id="checkboxAnswer'+ answerNbr +'">'
                  +  '</span>'
                  +  '<input type="text" class="form-control" required name="answerLabel['+ answerNbr +']" placeholder="Réponse n°'+ answerNbr +'">'
                  +  '</div>'
@@ -82,11 +82,6 @@
 
             var answerNbrClass = $(this).data('answernbr');
             $( ".answers"+answerNbrClass).html(data);
-        });
-
-        //Only one checkbox can be selected
-        $(element).on('change', '.checkboxAnswer', function() {
-            $('.checkboxAnswer').not(this).prop('checked', false);
         });
     </script>
     <script>

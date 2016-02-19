@@ -52,7 +52,11 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="flot-chart">
-                        <div class="flot-chart-content" id="flot-pie-chart"></div>
+                        @if ($actifQuizz)
+                            <div class="flot-chart-content" id="flot-pie-chart"></div>
+                        @else
+                           <em>Aucun quizz actif pour le moment</em>
+                        @endif
                     </div>
                 </div>
                 <!-- /.panel-body -->
