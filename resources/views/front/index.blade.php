@@ -11,7 +11,6 @@
         <div id="address-bar" class="address-bar">Quiquizz vous invite à commencer son test</div>
     @endif
 
-
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -32,9 +31,7 @@
             </div>
         </div>
     </nav>
-
     <div class="container">
-
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">

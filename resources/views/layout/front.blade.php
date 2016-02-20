@@ -10,7 +10,7 @@
     @include('front.common.global-js')
 
 </head>
-<body>
+<body style="background-color:{{$backgroundColor}}">
 @yield('javascript')
 
 @yield('title')

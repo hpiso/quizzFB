@@ -81,26 +81,13 @@
             </table>
             <a href="{{ route('quizz.create') }}" class="btn btn-primary btn-small">Créer un quizz</a>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
-
-
 @endsection
 
 @section('javascript')
     <script>
         var route = "{{ route('quizz.update.state') }}";
         $('.btn-actif-popover').popover({
-            delay: 300,
-//            template:'<div class="popover" role="tooltip">' +
-//                        '<div class="arrow"></div>' +
-//                        '<h3 class="popover-title"></h3>' +
-//                        '<div class="popover-content"></div>' +
-//                        '<form action="'+route+'" method="post">' +
-//                        '<input type="submit" style="margin: -10px 10px 10px;" value="OK" class="btn btn-success" />' +
-//                        '<a style="margin: -10px 10px 10px;" class="btn btn-default">Annuler</a>' +
-//                        '</form>' +
-//                        '</div>',
             placement:'top',
             html:true
         })
