@@ -2,6 +2,7 @@
 
 use App\Models\Score;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ScoreRepository {
 
@@ -96,6 +97,51 @@ class ScoreRepository {
 			->count();
 
 		return $scoreResult;
+	}
+
+	public function scoreClassement($quizz)
+	{
+		$scoreUsers = Score::where('quizz_id', $quizz->id )
+		->groupBy('user_id')->get();
+
+		$scoreClassement = array();
+		foreach($scoreUsers as $score) {
+
+			$timeQuestion = Score::where('user_id', $score->user_id)
+				->where('quizz_id', $quizz->id)
+				->where('already_answered', true)
+				->get();
+
+			$timeFirstQuestion = $timeQuestion->first()->created_at;
+
+			$timeQuestion = Score::where('user_id', $score->user_id)
+				->where('quizz_id', $quizz->id)
+				->where('already_answered', true)
+				->get();
+
+			$timeLastQuestion  = $timeQuestion->last()->updated_at;
+
+			Carbon::setLocale('fr');
+			$time = $timeLastQuestion->diffForHumans($timeFirstQuestion, true);
+
+
+			$scoreUser = Score::where('user_id', $score->user_id)
+				->where('quizz_id', $quizz->id)
+				->where('already_answered', true)
+				->where('correct', true)
+				->count();
+
+			$user = User::where('id',$score->user_id)->first();
+
+
+			$scoreClassement[$user->id] = ['prenom' => $user->first_name, 'profil' => 'facebook.com/'.$user->id ,'score' => $scoreUser, 'time' => $time];
+		}
+
+		$classementCollect = collect($scoreClassement);
+		$classementCollect
+			->sortBy('score')
+			->sortByDesc('time');
+		return $classementCollect;
 	}
 
 }

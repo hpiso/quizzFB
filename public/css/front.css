@@ -1,10 +1,12 @@
 #address-bar{
     padding: 25px;
+    text-align: center;
 }
 
 #nav_btn {
     background-color: transparent;
     cursor: pointer;
+    text-align: center;
 }
 #nav_btn:before {
     background: #0277DB ;
@@ -39,10 +41,17 @@
     padding: 10px;
 }
 
+.btn_partage img{
+    width: 48px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
 .btn_partage{
-color:white;
-font-weight: bold;
-background-color: #354c8c;
+    color:white;
+    font-weight: bold;
+    background-color: #354c8c;
+    padding: 0px 12px;
 }
 
 .btn_classement.disabled{
@@ -74,4 +83,10 @@ ul.pager li.active {
 
 .page_classement {
     text-align: center;
+}
+
+@media screen and (min-width:800px) {
+
+
+
 }

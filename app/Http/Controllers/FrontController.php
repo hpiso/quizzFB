@@ -153,16 +153,17 @@ class FrontController extends Controller {
     public function classement() {
 
         $quizz = $this->quizzRepository->getActif();
-        //IL FAUDRAIT CACHER LA VUE OU LES DONNEES AVANT LA DATE DE FIN DU QUIZZ
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
+        $classement = $this->scoreRepository->scoreClassement($quizz);
+
         $startClassement = false;
         if(new DateTime() > new DateTime($quizz->ending_at)) {
             $startClassement = true;
         }
 
+
         return view('front.classement', [
-            'startClassement' => $startClassement
+            'startClassement' => $startClassement,
+            'classement'    => $classement
         ]);
     }
 }
