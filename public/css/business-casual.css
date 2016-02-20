@@ -36,8 +36,7 @@ hr {
     border-color: #999999;
 }
 
-.brand,
-.address-bar {
+.brand {
     display: none;
 }
 
