@@ -46,7 +46,7 @@
 
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
                             <a id="nav_btn" href="{{ route('front.index') }}" class="hvr-shutter-out-vertical">Accueil</a>
@@ -78,15 +78,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for($i=1;$i<50;$i++)
+                                    <?php $i=1; ?>
+                                        @foreach($classement as $score)
                                             <tr>
                                                 <td>#{{$i}}</td>
-                                                <td>Alvin</td>
-                                                <td><a href="">Alvin Gégé</a></td>
-                                                <td>35/35</td>
-                                                <td>60s</td>
+                                                <td>{{ $score['prenom']}}</td>
+                                                <td><a target="_blank" href="http://{{ $score['profil']}}">{{ $score['prenom']}}</a></td>
+                                                <td>{{ $score['score']}}</td>
+                                                <td>{{ $score['time']}}</td>
                                             </tr>
-                                        @endfor
+                                            <?php $i++; ?>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             @else
