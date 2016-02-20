@@ -85,7 +85,7 @@ class ScoreRepository {
 
 	public function scoreResult($quizz)
 	{
-		$scoreResult = Score::where('user_id', $this->getUser()->id)
+		$scoreResult = Score::where('user_id', Auth::user()->id)
 			->where('quizz_id', $quizz->id)
 			->where('already_answered', true)
 			->where('correct', true)
