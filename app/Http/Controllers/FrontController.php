@@ -132,15 +132,17 @@ class FrontController extends Controller {
         Carbon::setLocale('fr');
         $time = $timeLastQuestion->diffForHumans($timeFirstQuestion, true);
 
-        $endingDate = new DateTime($quizz->ending_at);
-        $endingDate = $endingDate->format('d/m/Y') ;
+        $endingDate = Carbon::parse($quizz->ending_at);
+        $endingDate->hour = 23;
+        $endingDate->minute = 59;
+        $endingDate->second = 59;
+
         $startClassement = false;
-        if (new DateTime() > new DateTime($quizz->ending_at)) {
+        if (Carbon::now()->gt($endingDate)) {
             $startClassement = true;
         }
 
         return view('front.result', [
-            'endingDate'      => $endingDate,
             'startClassement' => $startClassement,
             'score'           => $score,
             'time'            => $time,

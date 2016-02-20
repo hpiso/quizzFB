@@ -32,7 +32,7 @@
                     <hr>
                     <div class="collection col-md-6 col-md-offset-3">
                         <div class="col-md-6">
-                            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{$endingDate}}</p>
+                            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{ date('d M Y', strtotime($quizz->ending_at)) }}</p>
                         </div>
                         <div class="col-md-6">
                             <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : ADEFINIR</p>
