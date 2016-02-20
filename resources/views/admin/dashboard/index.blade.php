@@ -45,25 +45,45 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Taux de bonnes / mauvaises réponses du quizz actuel
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="flot-chart">
-                        @if ($actifQuizz)
-                            <div class="flot-chart-content" id="flot-pie-chart"></div>
-                        @else
-                           <em>Aucun quizz actif pour le moment</em>
-                        @endif
+        @if (!$actifQuizz)
+            <div class="col-lg-6">
+                <em>Aucun quizz en cours</em>
+            <div>
+        @else
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Informations sur le quizz en cours
+                    </div>
+                    <div class="panel-body">
+                        <h4>Quizz : {{$actifQuizz->label}}</h4>
+                        <ul>
+                            <li>Thème : {{$actifQuizz->theme->label}}</li>
+                            <li>Nombre de question : {{count($actifQuizz->questions)}}</li>
+                            <li>Date de début : {{ date('d F Y', strtotime($actifQuizz->starting_at)) }}</li>
+                            <li>Date de fin : {{ date('d F Y', strtotime($actifQuizz->starting_at)) }}</li>
+                        </ul>
                     </div>
                 </div>
-                <!-- /.panel-body -->
+                <!-- /.panel -->
             </div>
-            <!-- /.panel -->
-        </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Taux de bonnes / mauvaises réponses du quizz en cours
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="flot-pie-chart"></div>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+        @endif
+
     </div>
 @endsection
 
