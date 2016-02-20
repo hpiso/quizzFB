@@ -1,9 +1,7 @@
 @extends('layout.front')
 
 @section('title')
-    <div class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="{{ url('/css/images/logo.png') }}" alt="">
-    </div>
+
 @endsection
 
 @section('content')
@@ -27,16 +25,17 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                        <strong>Félicitations {{ ucfirst(Auth::user()->first_name) }} !</strong><br><br>
-                        Score : 25pts
+                        <p><strong>Félicitations</strong>  {{ ucfirst(Auth::user()->first_name) }}</p>
+                        <p>Score : {{$score}} / {{$quizz->max_question}}</p>
+                        <p>Temps effectué : {{$time}}</p>
                     </h2>
                     <hr>
                     <div class="collection col-md-6 col-md-offset-3">
                         <div class="col-md-6">
-                            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{$endingDate}}</p>
+                            <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{ date('d M Y', strtotime($quizz->ending_at)) }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : 150</p>
+                            <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : ADEFINIR</p>
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default btn-md btn_partage">

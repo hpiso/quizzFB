@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Quizz',
+        'icon' => 'fa-gamepad',
         'links' => [
             'Quizz' => 'quizz.index',
             'Modifier un quizz' => 'quizz.edit'
@@ -31,14 +32,6 @@
                     <label for="quizzDescription">Description</label>
                     <textarea class="form-control" id="quizzDescription" name="description" placeholder="Description">{{$quizz->description}}
                     </textarea>
-                </div>
-                <div class="form-group">
-                    <label for="quizzActif">Actif</label>
-                    @if($quizz->actif == true)
-                        <input type="checkbox" value="true" checked id="quizzActif" name="actif">
-                    @else
-                        <input type="checkbox" value="false" id="quizzActif" name="actif">
-                    @endif
                 </div>
                 <div class="form-group">
                     <label for="quizzMaxNumber">Nombre de question</label>

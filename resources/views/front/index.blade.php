@@ -1,9 +1,7 @@
 @extends('layout.front')
 
 @section('title')
-    <div class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="{{ url('/css/images/logo.png') }}" alt="">
-    </div>
+
 @endsection
 
 @section('content')
@@ -13,7 +11,6 @@
         <div id="address-bar" class="address-bar">Quiquizz vous invite à commencer son test</div>
     @endif
 
-
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -21,19 +18,20 @@
                 <ul class="nav navbar-nav">
                     <li>
                         @if($already)
-                            <a id="nav_btn" href="{{ route('front.result') }}" class="hvr-shutter-out-vertical">Ton résultat</a>
+                            <a id="nav_btn" href="{{ route('front.result') }}" class="hvr-shutter-out-vertical">
+                                <i class="fa fa-chevron-right "></i> Ton résultat <i class="fa fa-chevron-left"></i>
+                            </a>
                         @else
-{{--                            <a id="nav_btn" href="{{ route('front.question') }}" class="hvr-shutter-out-vertical">Commencer le Quizz</a>--}}
-                            <a id="nav_btn" href="{{ route('login') }}" class="hvr-shutter-out-vertical">Commencer le Quizz</a>
+                            <a id="nav_btn" href="{{ route('login') }}" class="hvr-shutter-out-vertical">
+                                <i class="fa fa-chevron-right "></i> Commencer le Quizz <i class="fa fa-chevron-left"></i>
+                            </a>
                         @endif
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container">
-
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
@@ -48,7 +46,6 @@
                         </div>
                         <div class="col-lg-6">
                             <p><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Nombre de questions : {{$quizz->max_question}}</p>
-                            <p><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span> Temps par question : 150s</p>
                         </div>
                     </div>
                 </div>

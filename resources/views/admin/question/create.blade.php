@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Question',
+        'icon' => 'fa-question',
         'links' => [
             'Question' => 'question.index',
             'Créer une question' => 'question.create'
@@ -15,7 +16,7 @@
             <form method="post" action="{{ route('question.store') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label for="quizz">Associer à un quizz</label>
+                    <label for="quizz">Associer à un ou plusieurs quizzs</label>
                     <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
                         @foreach($items as $item)
                             <option value="{{$item->id}}">{{$item->label}}</option>
@@ -23,14 +24,14 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="questionLabel">Posez votre question (cocher la bonne réponse)</label>
+                    <label for="questionLabel">Posez votre question (cocher pour indiquer la bonne réponse)</label>
                     <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
                 </div>
                 <div id="answers">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" class="checkboxAnswer" name="answerChecked[1]" checked id="checkboxAnswer1">
+                                <input type="radio" class="checkboxAnswer" value="1" name="answerChecked" checked id="checkboxAnswer1">
                             </span>
                             <input type="text" class="form-control" required name="answerLabel[1]" placeholder="Réponse n°1">
                         </div>
@@ -38,7 +39,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" class="checkboxAnswer" name="answerChecked[2]" id="checkboxAnswer2">
+                                <input type="radio" class="checkboxAnswer" value="2" name="answerChecked" id="checkboxAnswer2">
                             </span>
                             <input type="text" class="form-control" required name="answerLabel[2]" placeholder="Réponse n°2">
                         </div>
@@ -69,7 +70,7 @@
             data += '<div class="form-group">'
                  +  '<div class="input-group">'
                  +  '<span class="input-group-addon">'
-                 +  '<input type="checkbox" class="checkboxAnswer" name="answerChecked['+ answerNbr +']" id="checkboxAnswer'+ answerNbr +'">'
+                 +  '<input type="radio" class="checkboxAnswer" value="'+ answerNbr +'" name="answerChecked" id="checkboxAnswer'+ answerNbr +'">'
                  +  '</span>'
                  +  '<input type="text" class="form-control" required name="answerLabel['+ answerNbr +']" placeholder="Réponse n°'+ answerNbr +'">'
                  +  '</div>'
@@ -83,13 +84,10 @@
             var answerNbrClass = $(this).data('answernbr');
             $( ".answers"+answerNbrClass).html(data);
         });
-
-        //Only one checkbox can be selected
-        $(element).on('change', '.checkboxAnswer', function() {
-            $('.checkboxAnswer').not(this).prop('checked', false);
-        });
     </script>
     <script>
-        $('.selectpicker').selectpicker();
+        $('.selectpicker').selectpicker({
+            "noneSelectedText": 'Aucun quizz sélectionné'
+        });
     </script>
 @endsection

@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Question',
+        'icon' => 'fa-question',
         'links' => [
             'Question' => 'question.index',
             'Modifier une question' => 'question.edit'
@@ -32,9 +33,9 @@
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     @if($answer->correct)
-                                        <input type="checkbox" checked class="checkboxAnswer" name="answerChecked[{{$key}}]" id="checkboxAnswer{{$key}}">
+                                        <input type="radio" checked class="checkboxAnswer" value="{{$key}}" name="answerChecked" id="checkboxAnswer{{$key}}">
                                     @else
-                                        <input type="checkbox" class="checkboxAnswer" name="answerChecked[{{$key}}]" id="checkboxAnswer{{$key}}">
+                                        <input type="radio" class="checkboxAnswer" value="{{$key}}" name="answerChecked" id="checkboxAnswer{{$key}}">
                                     @endif
                                 </span>
                                 <input type="text" class="form-control" required name="answerLabel[{{$key}}]" value="{{$answer->label}}" placeholder="Réponse n°{{$key +=1}}">
@@ -51,14 +52,11 @@
 
 @section('javascript')
     <script>
-        var element = '#answers';
-
-        //Only one checkbox can be selected
-        $(element).on('change', '.checkboxAnswer', function() {
-            $('.checkboxAnswer').not(this).prop('checked', false);
-        });
-
+        var element = $('#quizz');
         //Set selected value in the select multiple
-        $('#quizz').val({{$quizzSelected}});
+        element.val({{$quizzSelected}});
+        element.selectpicker({
+            "noneSelectedText": 'Aucun quizz sélectionné'
+        });
     </script>
 @endsection

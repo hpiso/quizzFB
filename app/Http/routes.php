@@ -66,6 +66,9 @@ $app->get('admin/quizz/{id}/update', [
 $app->get('admin/quizz/{id}/show', [
     'as' => 'quizz.show', 'uses' => 'QuizzController@show'
 ]);
+$app->post('admin/quizz/update-state', [
+    'as' => 'quizz.update.state', 'uses' => 'QuizzController@updateState'
+]);
 
 //Question
 $app->get('admin/question', [

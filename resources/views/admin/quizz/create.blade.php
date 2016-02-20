@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Quizz',
+        'icon' => 'fa-gamepad',
         'links' => [
             'Quizz' => 'quizz.index',
             'Ajouter un quizz' => 'quizz.create'
@@ -30,10 +31,6 @@
                 <div class="form-group">
                     <label for="quizzDescription">Description</label>
                     <textarea class="form-control" id="quizzDescription" name="description" placeholder="Description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="quizzActif">Actif</label>
-                    <input type="checkbox" id="quizzActif" name="actif">
                 </div>
                 <div class="form-group">
                     <label for="quizzMaxNumber">Nombre de question</label>

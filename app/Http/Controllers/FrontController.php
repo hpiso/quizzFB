@@ -8,6 +8,7 @@ use App\Repositories\QuestionRepository;
 use App\Repositories\QuizzRepository;
 use App\Repositories\ScoreRepository;
 use DateTime;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -136,18 +137,31 @@ class FrontController extends Controller
     public function result()
     {
         $quizz = $this->quizzRepository->getActif();
+        $score = $this->scoreRepository->scoreResult($quizz);
 
         $endingDate = new DateTime($quizz->ending_at);
         $endingDate = $endingDate->format('d/m/Y');
+        $timeFirstQuestion = $this->scoreRepository->getAnsweredQuestions($quizz)->first()->created_at;
+        $timeLastQuestion  = $this->scoreRepository->getAnsweredQuestions($quizz)->last()->updated_at;
+
+        Carbon::setLocale('fr');
+        $time = $timeLastQuestion->diffForHumans($timeFirstQuestion, true);
+
+        $endingDate = Carbon::parse($quizz->ending_at);
+        $endingDate->hour = 23;
+        $endingDate->minute = 59;
+        $endingDate->second = 59;
+
         $startClassement = false;
-        if (new DateTime() > new DateTime($quizz->ending_at))
-        {
+        if (Carbon::now()->gt($endingDate)) {
             $startClassement = true;
         }
 
         return view('front.result', [
-            'endingDate' => $endingDate,
-            'startClassement' => $startClassement
+            'startClassement' => $startClassement,
+            'score'           => $score,
+            'time'            => $time,
+            'quizz'           => $quizz
         ]);
     }
 

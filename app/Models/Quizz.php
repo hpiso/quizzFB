@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Quizz extends Model
 {
 
+    public function __construct(array $attributes = array())
+    {
+        parent::__construct($attributes);
+
+        $this->actif = false;
+    }
     /**
      * @var string Table Name
      */
