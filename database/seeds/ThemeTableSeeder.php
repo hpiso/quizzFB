@@ -18,18 +18,24 @@ class ThemeTableSeeder extends Seeder
         DB::table('themes')->insert([
             'label' => 'Général',
             'description' => 'Des questions de tout ordre',
+            'color_nav' => '#C65F5D',
+            'color_elements' => '#FFFFFF',
             'created_at' => $date,
             'updated_at' => $date
         ]);
         DB::table('themes')->insert([
-            'label' => 'Voiture',
-            'description' => 'Des questions orientées belles mécaniques',
+            'label' => 'Sport',
+            'description' => 'Des questions sur les différents sports',
+            'color_nav' => '#476390',
+            'color_elements' => '#FFFFFF',
             'created_at' => $date,
             'updated_at' => $date
         ]);
         DB::table('themes')->insert([
             'label' => 'Nature',
             'description' => 'Des questions sur les plantes, les animaux et la planète',
+            'color_nav' => '#476390',
+            'color_elements' => '#FFFFFF',
             'created_at' => $date,
             'updated_at' => $date
         ]);
