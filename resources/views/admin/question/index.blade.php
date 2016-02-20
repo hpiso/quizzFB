@@ -3,6 +3,7 @@
 @section('content')
     @include('admin.common.breadcrumb', [
        'mainTitle' => 'Question',
+       'icon' => 'fa-question',
        'links' => [
            'Question' => 'question.index',
        ]
@@ -20,12 +21,12 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="quizz">Quizz</label>
-                                <select class="form-control" id="quizz" name="quizz">
-                                        <option value="{{null}}">--- Tous ---</option>
-                                    @foreach($quizzs as $quizz)
-                                        <option value="{{$quizz->id}}">{{$quizz->label}}</option>
-                                    @endforeach
-                                </select>
+                            <select class="form-control" id="quizz" name="quizz">
+                                    <option value="{{null}}">--- Tous ---</option>
+                                @foreach($quizzs as $quizz)
+                                    <option value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Rechercher</button>
                     </form>

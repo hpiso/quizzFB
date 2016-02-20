@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Quizz',
+        'icon' => 'fa-gamepad',
         'links' => [
             'Quizz' => 'quizz.index',
             'Ajouter un quizz' => 'quizz.create'

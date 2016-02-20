@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Question',
+        'icon' => 'fa-question',
         'links' => [
             'Question' => 'question.index',
             'Créer une question' => 'question.create'
@@ -15,7 +16,7 @@
             <form method="post" action="{{ route('question.store') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label for="quizz">Associer à un quizz</label>
+                    <label for="quizz">Associer à un ou plusieurs quizzs</label>
                     <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
                         @foreach($items as $item)
                             <option value="{{$item->id}}">{{$item->label}}</option>
@@ -23,7 +24,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="questionLabel">Posez votre question (cocher la bonne réponse)</label>
+                    <label for="questionLabel">Posez votre question (cocher pour indiquer la bonne réponse)</label>
                     <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
                 </div>
                 <div id="answers">

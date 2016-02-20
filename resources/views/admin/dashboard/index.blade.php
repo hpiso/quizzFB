@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Dasboard',
+        'icon' => 'fa-dashboard',
         'links' => [
             'Dashboard' => 'dashboard.index',
         ]

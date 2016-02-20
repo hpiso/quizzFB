@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Thème',
+        'icon' => 'fa-picture-o',
         'links' => [
             'Thème' => 'theme.index',
         ]

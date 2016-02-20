@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Utilisateurs',
+        'icon' => 'fa-users',
         'links' => [
             'Utilisateurs' => 'user.index',
         ]
