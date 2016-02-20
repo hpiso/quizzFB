@@ -16,6 +16,6 @@
 #    RewriteCond %{HTTPS} !=on
 #    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 
-    RewriteCond %{HTTPS} !=on
-    RewriteRule (.*) https://esgiquizzcreator.herokuapp.com/$1 [R=301,L]
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule (.*) https://esgiquizzcreator.herokuapp.com/$1 [R=301,L]
 </IfModule>
