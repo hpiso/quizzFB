@@ -18,7 +18,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <p>Voici quelques informations concernant la création de quizz :</p>
+                    <p>Voici quelques informations concernant la gestion des quizzs :</p>
                     <ul>
                         <li>Le quizz actif est surligné en vert dans la liste.</li>
                         <li>Un quizz ne peut être valide que si le nombre de question associé à ce quizz est supèrieur
