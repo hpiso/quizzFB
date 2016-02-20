@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//Dotenv::load(__DIR__ . '/../');
+Dotenv::load(__DIR__ . '/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +63,11 @@ $app->middleware([
 //    Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 ]);
 
- $app->routeMiddleware([
+$app->routeMiddleware([
     'secure' => 'App\Http\Middleware\HttpsProtocol',
- ]);
+    'admin' => 'App\Http\Middleware\CheckAdmin',
+    'loggedin' => 'App\Http\Middleware\CheckLoggedIn'
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +109,7 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app)
 */
 
 config(['cache' => [
-    'default' => env('CACHE_DRIVER','database'),
+    'default' => env('CACHE_DRIVER', 'database'),
     'stores' => [
         'array' => [
             'driver' => 'array',
@@ -137,12 +139,12 @@ config(['session' => [
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
     'encrypt' => false,
 //    'files' => storage_path('framework/sessions'),
-    'connection' => env('SESSION_DATABASE_CONNECTION','pgsql'),
+    'connection' => env('SESSION_DATABASE_CONNECTION', 'pgsql'),
     'table' => env('SESSION_DATABASE_TABLE', 'sessions'),
     'lottery' => [2, 100],
     'cookie' => 'quizz_session',
     'path' => '/',
-    'domain' => env('SESSION_DOMAIN','esgiquizzcreator.herokuapp.com'),
+    'domain' => env('SESSION_DOMAIN', 'esgiquizzcreator.herokuapp.com'),
     'secure' => true,
 ]]);
 
