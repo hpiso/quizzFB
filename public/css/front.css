@@ -1,87 +1,64 @@
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: table;
-
+#address-bar{
+    padding: 25px;
 }
 
-.container {
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+#nav_btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+#nav_btn:before {
+    background: #0277DB ;
+}
+#nav_btn:hover {
+    color: white;
+}
+.infos_index {
+    padding: 10px;
 }
 
-.content {
-    text-align: center;
-    display: inline-block;
+.infos_index .col-lg-6 {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.content p {
+.infos_index p {
     text-align: left;
 }
 
-h1.title {
-    font-size: 80px;
-    margin-bottom: 40px;
+.img-center {
+    margin: 0 auto;
+    padding: 40px 0;
+    width : 250px;
+}
+
+.collection div{
     text-align: center;
-    font-weight: 100;
-    font-family: 'Lato';
-    color: #B0BEC5;
 }
 
-.btn-large {
-    margin : 80px;
+.collection .col-md-6 {
+    padding: 10px;
 }
 
-p.collection-item {
-    text-align: center;
-    color:gray;
+.btn_partage{
+color:white;
+font-weight: bold;
+background-color: #354c8c;
 }
 
-.collection {
-    margin-top: 80px;
-    width: 550px;
+.btn_classement.disabled{
+    color :#333;
 }
-
-.liste_questions {
-    width: 60em;
-}
-
-.questions {
-    margin-bottom:70px;
-}
-
-.questions>h5 {
-    text-align: left;
-}
-.questions>div>p {
-    /*text-align: center;*/
+.btn_classement {
+    color:white;
+    font-weight: bold;
+    width: 120px;
+    height: 50px;
+    background-color: #8BC34A;
 }
 
 blockquote {
+    color:red;
     text-align: left;
-    font-size: 12px;
-}
-
-.partage{
-    color:white;
-    font-weight: bold;
-    background-color: #354c8c;
-}
-
-.partage:hover{
-    background-color: #354c8c ;
-}
-
-.partage > .facebook {
-
-}
-
-.s6 > button {
-    margin-bottom: 40px;
-    margin-top: 20px;
     font-size: 12px;
 }
 
@@ -92,4 +69,9 @@ ul.pager li.active {
 
 #tab_classement{
     margin-bottom: 50px;
+    text-align: left;
+}
+
+.page_classement {
+    text-align: center;
 }

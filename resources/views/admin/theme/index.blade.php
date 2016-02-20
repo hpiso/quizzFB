@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Thème',
+        'icon' => 'fa-picture-o',
         'links' => [
             'Thème' => 'theme.index',
         ]
@@ -28,8 +29,8 @@
                         <td>{{$entity->label}}</td>
                         <td>{{$entity->description}}</td>
                         <td>
-                            <a href="{{ route('theme.edit', ['id' => $entity->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-edit"></i> Modifier</a>
-                            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> Supprimer</a>
+                            <a href="{{ route('theme.edit', ['id' => $entity->id]) }}" class="btn btn-warning btn-circle"><i class="fa fa-edit"></i> </a>
+                            <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#{{$entity->id}}"><i class="fa fa-trash"></i> </a>
                         </td>
                     </tr>
 

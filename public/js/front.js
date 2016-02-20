@@ -5,38 +5,6 @@
 var timeout;
 var restant;
 
-function nextPage(numPage) {
-    var questionId=$('.questions:eq('+numPage+')').attr('id');
-    $.ajax({
-        type: "GET",
-        url : "/questionquizz",
-        data : 'numQuest='+numPage+'&questionId='+questionId ,
-        success : function(data){
-            $('.questions').hide();
-            $('.questions:eq('+numPage+')').html(data);
-            $('.questions:eq('+numPage+')').show();
-        }
-    },"json");
-
-}
-
-function process(question, numPage, temps) {
-    var res=$('.questions:eq('+numPage+') input:checked').attr('id');
-
-    $.ajax({
-        type: "GET",
-        url : "/process",
-        data : 'question='+question+'&res='+res+'&temps='+temps ,
-        success : function(data){
-
-        }
-    },"json");
-}
-
-function result() {
-    window.location.replace("/result");
-}
-
 function rebour(tps,currentPage, numPages)
 {
         var heure = Math.floor(tps/3600);

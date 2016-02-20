@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Question',
+        'icon' => 'fa-question',
         'links' => [
             'Question' => 'question.index',
             'Détail question' => 'question.show'

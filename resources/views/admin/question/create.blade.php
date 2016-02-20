@@ -4,6 +4,7 @@
 
     @include('admin.common.breadcrumb', [
         'mainTitle' => 'Question',
+        'icon' => 'fa-question',
         'links' => [
             'Question' => 'question.index',
             'Créer une question' => 'question.create'
@@ -11,76 +12,82 @@
     ])
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <form method="post" action="{{ route('question.store') }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
-                    <label for="questionLabel">Posez votre question</label>
-                    <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
+                    <label for="quizz">Associer à un ou plusieurs quizzs</label>
+                    <select class="form-control selectpicker" multiple data-max-options="3" id="quizz" name="quizz[]">
+                        @foreach($items as $item)
+                            <option value="{{$item->id}}">{{$item->label}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="answerNbr">Nombre de réponse possible</label>
-                    <select class="form-control answerNbr" id="answerNbr" name="answerNbr">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                    <label for="questionLabel">Posez votre question (cocher pour indiquer la bonne réponse)</label>
+                    <input type="text" class="form-control" required id="questionLabel" name="label" placeholder="Votre question ?">
                 </div>
                 <div id="answers">
                     <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" class="checkboxAnswer" name="answerChecked1" checked id="checkboxAnswer1"> Activer comme réponse correcte
-                        </label>
-                        <input type="text" class="form-control" name="answerLabel1" placeholder="Réponse n°1">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" class="checkboxAnswer" value="1" name="answerChecked" checked id="checkboxAnswer1">
+                            </span>
+                            <input type="text" class="form-control" required name="answerLabel[1]" placeholder="Réponse n°1">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="checkbox-inline">
-                            <input type="checkbox" class="checkboxAnswer" name="answerChecked2" id="checkboxAnswer1"> Activer comme réponse correcte
-                        </label>
-                        <input type="text" class="form-control" name="answerLabel2" placeholder="Réponse n°2">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" class="checkboxAnswer" value="2" name="answerChecked" id="checkboxAnswer2">
+                            </span>
+                            <input type="text" class="form-control" required name="answerLabel[2]" placeholder="Réponse n°2">
+                        </div>
+                    </div>
+                    <div class="answers2">
+                        <div class="form-group">
+                            <a href="#" class="answerNbr" data-answernbr="2">Ajouter une réponse</a>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Créer</button>
             </form>
         </div>
     </div>
-
-
 
 @endsection
 
 @section('javascript')
     <script>
+        var element = '#answers';
 
         //Adding answers form
-        $( ".answerNbr" ).change(function() {
-            var questionNbr = $( ".answerNbr" ).val();
-
-            //Form question html builder
+        $(element).on('click', '.answerNbr', function() {
+            var answerNbr = $(this).data('answernbr');
+            answerNbr += 1;
             var data = '';
-            for(i=1;i<=questionNbr; i++){
-                data += '<div class="form-group">'
-                    + '<label class="checkbox-inline">';
-                if(i<=1){
-                    data += '<input type="checkbox" class="checkboxAnswer" checked name="answerChecked'+i+'" id="checkboxAnswer'+i+'"> Activer comme réponse correcte';
-                }else{
-                    data += '<input type="checkbox" class="checkboxAnswer" name="answerChecked'+i+'" id="checkboxAnswer'+i+'"> Activer comme réponse correcte';
-                }
-                data += '</label>'
-                    + '<input type="text" class="form-control" required name="answerLabel'+i+'" placeholder="Réponse n°'+i+'">'
-                    + '</div>';
-            }
 
-            //Insert html data in #answers
-            $( "#answers" ).html(data);
+            data += '<div class="form-group">'
+                 +  '<div class="input-group">'
+                 +  '<span class="input-group-addon">'
+                 +  '<input type="radio" class="checkboxAnswer" value="'+ answerNbr +'" name="answerChecked" id="checkboxAnswer'+ answerNbr +'">'
+                 +  '</span>'
+                 +  '<input type="text" class="form-control" required name="answerLabel['+ answerNbr +']" placeholder="Réponse n°'+ answerNbr +'">'
+                 +  '</div>'
+                 +  '</div>'
+                 +  '<div class="answers'+ answerNbr +'">'
+                 +  '<div class="form-group">'
+                 +  '<a href="#" class="answerNbr" data-answernbr="'+ answerNbr +'">Ajouter une réponse</a>'
+                 +  '</div>'
+                 +  '</div>';
 
+            var answerNbrClass = $(this).data('answernbr');
+            $( ".answers"+answerNbrClass).html(data);
         });
-
-
-        //Only one checkbox can be selected
-        $('#answers').on('change', '.checkboxAnswer', function() {
-            $('.checkboxAnswer').not(this).prop('checked', false);
+    </script>
+    <script>
+        $('.selectpicker').selectpicker({
+            "noneSelectedText": 'Aucun quizz sélectionné'
         });
-
     </script>
 @endsection

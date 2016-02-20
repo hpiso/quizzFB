@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call('AnswerTableSeeder');
         $this->call('QuizzTableSeeder');
         $this->call('QuestionsQuizzTableSeeder');
+        $this->call('UserTableSeeder');
 
         Model::reguard();
     }

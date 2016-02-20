@@ -25,7 +25,7 @@ class Question extends Model {
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function theme() {
-        return $this->hasOne('App\Theme');
+        return $this->hasOne('App\Models\Theme');
     }
 
     /**
@@ -35,6 +35,10 @@ class Question extends Model {
      */
     public function answers() {
         return $this->hasMany('App\Models\Answer');
+    }
+
+    public function alreadyAnswers() {
+        return $this->hasMany('App\Models\Score');
     }
 
     /**
