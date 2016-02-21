@@ -134,7 +134,7 @@ class ScoreRepository {
 			$user = User::where('id',$score->user_id)->first();
 
 
-			$scoreClassement[$user->id] = ['prenom' => $user->first_name, 'profil' => 'facebook.com/'.$user->id ,'score' => $scoreUser, 'time' => $time];
+			$scoreClassement[$user->id] = ['prenom' => $user->first_name, 'profil' => 'facebook.com/'.$user->id ,'avatar' => $user->avatar, 'score' => $scoreUser, 'time' => $time];
 		}
 
 		$classementCollect = collect($scoreClassement);

@@ -1,11 +1,5 @@
 @extends('layout.front')
 
-@section('title')
-    <div class="image-bg-fluid-height">
-        <img class="img-responsive img-center" src="{{ url('/css/images/logo.png') }}" alt="">
-    </div>
-@endsection
-
 @section('javascript')
     <script type="text/javascript">
         $(window).load(function() {
@@ -49,7 +43,9 @@
                 <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a id="nav_btn" href="{{ route('front.index') }}" class="hvr-shutter-out-vertical">Accueil</a>
+                            <a id="nav_btn" href="{{ route('front.index') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'">
+                                <i class="fa fa-chevron-right "></i> Accueil <i class="fa fa-chevron-left "></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -71,8 +67,8 @@
                                     <thead>
                                         <tr>
                                             <th>Position</th>
-                                            <th>Nom</th>
                                             <th>Profil</th>
+                                            <th>Prenom</th>
                                             <th>Score</th>
                                             <th>Temps</th>
                                         </tr>
@@ -82,8 +78,8 @@
                                         @foreach($classement as $score)
                                             <tr>
                                                 <td>#{{$i}}</td>
+                                                <td><a target="_blank" href="http://{{ $score['profil']}}"><img style="width:35px" src="{{ $score['avatar']}}"></a></td>
                                                 <td>{{ $score['prenom']}}</td>
-                                                <td><a target="_blank" href="http://{{ $score['profil']}}">{{ $score['prenom']}}</a></td>
                                                 <td>{{ $score['score']}}</td>
                                                 <td>{{ $score['time']}}</td>
                                             </tr>

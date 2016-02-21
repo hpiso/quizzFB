@@ -3,7 +3,6 @@
 <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 <link href="{{ url('/css/front.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/question.css') }}" rel="stylesheet" type="text/css" >
-<link href="{{ url('/css/hover.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/business-casual.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/social-buttons.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ url('/css/font-awesome-4.4.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" >
