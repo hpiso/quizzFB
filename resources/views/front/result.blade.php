@@ -12,7 +12,9 @@
             <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a id="nav_btn" href="{{ route('front.index') }}" class="hvr-shutter-out-vertical">Accueil</a>
+                        <a id="nav_btn" href="{{ route('front.index') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'">
+                            <i class="fa fa-chevron-right "></i> Accueil <i class="fa fa-chevron-left "></i>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -10,9 +10,9 @@
                 <ul class="nav navbar-nav">
                     <li>
                         @if($numQuest+1 == $nbQuest )
-                            <a id="nav_btn"  class="hvr-shutter-out-vertical">VALIDER</a>
+                            <a id="nav_btn"  onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >VALIDER</a>
                         @else
-                            <a id="nav_btn" class="hvr-shutter-out-vertical">SUIVANT</a>
+                            <a id="nav_btn" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >SUIVANT</a>
                         @endif
                     </li>
                 </ul>
@@ -35,7 +35,7 @@
                                 @include('admin.common.flash-message', ['type' => 'danger', 'message' => session('status')])
                             @endif
                             @foreach($question->answers->shuffle() as $rep )
-                                <label class="element-animation1 btn btn-lg btn-primary btn-block">
+                                <label class="element-animation1 btn btn-lg btn-primary btn-block" style="background-color:{{$btnColor}}">
                                     <span class="btn-label">
                                         <i class="glyphicon glyphicon-chevron-right"></i>
                                     </span>
