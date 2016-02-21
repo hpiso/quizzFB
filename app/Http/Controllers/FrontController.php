@@ -9,7 +9,6 @@ use App\Repositories\QuizzRepository;
 use App\Repositories\ScoreRepository;
 use App\Repositories\QuestionRepository;
 use App\Repositories\AnswerRepository;
-use DateTime;
 use Carbon\Carbon;
 
 class FrontController extends Controller {
@@ -155,11 +154,15 @@ class FrontController extends Controller {
         $quizz = $this->quizzRepository->getActif();
         $classement = $this->scoreRepository->scoreClassement($quizz);
 
+        $endingDate = Carbon::parse($quizz->ending_at);
+        $endingDate->hour = 23;
+        $endingDate->minute = 59;
+        $endingDate->second = 59;
+
         $startClassement = false;
-        if(new DateTime() > new DateTime($quizz->ending_at)) {
+        if (Carbon::now()->gt($endingDate)) {
             $startClassement = true;
         }
-
 
         return view('front.classement', [
             'startClassement' => $startClassement,
