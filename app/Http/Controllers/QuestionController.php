@@ -66,7 +66,8 @@ class QuestionController extends BaseController
 
         return view('admin.question.index', [
             'entities' => $entities,
-            'quizzs'   => $quizzs
+            'quizzs'   => $quizzs,
+            'filter'   => $inputs['quizz'],
         ]);
     }
 
