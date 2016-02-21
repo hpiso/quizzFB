@@ -96,3 +96,15 @@ ul.pager li.active {
 
 
 }
+
+/* fix button */
+.btn-primary {
+    /*color: #fff;*/
+    background-color: #337ab7;
+    border: none;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    color: #18a041;
+    border: 3px solid #18a041;
+}
