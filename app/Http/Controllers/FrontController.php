@@ -84,7 +84,7 @@ class FrontController extends Controller
             ]);
         }
 
-        return redirect()->secure('/result');
+        return redirect('/result');
     }
 
     public function action(Request $request)

@@ -70,7 +70,7 @@ class AuthController extends Controller
         {
             return redirect($this->redirectPath);
         } else{
-            return Socialite::driver('facebook')->scopes(['user_location', 'email'])->redirect();
+            return Socialite::driver('facebook')->scopes(['email'])->redirect();
         }
     }
 
@@ -85,7 +85,7 @@ class AuthController extends Controller
          * S'il existe -> je le renvois
          * S'il n'existe pas -> on l'ajoute
          */
-        $user = Socialite::driver('facebook')->fields(['first_name', 'last_name', 'email', 'gender', 'verified', 'id', 'age_range', 'location'])->user();
+        $user = Socialite::driver('facebook')->fields(['first_name', 'last_name', 'email', 'gender', 'verified', 'id', 'age_range'])->user();
         $user = $this->findOrStore($user);
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
 
