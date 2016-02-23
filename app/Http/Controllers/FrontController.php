@@ -173,5 +173,10 @@ class FrontController extends Controller
             'classement'    => $classement
         ]);
     }
+
+    public function policy()
+    {
+        return view('front.static-page.policy');
+    }
 }
 

@@ -26,6 +26,18 @@ $app->get('/classement', [
     'as' => 'front.classement', 'uses' => 'FrontController@classement'
 ]);
 
+$app->get('/policy', [
+    'as' => 'front.policy', 'uses' => 'FrontController@policy'
+]);
+
+$app->get('/help', [
+    'as' => 'front.help', 'uses' => 'FrontController@help'
+]);
+
+$app->get('/tos', [
+    'as' => 'front.tos', 'uses' => 'FrontController@tos'
+]);
+
 /* ---------- LOGIN ----------*/
 $app->get('/login', [
     'as' => 'login', 'uses' => 'AuthController@redirectToProvider'
