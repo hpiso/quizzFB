@@ -12,7 +12,7 @@
                         @if($numQuest+1 == $nbQuest )
                             <a id="nav_btn"  onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >VALIDER</a>
                         @else
-                            <a id="nav_btn" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >SUIVANT</a>
+                            <a id="nav_btn" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >SUIVANT <i class="fa fa-chevron-right "></i></a>
                         @endif
                     </li>
                 </ul>

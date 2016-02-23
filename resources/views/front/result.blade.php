@@ -40,13 +40,14 @@
                             <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : ADEFINIR</p>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-default btn-md btn_partage">
-                                <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon"> Partager
+                            <button type="button" class="btn btn-md btn_partage">
+                                <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=quizzesgi.com" target="_blank"> Partager</a>
                             </button>
                         </div>
                         <div class="col-md-6">
                         @if($startClassement)
-                                <button onClick="location.href='{{ url("classement") }}'" type="button" class="btn btn-default btn-md btn_classement">
+                                <button onClick="location.href='{{ url("classement") }}'" type="button" class="btn btn-md btn_classement">
                                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  Classement
                                 </button>
                             </div>
