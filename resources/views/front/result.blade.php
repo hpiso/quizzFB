@@ -42,7 +42,7 @@
                         <div class="col-md-6">
                             <button type="button" class="btn btn-md btn_partage">
                                 <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon">
-                                <a href="https://www.facebook.com/sharer/sharer.php?u=quizzesgi.com" target="_blank"> Partager</a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=esgiquizzcreator.herokuapp.com/" target="_blank"> Partager</a>
                             </button>
                         </div>
                         <div class="col-md-6">
