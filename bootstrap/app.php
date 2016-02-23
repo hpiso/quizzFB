@@ -126,8 +126,8 @@ config(['cache' => [
 
 config(['services' => [
     'facebook' => [
-        'client_id' => env('FACEBOOK_APP_ID', '1685507368351576'),
-        'client_secret' => env('FACEBOOK_APP_SECRET', '76494686368fe261129849f7b70e526f'),
+        'client_id' => env('FACEBOOK_APP_ID', '1097226993640867'),
+        'client_secret' => env('FACEBOOK_APP_SECRET', 'c04c853db9d38aee3b30c9bc760621bf'),
         'default_graph_version' => '2.5',
         'redirect' => route('callback'),
     ]

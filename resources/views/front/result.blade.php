@@ -33,12 +33,12 @@
                     </h2>
                     <hr>
                     <div class="collection col-md-6 col-md-offset-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{ date('d M Y', strtotime($quizz->ending_at)) }}</p>
                         </div>
-                        <div class="col-md-6">
-                            <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : ADEFINIR</p>
-                        </div>
+                        {{--<div class="col-md-6">--}}
+                            {{--<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Nombre de participants : ADEFINIR</p>--}}
+                        {{--</div>--}}
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default btn-md btn_partage">
                                 <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon"> Partager
@@ -56,8 +56,7 @@
                             </button>
                             </div>
                             <blockquote>
-                                L'ensemble des résultats finaux seront disponible
-                                lorsque le quizz arrivera à sa date échéante.
+                                Les résultats seront disponnibles à la fin du quizz
                             </blockquote>
                         @endif
                     </div>
