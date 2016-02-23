@@ -178,5 +178,15 @@ class FrontController extends Controller
     {
         return view('front.static-page.policy');
     }
+
+    public function help()
+    {
+        return view('front.static-page.help');
+    }
+
+    public function tos()
+    {
+        return view('front.static-page.tos');
+    }
 }
 
