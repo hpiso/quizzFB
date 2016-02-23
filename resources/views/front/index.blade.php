@@ -14,15 +14,15 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
                         @if($already)
-                            <a id="nav_btn" href="{{ route('front.result') }}" class="hvr-shutter-out-vertical">
+                            <a id="nav_btn" href="{{ route('front.result') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >
                                 <i class="fa fa-chevron-right "></i> Ton résultat <i class="fa fa-chevron-left"></i>
                             </a>
                         @else
-                            <a id="nav_btn" href="{{ route('login') }}" class="hvr-shutter-out-vertical">
+                            <a id="nav_btn" href="{{ route('login') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'" >
                                 <i class="fa fa-chevron-right "></i> Commencer le Quizz <i class="fa fa-chevron-left"></i>
                             </a>
                         @endif

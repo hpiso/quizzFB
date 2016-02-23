@@ -9,10 +9,12 @@
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a id="nav_btn" href="{{ route('front.index') }}" class="hvr-shutter-out-vertical">Accueil</a>
+                        <a id="nav_btn" href="{{ route('front.index') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'">
+                            <i class="fa fa-chevron-right "></i> Accueil <i class="fa fa-chevron-left "></i>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -39,7 +41,7 @@
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-default btn-md btn_partage">
-                                <a class="sb min facebook"></a> Partager
+                                <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon"> Partager
                             </button>
                         </div>
                         <div class="col-md-6">

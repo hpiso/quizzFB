@@ -1,17 +1,21 @@
 #address-bar{
     padding: 25px;
+    text-align: center;
 }
 
 #nav_btn {
     background-color: transparent;
     cursor: pointer;
+    text-align: center;
+    border : 1px solid transparent;
+    -webkit-transition: background 2s; /* For Safari 3.0 to 6.0 */
+    transition: background 2s; /* For modern browsers */
 }
-#nav_btn:before {
-    background: #0277DB ;
-}
+
 #nav_btn:hover {
     color: white;
 }
+
 .infos_index {
     padding: 10px;
 }
@@ -39,10 +43,17 @@
     padding: 10px;
 }
 
+.btn_partage img{
+    width: 48px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
 .btn_partage{
-color:white;
-font-weight: bold;
-background-color: #354c8c;
+    color:white;
+    font-weight: bold;
+    background-color: #354c8c;
+    padding: 0px 12px;
 }
 
 .btn_classement.disabled{
@@ -72,6 +83,28 @@ ul.pager li.active {
     text-align: left;
 }
 
+#tab_classement td{
+    vertical-align: middle;
+}
+
 .page_classement {
     text-align: center;
+}
+
+@media screen and (min-width:800px) {
+
+
+
+}
+
+/* fix button */
+.btn-primary {
+    /*color: #fff;*/
+    background-color: #337ab7;
+    border: none;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    color: #18a041;
+    border: 3px solid #18a041;
 }

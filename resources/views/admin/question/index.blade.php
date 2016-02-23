@@ -24,7 +24,15 @@
                             <select class="form-control" id="quizz" name="quizz">
                                     <option value="{{null}}">--- Tous ---</option>
                                 @foreach($quizzs as $quizz)
-                                    <option value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                    @if(isset($filter))
+                                        @if($quizz->id == $filter)
+                                            <option selected value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                            @else
+                                            <option value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                        @endif
+                                    @else
+                                        <option value="{{$quizz->id}}">{{$quizz->label}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
