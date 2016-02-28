@@ -34,6 +34,14 @@ class ThemeController extends BaseController
 
     public function store(Request $request)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'decription'     => 'required',
+            'color_nav'      => 'required',
+            'color_elements' => 'required'
+        ]);
+
         $inputs = $request->all();
         $this->themeRepository->store($inputs);
 
@@ -52,6 +60,14 @@ class ThemeController extends BaseController
 
     public function update(Request $request, $id)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'decription'     => 'required',
+            'color_nav'      => 'required',
+            'color_elements' => 'required'
+        ]);
+
         $inputs = $request->all();
         $this->themeRepository->update($id, $inputs);
 
