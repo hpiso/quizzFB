@@ -3,6 +3,7 @@
 <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ url('/js/bootstrap-datepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/bootstrap-datepicker.fr.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/bootstrap-select.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/bootstrap-colorpicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('/js/metisMenu.min.js') }}"></script>
