@@ -1,87 +1,92 @@
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: table;
-
-}
-
-.container {
+#address-bar{
+    padding: 25px;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
 }
 
-.content {
+#nav_btn {
+    background-color: transparent;
+    cursor: pointer;
     text-align: center;
-    display: inline-block;
+    border : 1px solid transparent;
+    -webkit-transition: background 2s; /* For Safari 3.0 to 6.0 */
+    transition: background 2s; /* For modern browsers */
 }
 
-.content p {
+#nav_btn:hover {
+    color: white;
+}
+
+.infos_index {
+    padding: 10px;
+}
+
+.infos_index .col-lg-6 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.infos_index p {
     text-align: left;
 }
 
-h1.title {
-    font-size: 80px;
-    margin-bottom: 40px;
+.img-center {
+    margin: 0 auto;
+    padding: 40px 0;
+    width : 250px;
+}
+
+.collection div{
     text-align: center;
-    font-weight: 100;
-    font-family: 'Lato';
-    color: #B0BEC5;
 }
 
-.btn-large {
-    margin : 80px;
+.collection .col-md-6 {
+    padding: 10px;
 }
 
-p.collection-item {
-    text-align: center;
-    color:gray;
+.btn_partage img{
+    width: 48px;
+    margin-right: -10px;
+    margin-left: -10px;
 }
 
-.collection {
-    margin-top: 80px;
-    width: 550px;
-}
-
-.liste_questions {
-    width: 60em;
-}
-
-.questions {
-    margin-bottom:70px;
-}
-
-.questions>h5 {
-    text-align: left;
-}
-.questions>div>p {
-    /*text-align: center;*/
-}
-
-blockquote {
-    text-align: left;
-    font-size: 12px;
-}
-
-.partage{
+.btn_partage{
     color:white;
     font-weight: bold;
     background-color: #354c8c;
+    padding: 0px 12px;
 }
 
-.partage:hover{
-    background-color: #354c8c ;
+.btn_partage a {
+    color: white;
 }
 
-.partage > .facebook {
-
+.btn_partage:hover {
+    background-color: #4765BA;
 }
 
-.s6 > button {
-    margin-bottom: 40px;
-    margin-top: 20px;
+.btn_partage a:hover {
+    text-decoration: none;
+}
+
+.btn_classement.disabled{
+    color :#333;
+}
+.btn_classement {
+    color:white;
+    font-weight: bold;
+    width: 120px;
+    height: 50px;
+    background-color: #8BC34A;
+}
+
+.btn_classement:hover {
+    background-color: #9AD953;
+    color:white;
+}
+
+blockquote {
+    color:red;
+    text-align: left;
     font-size: 12px;
 }
 
@@ -92,4 +97,30 @@ ul.pager li.active {
 
 #tab_classement{
     margin-bottom: 50px;
+    text-align: left;
+}
+
+#tab_classement td{
+    vertical-align: middle;
+}
+
+.page_classement {
+    text-align: center;
+}
+
+@media screen and (min-width:800px) {
+
+
+
+}
+
+/* fix button */
+.btn-primary {
+    /*color: #fff;*/
+    background-color: #337ab7;
+    border: none;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    border: 3px solid #18a041;
 }

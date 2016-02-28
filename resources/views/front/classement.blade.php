@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Quizz ESGI</title>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <link href='css/front.css' rel='stylesheet' type='text/css'>
+@extends('layout.front')
+
+@section('javascript')
     <script type="text/javascript">
         $(window).load(function() {
 
@@ -22,64 +14,89 @@
                 $table.trigger('repaginate');
                 var numRows = $table.find('tbody tr').length;
                 var numPages = Math.ceil(numRows / numPerPage);
-                var $pager = $('<ul class="pagination pager"></ul>');
-                var $pager2 = $('<ul class="pagination pager"></ul>');
-                for (var page = 0; page < numPages; page++) {
+                var $pager = $('<ul class="pagination"></ul>');
 
-                    $('<li class="waves-effect page-number"></li>').text(page + 1).bind('click', {
+                for (var page = 0; page < numPages; page++) {
+                    var li = $('<li class="page-number"><a href="#"></a></li>');
+
+                    li.find('a').text(page + 1).bind('click', {
                         newPage: page
                     }, function(event) {
                         currentPage = event.data['newPage'];
                         $table.trigger('repaginate');
-                        console.log(currentPage);
-                        $(this).addClass('active').siblings().removeClass('active');
-                    }).appendTo($pager);
+                    });
+
+                    li.appendTo($pager);
 
                 }
-                var copie = $($pager).clone();
-                copie.appendTo($pager2);
-                $pager.insertBefore($table).find('li.page-number:first').addClass('active');
-                $pager2.insertAfter($table).find('li.page-number:first').addClass('active');
+                $pager.insertAfter($table);
             });
 
         });
     </script>
-</head>
-<body>
-<div class="container">
-    <div class="content">
-        <h1 class="title">Classement</h1>
-        @if($startClassement)
-            <table id="tab_classement" class="bordered highlight paginated">
-                <thead>
-                <tr>
-                    <th scope="col">Position</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Profil</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Temps</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @for($i=0;$i<50;$i++)
-                        <tr>
-                            <td>#1</td>
-                            <td>Alvin</td>
-                            <td><a href="">Alvin Gégé</a></td>
-                            <td>35/35</td>
-                            <td>60s</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-        @else
-            <blockquote>
-                Les résultats finaux seront disponible <br>
-                lorsque le quizz arrivera à sa date échéante.
-            </blockquote>
-        @endif
-    </div>
-</div>
-</div>
-</body>
-</html>
+@endsection
+
+@section('content')
+
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a id="nav_btn" href="{{ route('front.index') }}" onmouseover="this.style.background='{{$backgroundColor}}';" onmouseout="this.style.background='transparent'">
+                                <i class="fa fa-chevron-right "></i> Accueil <i class="fa fa-chevron-left "></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="box">
+                    <div class="col-lg-12">
+                        <hr>
+                        <h2 class="intro-text text-center">
+                            <strong>Classement</strong>
+                        </h2>
+                        <hr>
+                        <div class="col-md-6 col-md-offset-3 page_classement">
+                            @if($startClassement)
+                                <table id="tab_classement" class="table table-striped paginated">
+                                    <thead>
+                                        <tr>
+                                            <th>Position</th>
+                                            <th>Profil</th>
+                                            <th>Prenom</th>
+                                            <th>Score</th>
+                                            <th>Temps</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                        @foreach($classement as $score)
+                                            <tr>
+                                                <td>#{{$i}}</td>
+                                                <td><a target="_blank" href="http://{{ $score['profil']}}"><img style="width:35px" src="{{ $score['avatar']}}"></a></td>
+                                                <td>{{ $score['prenom']}}</td>
+                                                <td>{{ $score['score']}}</td>
+                                                <td>{{ $score['time']}}</td>
+                                            </tr>
+                                            <?php $i++; ?>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <blockquote>
+                                    Les résultats finaux seront disponible <br>
+                                    lorsque le quizz arrivera à sa date échéante.
+                                </blockquote>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endsection
+

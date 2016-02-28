@@ -16,27 +16,28 @@ class QuizzTableSeeder extends Seeder
         $date = $date->toDateTimeString();
 
         DB::table('quizzs')->insert([
-            'label' => 'Mon premier quizz',
-            'description' => 'Le premier quizz de l\'application qui va servir de test',
+            'label' => 'Quizz de sport',
+            'description' => 'À vous de retrouver dans quelle discipline ces sportifs se sont-ils illustrés !',
             'starting_at' => $startDate,
             'ending_at' => $endDate,
             'actif' => true,
-            'max_question' => 2,
-            'theme_id' => 1,
-            'created_at' => $date
+            'max_question' => 12,
+            'theme_id' => 2,
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
 
         DB::table('quizzs')->insert([
-            'label' => 'Mon quizz test',
-            'description' => 'Decription de mon quizz test',
+            'label' => 'Quizz de culture générale',
+            'description' => 'Vous trouverez des questions de tout ordre (politique, sport, géographie,...) ',
             'starting_at' => $startDate,
             'ending_at' => $endDate,
-            'actif' => true,
-            'max_question' => 15,
+            'actif' => false,
+            'max_question' => 8,
             'theme_id' => 1,
-            'created_at' => $date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
-
 
     }
 }
