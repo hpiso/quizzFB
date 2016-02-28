@@ -8,6 +8,10 @@ $app->get('/', [
     'as' => 'front.index', 'uses' => 'FrontController@index'
 ]);
 
+$app->post('/', [
+    'as' => 'front.index', 'uses' => 'FrontController@index'
+]);
+
 $app->group(['middleware' => 'loggedin', 'namespace' => 'App\Http\Controllers'], function($app) {
     $app->get('/question', [
         'as' => 'front.question', 'uses' => 'FrontController@question'
