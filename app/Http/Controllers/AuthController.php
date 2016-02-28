@@ -68,7 +68,7 @@ class AuthController extends Controller
     {
         if(Auth::check())
         {
-            return redirect($this->redirectPath);
+            return redirect($this->redirectPath,302,[],true);
         } else{
             return Socialite::driver('facebook')->scopes(['email'])->redirect();
         }
@@ -90,7 +90,7 @@ class AuthController extends Controller
         // Je fais confiance à Facebook et j'authentifie l'utilisateur renvoyé / créé
 
         $this->login($user);
-        return redirect($this->redirectPath);
+        return redirect($this->redirectPath,302,[],true);
     }
 
     /**
