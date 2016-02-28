@@ -51,6 +51,12 @@ class QuestionController extends BaseController
 
     public function store(Request $request)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'answerChecked'  => 'required',
+        ]);
+
         $inputs = $request->all();
         $this->questionRepository->store($inputs);
 
@@ -100,6 +106,12 @@ class QuestionController extends BaseController
 
     public function update(Request $request, $id)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'answerChecked'  => 'required',
+        ]);
+
         $inputs = $request->all();
         $this->questionRepository->update($id, $inputs);
 
