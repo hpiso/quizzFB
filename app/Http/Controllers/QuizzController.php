@@ -51,7 +51,10 @@ class QuizzController extends BaseController
             'max_question'   => 'required|integer',
             'starting_at'    => 'required|date',
             'ending_at'      => 'required|date',
-            'id_theme'       => 'required'
+            'id_theme'       => 'required',
+            'titre_lot'      => 'required',
+            'desc_lot'       => 'required',
+            'image_lot'      => 'required'
         ]);
 
         $inputs = $request->all();
@@ -80,7 +83,10 @@ class QuizzController extends BaseController
             'max_question'   => 'required|integer',
             'starting_at'    => 'required|date',
             'ending_at'      => 'required|date',
-            'id_theme'       => 'required'
+            'id_theme'       => 'required',
+            'titre_lot'      => 'required',
+            'desc_lot'       => 'required',
+            'image_lot'      => 'required'
         ]);
 
         $inputs = $request->all();

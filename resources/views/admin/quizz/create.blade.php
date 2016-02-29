@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="desc_lot">Description lot</label>
-                    <textarea type="input" class="form-control"  id="desc_lot" name="desc_lot"></textarea>
+                    <textarea class="form-control" id="desc_lot" name="desc_lot"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image_lot">Url image lot</label>

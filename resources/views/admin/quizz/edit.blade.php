@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="quizzEndDate">Date de fin</label>
-                    <input type="text" class="form-control date-picker" value="{{$quizz->ending_at}}" id="quizzEndDate" name="end_at">
+                    <input type="text" class="form-control date-picker" value="{{$quizz->ending_at}}" id="quizzEndDate" name="ending_at">
                 </div>
                 <div class="form-group">
                     <label for="quizzTheme">Thème</label>
@@ -59,15 +59,15 @@
                 </div>
                 <div class="form-group">
                     <label for="titre_lot">Titre description lot</label>
-                    <input type="text" class="form-control"  id="titre_lot" name="titre_lot">
+                    <input type="text" class="form-control" value="{{$quizz->titre_lot}}"  id="titre_lot" name="titre_lot">
                 </div>
                 <div class="form-group">
                     <label for="desc_lot">Description lot</label>
-                    <textarea type="input" class="form-control"  id="desc_lot" name="desc_lot"></textarea>
+                    <textarea  class="form-control"  id="desc_lot" name="desc_lot">{{$quizz->desc_lot}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="image_lot">Url image lot</label>
-                    <input type="text" class="form-control"  id="image_lot" name="image_lot">
+                    <input type="text" class="form-control" value="{{$quizz->image_lot}}" id="image_lot" name="image_lot">
                 </div>
                 <button type="submit" class="btn btn-default">Envoyer</button>
             </form>

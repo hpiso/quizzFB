@@ -39,7 +39,8 @@ class ThemeController extends BaseController
             'label'          => 'required',
             'decription'     => 'required',
             'color_nav'      => 'required',
-            'color_elements' => 'required'
+            'color_elements' => 'required',
+            'logo'           => 'required'
         ]);
 
         $inputs = $request->all();
@@ -65,7 +66,8 @@ class ThemeController extends BaseController
             'label'          => 'required',
             'decription'     => 'required',
             'color_nav'      => 'required',
-            'color_elements' => 'required'
+            'color_elements' => 'required',
+            'logo'           => 'required'
         ]);
 
         $inputs = $request->all();
