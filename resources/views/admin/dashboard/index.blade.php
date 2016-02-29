@@ -89,12 +89,12 @@
 
 @section('javascript')
 
-<script type="text/javascript" src="{{ url('/js/flot/excanvas.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.js') }}"></script>
-<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.pie.js') }}"></script>
-<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.resize.js') }}"></script>
-<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.time.js') }}"></script>
-<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.tooltip.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/excanvas.min.js',[],true) }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.js',[],true) }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.pie.js',[],true) }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.resize.js',[],true) }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.time.js',[],true) }}"></script>
+<script type="text/javascript" src="{{ url('/js/flot/jquery.flot.tooltip.min.js',[],true) }}"></script>
 
 <script>
     //Flot Pie Chart
