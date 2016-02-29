@@ -48,7 +48,7 @@ class Question extends Model {
      */
     public function quizzs() {
         return $this->belongsToMany('App\Models\Quizz', 'questions_quizzs',
-            'question_id', 'quizz_id');
+            'question_id', 'quizz_id')->withTimestamps();
     }
 
     public function set_label($label) {
