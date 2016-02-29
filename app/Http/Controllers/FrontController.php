@@ -51,7 +51,8 @@ class FrontController extends Controller
 
         return view('front.index', [
             'quizz'         => $quizz,
-            'already'       => $already
+            'already'       => $already,
+            'logo'          => $quizz->theme->logo
         ]);
     }
 
