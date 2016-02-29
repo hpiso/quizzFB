@@ -22,7 +22,6 @@ class QuizzController extends BaseController
 
     public function index()
     {
-//        dump(Auth::user());
         $entities = Quizz::all();
         $entitiesQuestion = Question::all();
         $entitiesTheme = Theme::all();
@@ -45,17 +44,17 @@ class QuizzController extends BaseController
 
     public function store(Request $request)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'decription'     => 'required',
+            'max_question'   => 'required|integer',
+            'starting_at'    => 'required|date',
+            'ending_at'      => 'required|date',
+            'id_theme'       => 'required'
+        ]);
+
         $inputs = $request->all();
-
-        $messages = [
-            'max' => 'Il ne peut y avoir qu\'un quizz actif',
-        ];
-
-        //Si il exsite au moins un autre quizz actif on retourne une erreur
-        if ($this->quizzRepository->getActif()) {
-            $this->validate($request, ['actif' => 'max:0'], $messages);
-        }
-
         $this->quizzRepository->store($inputs);
 
         return redirect('admin/quizz',302,[],true);
@@ -74,17 +73,17 @@ class QuizzController extends BaseController
 
     public function update(Request $request, $id)
     {
+        //Php validation
+        $this->validate($request, [
+            'label'          => 'required',
+            'decription'     => 'required',
+            'max_question'   => 'required|integer',
+            'starting_at'    => 'required|date',
+            'ending_at'      => 'required|date',
+            'id_theme'       => 'required'
+        ]);
+
         $inputs = $request->all();
-
-        $messages = [
-            'max' => 'Il ne peut y avoir qu\'un quizz actif',
-        ];
-
-        //Si il exsite au moins un autre quizz actif on retourne une erreur
-        if ($this->quizzRepository->getActif()) {
-            $this->validate($request, ['actif' => 'max:0'], $messages);
-        }
-
         $this->quizzRepository->update($id, $inputs);
 
         return redirect('admin/quizz',302,[],true)->with('status', 'Quizz modifié');
