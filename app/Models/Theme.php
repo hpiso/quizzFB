@@ -19,6 +19,7 @@ class Theme extends Model
         'description',
         'color_nav',
         'color_elements',
+        'logo'
     ];
 
     /**

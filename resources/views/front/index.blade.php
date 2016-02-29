@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    <div style="text-align: center">
+        <img height="200px" src="{{$logo}}">
+    </div>
     @if($already)
         <div id="address-bar" class="address-bar">Quiquizz t'invite à partager ton score</div>
     @else
@@ -39,13 +42,16 @@
                     <hr class="tagline-divider">
                     <h3><strong>{{$quizz->description}}</strong></h3>
                     <br><br><br>
-                    <div class="col-lg-6 col-lg-offset-3 infos_index">
+                    <div class="col-lg-10 col-lg-offset-1 infos_index">
                         <div class="col-lg-6">
                             <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de début : {{ date('d/m/Y', strtotime($quizz->starting_at)) }}</p>
                             <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Date de fin : {{ date('d/m/Y', strtotime($quizz->ending_at)) }}</p>
+                            <p><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Nombre de questions : {{$quizz->max_question}}</p>
                         </div>
                         <div class="col-lg-6">
-                            <p><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Nombre de questions : {{$quizz->max_question}}</p>
+                            <h4>{{$quizz->titre_lot}}</h4>
+                            <img height="200px" src="{{$quizz->image_lot}}">
+                            <p>{{$quizz->desc_lot}}</p>
                         </div>
                     </div>
                 </div>

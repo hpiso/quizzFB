@@ -24,7 +24,10 @@ class QuizzTableSeeder extends Seeder
             'max_question' => 12,
             'theme_id' => 2,
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
+            'titre_lot' => 'Tentez de gagner ce super cadeau',
+            'desc_lot'  => 'Ce super cadeau vous servira au quotidien et vous aidera dans toute vos taches !',
+            'image_lot' => 'http://files.veloscouches.webnode.fr/200000438-ae3aaaf346/cadeau.png'
         ]);
 
         DB::table('quizzs')->insert([
@@ -36,7 +39,10 @@ class QuizzTableSeeder extends Seeder
             'max_question' => 8,
             'theme_id' => 1,
             'created_at' => $date,
-            'updated_at' => $date
+            'updated_at' => $date,
+            'titre_lot' => 'Tentez de gagner ce super cadeau',
+            'desc_lot'  => 'Ce super cadeau vous servira au quotidien et vous aidera dans toute vos taches !',
+            'image_lot' => 'http://files.veloscouches.webnode.fr/200000438-ae3aaaf346/cadeau.png'
         ]);
 
     }
