@@ -47,7 +47,7 @@ class QuizzController extends BaseController
         //Php validation
         $this->validate($request, [
             'label'          => 'required',
-            'decription'     => 'required',
+            'description'     => 'required',
             'max_question'   => 'required|integer',
             'starting_at'    => 'required|date',
             'ending_at'      => 'required|date',
@@ -79,7 +79,7 @@ class QuizzController extends BaseController
         //Php validation
         $this->validate($request, [
             'label'          => 'required',
-            'decription'     => 'required',
+            'description'     => 'required',
             'max_question'   => 'required|integer',
             'starting_at'    => 'required|date',
             'ending_at'      => 'required|date',

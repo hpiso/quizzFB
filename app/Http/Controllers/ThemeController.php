@@ -36,11 +36,11 @@ class ThemeController extends BaseController
     {
         //Php validation
         $this->validate($request, [
-            'label'          => 'required',
-            'decription'     => 'required',
-            'color_nav'      => 'required',
-            'color_elements' => 'required',
-            'logo'           => 'required'
+            'label'           => 'required',
+            'description'     => 'required',
+            'color_nav'       => 'required',
+            'color_elements'  => 'required',
+            'logo'            => 'required'
         ]);
 
         $inputs = $request->all();
@@ -63,11 +63,11 @@ class ThemeController extends BaseController
     {
         //Php validation
         $this->validate($request, [
-            'label'          => 'required',
-            'decription'     => 'required',
-            'color_nav'      => 'required',
-            'color_elements' => 'required',
-            'logo'           => 'required'
+            'label'           => 'required',
+            'description'     => 'required',
+            'color_nav'       => 'required',
+            'color_elements'  => 'required',
+            'logo'            => 'required'
         ]);
 
         $inputs = $request->all();
