@@ -46,7 +46,7 @@
                         <span class="input-group-addon"><i></i></span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
         </div>
     </div>

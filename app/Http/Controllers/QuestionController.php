@@ -82,7 +82,7 @@ class QuestionController extends BaseController
         $question = Question::findOrFail($id);
         $question->delete();
 
-        return redirect('admin/question')->with('status', 'Question supprimée');
+        return redirect('admin/question',302,[],true)->with('status', 'Question supprimée');
     }
 
     public function edit($id)
@@ -115,6 +115,6 @@ class QuestionController extends BaseController
         $inputs = $request->all();
         $this->questionRepository->update($id, $inputs);
 
-        return redirect('admin/question')->with('status', 'Question modifiée');
+        return redirect('admin/question',302,[],true)->with('status', 'Question modifiée');
     }
 }

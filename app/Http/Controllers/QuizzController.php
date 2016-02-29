@@ -86,7 +86,7 @@ class QuizzController extends BaseController
         $inputs = $request->all();
         $this->quizzRepository->update($id, $inputs);
 
-        return redirect('admin/quizz')->with('status', 'Quizz modifié');
+        return redirect('admin/quizz',302,[],true)->with('status', 'Quizz modifié');
     }
 
     public function destroy($id)
@@ -94,7 +94,7 @@ class QuizzController extends BaseController
         $quizz = Quizz::findOrFail($id);
         $quizz->delete();
 
-        return redirect('admin/quizz')->with('status', 'Quizz supprimé');
+        return redirect('admin/quizz',302,[],true)->with('status', 'Quizz supprimé');
     }
 
     public function show($id)
@@ -123,7 +123,7 @@ class QuizzController extends BaseController
                 à ce quizz pour l\'activer ('.$quizz->questions->count().' actuellement).
                 Vous pouver ajouter des questions dans la rubrique "Question"');
         } elseif ($inputs['actif'] && $this->quizzRepository->getActif()) {
-            return redirect('admin/quizz')->with(
+            return redirect('admin/quizz',302,[],true)->with(
                 'error-status',
                 'Un seul quizz peut être actif');
         } else {
@@ -131,9 +131,9 @@ class QuizzController extends BaseController
         }
 
         if ($inputs['actif']) {
-            return redirect('admin/quizz')->with('status', 'Le quizz a été activé');
+            return redirect('admin/quizz',302,[],true)->with('status', 'Le quizz a été activé');
         } else {
-            return redirect('admin/quizz')->with('status', 'Le quizz a été désactivé');
+            return redirect('admin/quizz',302,[],true)->with('status', 'Le quizz a été désactivé');
         }
 
     }
