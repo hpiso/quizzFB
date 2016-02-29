@@ -10,9 +10,9 @@ class HttpsProtocol {
 
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() ) {
+        if (!$request->isSecure() ) {
             $request->setTrustedProxies( [ $request->getClientIp() ] );
-            return redirect()->secure($request->getRequestUri());
+            return redirect($request->getRequestUri(),302,[],true);
         }
 
         return $next($request);

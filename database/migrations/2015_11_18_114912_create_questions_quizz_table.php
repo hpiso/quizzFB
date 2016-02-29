@@ -16,7 +16,7 @@ class CreateQuestionsQuizzTable extends Migration
             $table->integer('quizz_id')->unsigned();
             $table->integer('question_id')->unsigned();
             $table->integer('order')->nullable();
-            $table->timestamps();
+//            $table->timestamps();
             $table->primary(['quizz_id','question_id']);
         });
 

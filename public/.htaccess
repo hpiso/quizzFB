@@ -12,10 +12,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-#    RewriteCond %{HTTPS} !=on
-#    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
-
-#    RewriteCond %{HTTPS} !=on
-#    RewriteRule (.*) https://esgiquizzcreator.herokuapp.com/$1 [R=301,L]
 </IfModule>

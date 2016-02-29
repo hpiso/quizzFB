@@ -30,6 +30,9 @@ class Quizz extends Model
         'actif',
         'max_question',
         'theme_id',
+        'image_lot',
+        'titre_lot',
+        'desc_lot'
     ];
 
     /**

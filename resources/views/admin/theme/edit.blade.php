@@ -46,7 +46,11 @@
                         <span class="input-group-addon"><i></i></span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <div class="form-group">
+                    <label for="logoTheme">Url du logo</label>
+                    <input type="text" class="form-control" value="{{ $theme->logo }}" id="logoTheme" name="logo" >
+                </div>
+                <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
         </div>
     </div>
