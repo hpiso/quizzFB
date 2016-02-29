@@ -69,7 +69,7 @@
                     <label for="image_lot">Url image lot</label>
                     <input type="text" class="form-control"  id="image_lot" name="image_lot">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
         </div>
     </div>
