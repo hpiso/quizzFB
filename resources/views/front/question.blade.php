@@ -59,7 +59,7 @@
     </div>
     @if(Auth::check() && Auth::user()->isAdmin())
         <div class="row">
-            <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+            <a href="{{ url('admin/dashboard',[],true)  }}" class="btn btn-danger">Administration</a>
         </div>
     @endif
     <script type="text/javascript">

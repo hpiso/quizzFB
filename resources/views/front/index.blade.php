@@ -25,7 +25,7 @@
                                 </a>
                             @else
                                 @if( env('APP_ENV') == 'local')
-                                    <a id="nav_btn" href="{{ route('login') }}"
+                                    <a id="nav_btn" href="{{ url('login',[],true) }}"
                                        onmouseover="this.style.background='{{$backgroundColor}}';"
                                        onmouseout="this.style.background='transparent'">
                                         <i class="fa fa-chevron-right "></i> Commencer le Quizz <i
@@ -70,7 +70,7 @@
             </div>
             @if(Auth::check() && Auth::user()->isAdmin())
                 <div class="row">
-                    <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+                    <a href="{{ url('admin/dashboard',[],true)  }}" class="btn btn-danger">Administration</a>
                 </div>
             @endif
         </div>

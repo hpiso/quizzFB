@@ -37,6 +37,10 @@
                         <span class="input-group-addon"><i></i></span>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="logoTheme">Url du logo</label>
+                    <input type="text" class="form-control" id="logoTheme" name="logo" >
+                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>

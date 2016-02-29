@@ -41,13 +41,13 @@
                         {{--</div>--}}
                         <div class="col-md-6">
                             <button type="button" class="btn btn-md btn_partage">
-                                <img src="{{ url('/css/images/icon-facebook.png') }}" alt="icon">
+                                <img src="{{ url('/css/images/icon-facebook.png',[],true) }}" alt="icon">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=esgiquizzcreator.herokuapp.com/" target="_blank"> Partager</a>
                             </button>
                         </div>
                         <div class="col-md-6">
                         @if($startClassement)
-                                <button onClick="location.href='{{ url("classement") }}'" type="button" class="btn btn-md btn_classement">
+                                <button onClick="location.href='{{ url("classement",[],true) }}'" type="button" class="btn btn-md btn_classement">
                                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  Classement
                                 </button>
                             </div>
@@ -65,7 +65,7 @@
             </div>
             @if(Auth::check() && Auth::user()->isAdmin())
                 <div class="row">
-                    <a href="{{ route('dashboard.index')  }}" class="btn btn-danger">Administration</a>
+                    <a href="{{ url('admin/dashboard',[],true)  }}" class="btn btn-danger">Administration</a>
                 </div>
         @endif
         </div>

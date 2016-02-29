@@ -70,7 +70,7 @@ class AuthController extends Controller
         {
             return redirect($this->redirectPath,302,[],true);
         } else{
-            return Socialite::driver('facebook')->scopes(['email'])->redirect(null,302,[],true);
+            return Socialite::driver('facebook')->scopes(['email'])->redirect();
         }
     }
 

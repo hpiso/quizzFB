@@ -17,5 +17,5 @@
     <a href="{{ route('users.index') }}"><i class="fa fa-users"></i> Utilisateurs</a>
 </li>
 <li>
-    <a href="{{ route('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
+    <a href="{{ url('logout',[],true) }}"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
 </li>
