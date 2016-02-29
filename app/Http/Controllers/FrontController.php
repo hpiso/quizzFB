@@ -69,7 +69,7 @@ class FrontController extends Controller
         } else {
             $unansweredQuestion = $this->scoreRepository->getUnansweredQuestion($quizz);
             if(!$unansweredQuestion) {
-                return redirect('/result');
+                return redirect('/result',302,[],true);
             }
             $question = $unansweredQuestion->question;
         }
@@ -84,7 +84,7 @@ class FrontController extends Controller
             ]);
         }
 
-        return redirect('/result');
+        return redirect('/result',302,[],true);
     }
 
     public function action(Request $request)
@@ -93,7 +93,7 @@ class FrontController extends Controller
         $answer = Answer::find($request->get('answer'));
 
         if (!$answer) {
-            return redirect('/question')->with('status', 'Vous devez cochez au moins une réponse');
+            return redirect('/question',302,[],true)->with('status', 'Vous devez cochez au moins une réponse');
         }
 
         $answeredQuestionNbr = $this->scoreRepository->getAnsweredQuestionNbr($quizz);
@@ -113,15 +113,15 @@ class FrontController extends Controller
             }
 
             if ($quizz->questions->isEmpty()) {
-                return redirect('/result');
+                return redirect('/result',302,[],true);
             } else {
                 $question = $quizz->questions->random(1);
                 $this->scoreRepository->storeUnansweredQuestion($quizz, $question);
             }
 
-            return redirect('/question');
+            return redirect('/question',302,[],true);
         }
-        return redirect('/result');
+        return redirect('/result',302,[],true);
     }
 
     public function result()

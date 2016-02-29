@@ -70,7 +70,7 @@ class AuthController extends Controller
         {
             return redirect($this->redirectPath,302,[],true);
         } else{
-            return Socialite::driver('facebook')->scopes(['email'])->redirect();
+            return Socialite::driver('facebook')->scopes(['email'])->redirect(null,302,[],true);
         }
     }
 
@@ -122,7 +122,7 @@ class AuthController extends Controller
     public function logout()
     {
         Session::forget(Auth::getName());
-        return redirect($this->redirectAfterLogout);
+        return redirect($this->redirectAfterLogout,302,[],true);
     }
 
     /**

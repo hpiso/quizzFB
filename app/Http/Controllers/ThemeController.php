@@ -37,7 +37,7 @@ class ThemeController extends BaseController
         $inputs = $request->all();
         $this->themeRepository->store($inputs);
 
-        return redirect('admin/theme')->with('status', 'Thème ajouté');
+        return redirect('admin/theme',302,[],true)->with('status', 'Thème ajouté');
     }
 
     public function edit($id)
@@ -55,7 +55,7 @@ class ThemeController extends BaseController
         $inputs = $request->all();
         $this->themeRepository->update($id, $inputs);
 
-        return redirect('admin/theme')->with('status', 'Thème modifié');
+        return redirect('admin/theme',302,[],true)->with('status', 'Thème modifié');
     }
 
     public function destroy($id)
@@ -63,6 +63,6 @@ class ThemeController extends BaseController
         $theme = Theme::findOrFail($id);
         $theme->delete();
 
-        return redirect('admin/theme')->with('status', 'Thème supprimé');
+        return redirect('admin/theme',302,[],true)->with('status', 'Thème supprimé');
     }
 }
